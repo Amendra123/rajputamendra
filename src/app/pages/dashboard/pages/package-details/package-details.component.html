@@ -1,0 +1,150 @@
+<!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
+
+
+<div class="col-xl-12">
+  <div class="card">
+    <div class="card-header topHeadList">
+      <h4 class="card-title">Package Details </h4>
+
+      <span class="count" *ngIf="package">Count : <strong>{{package.length}}</strong></span>
+
+      <div class="display">
+        <button class="btn btn-light selectbox" routerLink="/package/add-package">Add</button>&nbsp;
+        <button class="btn btn-light selectbox" routerLink="/package/add-category">Add Category</button>&nbsp;
+        <button class="btn btn-light selectbox" routerLink="/package/show-category">Show Category</button>&nbsp;
+        <button class="btn btn-light selectbox" routerLink="/package/add-Subcategory">Add Sub-Category</button>&nbsp;
+        <button class="btn btn-light selectbox" routerLink="/package/show-Subcategory">Show Sub-Category</button>&nbsp;
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <!-- <div class="filter">                 
+                    <div class="form-group selectbox special mr4 select_drop">
+                        <select
+                          [(ngModel)]="selectedDay"
+                          (change)="onChangeParam('day')"
+                          class="form-control col-sm-10"
+                          id="sel1"
+                        >
+                          <option selected disabled value="null">Day</option>
+                          <option value="today">Today</option>
+                          <option value="yesterday">yesterday</option>
+                        </select>
+                      </div>
+
+                    <div class="form-group selectbox special mr4 select_drop">
+                        <select
+                          [(ngModel)]="selectedMonth"
+                          (change)="onChangeParam('month')"
+                          class="form-control col-sm-10"
+                          id="sel1"
+                        >
+                          <option selected value="null">Month</option>
+                          <option
+                            *ngFor="let option of monthsList"
+                            [value]="option.key"
+                          >
+                            {{ option.value }}
+                          </option>
+                        </select>
+                      </div>
+
+                      <div class="form-group selectbox mr4 special select_drop">
+                        <select
+                          [(ngModel)]="selectedYear"
+                          (change)="onChangeParam('year')"
+                          class="form-control col-sm-10"
+                          id="sel1"
+                        >
+                          <option selected disabled value="null">Year</option>
+                          <option *ngFor="let option of yearsList" [value]="option">
+                            {{ option }}
+                          </option>
+                        </select>
+                      </div>
+
+                      <div class="form-group selectbox mr4 special select_drop">
+                        <select
+                          [(ngModel)]="selectedPlan"
+                          (change)="onChangeParam('plan')"
+                          class="form-control col-sm-10"
+                          id="sel1"
+                        >
+                          <option disabled value ='null'>Plan</option>
+                          <option value="Standard_Elite">Standard_Elite</option>
+                          <option value="Standard_Ultra">Standard_Ultra</option>
+                          <option value="Standard_Basic">Standard_Basic</option>
+                          <option value="Standard_Basic7Drp">Standard_Basic7Drp</option>
+                          <option value="Premium_Elite">Premium_Elite</option>
+                          <option value="Premium_Ultra">Premium_Ultra</option>
+                          <option value="Premium_Basic">Premium_Basic</option>
+                          <option value="Premium_BasicDrp">Premium_BasicDrp</option>
+                        
+                        </select>
+                      </div>
+                      <button class="btn btn-light selectbox" (click)="Reset()">Reset</button>&nbsp;
+
+                    
+                      <div class="page-records">
+                        <div class="form-group selectbox special">
+                            <h6 style="margin-top: 5px;">Per Page Record:</h6>
+                        </div>
+                        <div class="form-group selectbox special mr4 select_drop" style="float: right;">
+                           
+                            <select #selectedperPage (change)="itemPerPage(selectedperPage.value)"
+                                class="form-control col-sm-10">
+                                <option value="All">All</option>
+                                <option selected value="100">100</option>
+                                <option value="200">200</option>
+                                <option value="300">300</option>
+                                <option value="400">400</option>
+                                <option value="500">500</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div> -->
+
+        <table class="table mb-0" id="excel-table">
+          <thead class="table-light">
+            <tr>
+              <th class="text-center">S.No</th>
+              <th class="text-center">Package Name </th>
+              <th class="text-center">Subcategory name </th>
+              <th class="text-center">Month </th>
+              <th class="text-center">no. of people </th>
+              <th class="text-center">Pdf</th>
+              <th class="text-center">Created At </th>
+              <th class="text-center">Action </th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of package| paginate:{itemsPerPage: itemsPerPageC, currentPage:p};let i=index;">
+              <td class="text-center" scope="row">{{(p - 1) * itemsPerPageC + i + 1}}</td>
+              <td class="text-center">{{data?.package ? data?.package : 'N.A' }}</td>
+              <td class="text-center">{{data?.subcategory ? data?.subcategory : 'N.A'}}</td>
+              <td class="text-center">{{data?.month ? data.month : 'N.A'}}</td>
+              <td class="text-center">{{data?.nop ? data?.nop : 'N.A'}}</td>
+              <td class="text-center">{{data?.pdf ? (data?.pdf): 'N.A'}}</td>
+              <td class="text-center">{{data.created_at ? (data?.created_at | date : 'dd-MM-yyyy h:mm a'): 'N.A'}}</td>
+              <td><button routerLink="/package/edit-package/{{data.id}}"><i class="fa fa-edit"></i></button>&nbsp;
+                <button routerLink="/dashboard/package-details/delete/{{data.id}}"><i class="fa fa-trash"></i></button></td>
+
+            </tr>
+            <tr *ngIf="package && package?.length <= 0">
+              <td colspan="9" class="text-center" style="color:rgb(143, 71, 71);">Records Not Found</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div *ngIf="package &&  package.length>0" id="pagination" class="mt-2">
+        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+
+</div>
+

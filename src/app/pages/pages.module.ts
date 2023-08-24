@@ -68,6 +68,18 @@ import { KnowAudienceDemographicComponent } from './dashboard-collections/coming
 import { NotificationDetailComponent } from './dashboard-collections/notification-detail/notification-detail.component';
 import { TransformstringPipe } from './transformstring.pipe';
 import { BlockCopyPasteDirective } from './block-copy-paste.directive';
+import { PackageDetailsComponent } from './dashboard/pages/package-details/package-details.component';
+import { AddCategoryComponent } from './package/add-category/add-category.component';
+import { ShowCategoryComponent } from './package/show-category/show-category.component';
+import { ShowSubcategoryComponent } from './package/show-subcategory/show-subcategory.component';
+import { AddSubcategoryComponent } from './package/add-subcategory/add-subcategory.component';
+import { AddPackageComponent } from './package/add-package/add-package.component';
+import { ShowPackageComponent } from './package/show-package/show-package.component';
+import { EditPackageComponent } from './package/edit-package/edit-package.component';
+import { UserPackageComponent } from './dashboard/pages/user-package/user-package.component';
+import { MetaTagsComponent } from './dashboard/pages/meta-tags/meta-tags.component';
+import { AddMetatagComponent } from './metatags/add-metatag/add-metatag.component';
+import { EditMetatagComponent } from './metatags/edit-metatag/edit-metatag.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +116,19 @@ import { BlockCopyPasteDirective } from './block-copy-paste.directive';
     KnowAudienceDemographicComponent,
     NotificationDetailComponent,
     TransformstringPipe,
-    BlockCopyPasteDirective
+    BlockCopyPasteDirective,
+    PackageDetailsComponent,
+    AddCategoryComponent,
+    ShowCategoryComponent,
+    ShowSubcategoryComponent,
+    AddSubcategoryComponent,
+    AddPackageComponent,
+    ShowPackageComponent,
+    EditPackageComponent,
+    UserPackageComponent,
+    MetaTagsComponent,
+    AddMetatagComponent,
+    EditMetatagComponent
   ],
   imports: [
     CommonModule,

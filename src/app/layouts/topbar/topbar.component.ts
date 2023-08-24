@@ -96,7 +96,7 @@ export class TopbarComponent implements OnInit {
       }      
 
 
-      this.countNotification()
+      //this.countNotification()
     },(error:any)=>{
       console.log("error",error)
     })

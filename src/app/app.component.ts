@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'M-Fuel';
+  title = 'Dodham Yatra';
 
   constructor(private _authService : AuthorizationService, private _sess : MfuelService,private router:Router){}
   ngOnInit(){

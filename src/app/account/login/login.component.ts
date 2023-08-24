@@ -106,12 +106,13 @@ export class LoginComponent implements OnInit {
           .pipe(first())
           .subscribe(
             (res: any) => {
-              if (res && res.status == "200") {
+              if (res && res.status == 200) {
                 // console.log(">>>>>>>>>>>>",data)
-                sessionStorage.setItem("clientId", JSON.stringify(res.data.clientId))
+                //sessionStorage.setItem("clientId", JSON.stringify(res.data.clientId))
                 this._sess.setS('userInfo', JSON.stringify(res.data));
                 this._authService.userInfo$.next(res.data);
-                this.getUserInfo(res.data);
+                //this.getUserInfo(res.data);
+                this.router.navigate(['dashboard']);
 
               }
               else {

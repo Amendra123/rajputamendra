@@ -10,23 +10,18 @@
           >
           <div class="col-5">
             <h6>
-              <span>{{ $total_revenue_count }}</span>
+              <span>0</span>
             </h6>
           </div>
 
           <div class="col-7">
-            <div [chart]="line_revenue_chart" class="chart"></div>
+            <!-- <div [chart]="line_revenue_chart" class="chart"></div> -->
           </div>
         </div>
         <div class="text-nowrap">
           <span
-            class="badge"
-            [ngClass]="
-              _movement_revenue > 0
-                ? 'bg-soft-success text-success'
-                : 'bg-soft-danger text-danger'
-            "
-            >{{ _movement_revenue }}
+            class="badge">
+            0
           </span>
           <span class="ms-1 text-muted font-size-13">Since last week</span>
         </div>
@@ -49,13 +44,9 @@
           <div class="col-5">
             <h6>
               <span
-                *ngIf="$total_landing_count; else landingCountNotFound"
-                [CountTo]="$total_landing_count"
-                class="counter-value"
-                [from]="0"
-                [duration]="1"
+                
               ></span>
-              <ng-template #landingCountNotFound><span>0</span></ng-template>
+              <ng-template ><span>0</span></ng-template>
             </h6>
             <!-- <h4 class="mb-3"> -->
             <!-- <h5> <span [CountTo]="$total_landing_count" class="counter-value" [from]="0" [duration]="1"></span></h5> -->
@@ -66,18 +57,14 @@
                             [chart]="tradeslineChart.chart" [colors]="tradeslineChart.colors"
                             [stroke]="tradeslineChart.stroke" [tooltip]="tradeslineChart.tooltip">
                         </apx-chart> -->
-            <div [chart]="lineHighChart" class="chart"></div>
+            <!-- <div [chart]="lineHighChart" class="chart"></div> -->
           </div>
         </div>
         <div class="text-nowrap">
           <span
             class="badge"
-            [ngClass]="
-              _movement_landing > 0
-                ? 'bg-soft-success text-success'
-                : 'bg-soft-danger text-danger'
-            "
-            >{{ _movement_landing }} landings</span
+           
+            >0 landings</span
           >
           <span class="ms-1 text-muted font-size-13">Since last week</span>
         </div>
@@ -100,14 +87,14 @@
 
           <div class="col-5">
             <h6>
-              <span
+              <!-- <span
                 *ngIf="$total_conversion_count; else conversionCountNotFound"
                 [CountTo]="$total_conversion_count"
                 class="counter-value"
                 [from]="0"
                 [duration]="1"
-              ></span>
-              <ng-template #conversionCountNotFound><span>0</span></ng-template>
+              ></span> -->
+              <ng-template><span>0</span></ng-template>
             </h6>
           </div>
           <div class="col-7">
@@ -115,18 +102,14 @@
                             [chart]="investedlineChart.chart" [colors]="investedlineChart.colors"
                             [stroke]="investedlineChart.stroke" [tooltip]="investedlineChart.tooltip">
                         </apx-chart> -->
-            <div [chart]="line_conversion_chart" class="chart"></div>
+            <!-- <div [chart]="line_conversion_chart" class="chart"></div> -->
           </div>
         </div>
         <div class="text-nowrap">
           <span
             class="badge"
-            [ngClass]="
-              _movement_conversion > 0
-                ? 'bg-soft-success text-success'
-                : 'bg-soft-danger text-danger'
-            "
-            >{{ _movement_conversion }} conversions</span
+           
+            >0 conversions</span
           >
           <span class="ms-1 text-muted font-size-13">Since last week</span>
         </div>
@@ -148,14 +131,8 @@
           >
           <div class="col-5">
             <h6>
-              <span
-                *ngIf="$total_conversion_percentage; else conversionPercentageNotFound"
-                [CountTo]="$total_conversion_percentage"
-                class="counter-value"
-                [from]="0"
-                [duration]="1"
-              ></span>
-              <ng-template #conversionPercentageNotFound><span>0</span></ng-template>%
+              
+              <ng-template ><span>0</span></ng-template>%
             </h6>
           </div>
           <div class="col-7">
@@ -163,18 +140,14 @@
                             [chart]="profitlineChart.chart" [colors]="profitlineChart.colors"
                             [stroke]="profitlineChart.stroke" [tooltip]="profitlineChart.tooltip">
                         </apx-chart> -->
-            <div [chart]="line_conversion_percentage_chart" class="chart"></div>
+            <!-- <div [chart]="line_conversion_percentage_chart" class="chart"></div> -->
           </div>
         </div>
         <div class="text-nowrap">
           <span
             class="badge"
-            [ngClass]="
-              _movement_conv_percentage > 0
-                ? 'bg-soft-success text-success'
-                : 'bg-soft-danger text-danger'
-            "
-            >{{ _movement_conv_percentage }}</span
+           
+            >0</span
           >
           <span class="ms-1 text-muted font-size-13">Since last week</span>
         </div>

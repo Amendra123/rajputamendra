@@ -1,0 +1,62 @@
+<!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
+
+
+<div class="col-xl-12">
+    <div class="card">
+      <div class="card-header topHeadList">
+        <h4 class="card-title">Tags Details </h4>
+  
+        <span class="count" *ngIf="tags">Count : <strong>{{tags.length}}</strong></span>
+        <div class="display">
+            <button class="btn btn-light selectbox" routerLink="/metatags/add-metatag">Add Tags</button>&nbsp;            
+          </div>
+      
+      </div>
+  
+      <div class="card-body">
+        <div class="table-responsive">
+          
+  
+          <table class="table mb-0" id="excel-table">
+            <thead class="table-light">
+              <tr>
+                <th class="text-center">S.No</th>
+                <th class="text-center">Category Name </th>
+                <th class="text-center">Subcategory name </th>
+                <th class="text-center">Meta Tag </th>
+                <th class="text-center">Meta Description </th>
+                <th class="text-center">Image </th>
+                <th class="text-center">Created At </th>
+                <th class="text-center">Action </th>
+  
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of tags | paginate:{itemsPerPage: itemsPerPageC, currentPage:p};let i=index;">
+                <td class="text-center" scope="row">{{(p - 1) * itemsPerPageC + i + 1}}</td>
+                <td class="text-center">{{data?.category ? data?.category : 'N.A' }}</td>
+                <td class="text-center">{{data?.subcategory ? data?.subcategory : 'N.A'}}</td>
+                <td class="text-center">{{data?.meta_title ? data.meta_title : 'N.A'}}</td>
+                <td class="text-center">{{data?.meta_description ? data?.meta_description : 'N.A'}}</td>
+                <td class="text-center">{{data?.image ? (data?.image): 'N.A'}}</td>
+                <td class="text-center">{{data.created_at ? (data?.created_at | date : 'dd-MM-yyyy h:mm a'): 'N.A'}}</td>
+                <td><button routerLink="/metatags/edit-metatags/{{data.id}}"><i class="fa fa-edit"></i></button>&nbsp;
+                  <button routerLink="/metatags/delete/{{data.id}}"><i class="fa fa-trash"></i></button></td>
+  
+              </tr>
+              <tr *ngIf="tags && tags?.length <= 0">
+                <td colspan="9" class="text-center" style="color:rgb(143, 71, 71);">Records Not Found</td>
+              </tr>
+            </tbody>
+          </table>
+  
+        </div>
+        <div *ngIf="tags &&  tags.length>0" id="pagination" class="mt-2">
+          <pagination-controls (pageChange)="p=$event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  
+  

@@ -32,6 +32,17 @@ import { ReachAudienceL1Component } from './dashboard-collections/coming-soon/re
 import { ReachAudienceL2Component } from './dashboard-collections/coming-soon/reach-audience-l2/reach-audience-l2.component';
 import { InsightsComponent } from './dashboard-collections/coming-soon/insights/insights.component';
 import { NotificationDetailComponent } from './dashboard-collections/notification-detail/notification-detail.component';
+import { PackageDetailsComponent } from './dashboard/pages/package-details/package-details.component';
+import { AddCategoryComponent } from './package/add-category/add-category.component';
+import { ShowCategoryComponent } from './package/show-category/show-category.component';
+import { AddSubcategoryComponent } from './package/add-subcategory/add-subcategory.component';
+import { ShowSubcategoryComponent } from './package/show-subcategory/show-subcategory.component';
+import { AddPackageComponent } from './package/add-package/add-package.component';
+import { EditPackageComponent } from './package/edit-package/edit-package.component';
+import { UserPackageComponent } from './dashboard/pages/user-package/user-package.component';
+import { MetaTagsComponent } from './dashboard/pages/meta-tags/meta-tags.component';
+import { AddMetatagComponent } from './metatags/add-metatag/add-metatag.component';
+import { EditMetatagComponent } from './metatags/edit-metatag/edit-metatag.component';
 
 const routes: Routes = [
  
@@ -39,157 +50,69 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
   },
-  { path: 'dashboard/campaign-dash',component:CampaignDashboardComponent },
-  { path: 'dashboard/consumer-drop',component:ConsumerDropComponent},
-  { path: 'dashboard/consumer-plan-distribution',component:ConsumerPlanDistributionComponent},
-  { path: 'dashboard/client-dashboard',component:ClientDashboardComponent},
-  { path: 'dashboard/top-5campains',component:Top5CampaignComponent},
-  { path: 'dashboard/top-5competitions',component:Top5CompetitionComponent},
-  { path: 'dashboard/trafic-distribution',component:TrafficDistributionComponent}, 
-
-  { path: 'dashboard/campaign-list-data', component:CampaignListDataComponent},
-  { path: 'dashboard/top5-competition-list', component:Top5CompetitionListComponent},
-  { path: 'dashboard/consumer-pland-list',component:ConsumerPlanDistListComponent},
-  { path: 'dashboard/consumer-drop-list',component:ConsumerDropListComponent},
-  { path: 'dashboard/top5-Campaign-list',component:TopFiveCampaignListComponent},
-  { path: 'dashboard/traffic-organic-list',component:TrafficOrganicListComponent},
-  { path: 'dashboard/campaign-revenue-list',component: CampaignRevenueListComponent},
-  // {
-  //   path: 'campaign-dash',
-  //   component:CampaignDashboardComponent
-  // },
-  // {
-  //   path:'consumer-drop',
-  //   component:ConsumerDropComponent
-  // },
-  // {
-  //   path:'consumer-plan-distribution',
-  //   component:ConsumerPlanDistributionComponent
-  // },
-  // {
-  //   path:'campaign-list-data',
-  //   component:CampaignListDataComponent
-  //  },
-  //  {
-  //   path:'client-dashboard',
-  //   component:ClientDashboardComponent
-  //  }
-  //  ,
-  // {
-  //   path:'top-5campains',
-  //   component:Top5CampaignComponent
-  // },
-  // {
-  //   path:'top-5competitions',
-  //   component:Top5CompetitionComponent
-  // },
-  // {
-  //   path:'trafic-distribution',
-  //   component:TrafficDistributionComponent
-  // },
-  // {
-  //   path:'affiliate-dashboard',
-  //   component:AffiliateDashbordComponent
-  // },
+  { path: 'dashboard/package-details',component:PackageDetailsComponent },
+  { path: 'dashboard/user-package-details',component:UserPackageComponent },
+  { path: 'dashboard/user-package-details/delete/:id',component:UserPackageComponent },
+  { path: 'dashboard/package-details/delete/:id',component:PackageDetailsComponent },
   {
-    path:"cm-dash1",
-    component:CommingSoonComponent
+    path:"package/add-category",
+    component:AddCategoryComponent
+  },
+  { path: 'package/edit-package/:id',component:EditPackageComponent },
+  {
+    path:"package/category/:id",
+    component:AddCategoryComponent
   },
   {
-    path:"cm-dash2",
-    component:CommingSoonComponent
+    path:"package/subcategory/:id",
+    component:AddSubcategoryComponent
   },
   {
-    path:"cm-dash3",
-    component:CommingSoonComponent
+    path:"package/delete/:id",
+    component:ShowCategoryComponent
   },
   {
-    path:"cm-dash4",
-    component:CommingSoonComponent
+    path:"package/deleteSubcategory/:id",
+    component:ShowSubcategoryComponent
   },
   {
-    path:"cm-dash5",
-    component:CommingSoonComponent
+    path:"package/show-category",
+    component:ShowCategoryComponent
   },
   {
-    path:"cm-dash6",
-    component:CommingSoonComponent
+    path:"package/add-Subcategory",
+    component:AddSubcategoryComponent
   },
   {
-    path:"cm-dash7",
-    component:CommingSoonComponent
-  },
-
-  {
-    path:"search-audience/demographic",
-    component:DemographicComponent
-  },
-
-  {
-    path:"search-audience/person",
-    component:PersonaComponent
-  },
-
-  {
-    path:"search-audience/keyword",
-    component:KeywordBasedComponent
+    path:"package/show-Subcategory",
+    component:ShowSubcategoryComponent
   },
   {
-    path:"know-audience/demographic",
-    component:KnowAudienceDemographicComponent
-  },
-
-  {
-    path:"know-audience/persona",
-    component:KnowAudiencePersonaComponent
+    path:"package/add-package",
+    component:AddPackageComponent
   },
   {
-    path:"know-audience/keyword",
-    component:KnowAudienceKeywordComponent
+    path:"dashboard/metaTags",
+    component:MetaTagsComponent
   },
   {
-    path:"reach-audience/level1",
-    component:ReachAudienceL1Component
+    path:"metatags/edit-metatags/:id",
+    component:EditMetatagComponent
   },
   {
-    path:"reach-audience/level2",
-    component:ReachAudienceL2Component
+    path:"metatags/add-metatag",
+    component:AddMetatagComponent
   },
   {
-    path:"insight/insight",
-    component:InsightsComponent
+    path:"metatags/delete/:id",
+    component:MetaTagsComponent
   },
-
-
-  
-
-
-
-  // {
-  //   path:"top5-competition-list",
-  //   component:Top5CompetitionListComponent
-  // },
-  // {
-  //   path:"consumer-pland-list",
-  //   component:ConsumerPlanDistListComponent
-  // },
-  // {
-  //   path:"consumer-drop-list",
-  //   component:ConsumerDropListComponent
-  // },
-  // {
-  //   path:"top5-Campaign-list",
-  //   component:TopFiveCampaignListComponent
-  // },
-  // {
-  //   path:"traffic-organic-list",
-  //   component:TrafficOrganicListComponent
-  // },
   // {
   //  path:"campaign-revenue-list",
   //  component: CampaignRevenueListComponent
   // },
   // un implemented route modules below !!
+  
   {
     path: 'apps', loadChildren: () => import('./apps/apps.module').then(m => m.AppsModule)
   },

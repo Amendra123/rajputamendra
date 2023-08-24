@@ -35,7 +35,7 @@ export class DetailViewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.toggleUserAsPerRole();
+   // this.toggleUserAsPerRole();
 
   }
 

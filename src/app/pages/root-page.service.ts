@@ -20,8 +20,11 @@ export class RootPageService {
 
   //base_url: string = "http://localhost:9090/api/";
 
+  // base_url: string = environment.base_url_node;
+  // base_url1: string = environment.base_url_java;
+
   base_url: string = environment.base_url_node;
-  base_url1: string = environment.base_url_java;
+  base_url1: string = environment.base_url_node;
 
 
   // https://javastaing.encashoffers.com/
@@ -728,7 +731,7 @@ export class RootPageService {
   }
 
   getUserLogin(userEmail: any, password: any) {
-    return this.http.s_post(this.base_url1 + "mfuelUserLogin", {
+    return this.http.s_post(this.base_url1 + "login", {
       email: userEmail,
       password: password,
     });
@@ -883,4 +886,32 @@ export class RootPageService {
     newWin.close(); 
    }
 
+   app_url:any="http://localhost:8080/api/";
+   getPackageAllData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`package?name=${name}&limit=${limit}`);
+   }
+   getUserPackageAllData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`userPackage?name=${name}&limit=${limit}`);
+   }
+   getMetaTagAllData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`metatags?name=${name}&limit=${limit}`);
+   }
+   getCategoryAllData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`category?category=${name}&limit=${limit}`);
+   }
+   getSubCategoryAllData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`sub-category?subcategory=${name}&limit=${limit}`);
+   }
+   getPackageById(id:any){
+    return this.http.s_get(this.app_url+`package/getPackageById/${id}`);
+   }
+   deletePackageById(id:any){
+    return this.http.s_delete(this.app_url+`package/delete/${id}`);
+   }
+   deleteUserPackageById(id:any){
+    return this.http.s_delete(this.app_url+`userPackage/delete/${id}`);
+   }
+   deleteMetaTagsById(id:any){
+    return this.http.s_delete(this.app_url+`metatags/delete/${id}`);
+   }
 }

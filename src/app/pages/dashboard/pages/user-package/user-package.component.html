@@ -1,0 +1,60 @@
+<!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
+
+
+<div class="col-xl-12">
+    <div class="card">
+      <div class="card-header topHeadList">
+        <h4 class="card-title">Package Details </h4>
+  
+        <span class="count" *ngIf="userPackage">Count : <strong>{{userPackage.length}}</strong></span>
+  
+        
+      </div>
+  
+      <div class="card-body">
+        <div class="table-responsive">
+         
+  
+          <table class="table mb-0" id="excel-table">
+            <thead class="table-light">
+              <tr>
+                <th class="text-center">S.No</th>
+                <th class="text-center">Package Name </th>
+                <th class="text-center">Mobile </th>
+                <th class="text-center">Year</th>
+                <th class="text-center">no. of people </th>
+                <th class="text-center">Pdf</th>
+                <th class="text-center">Created At </th>
+                <th class="text-center">Action </th>
+  
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of userPackage| paginate:{itemsPerPage: itemsPerPageC, currentPage:p};let i=index;">
+                <td class="text-center" scope="row">{{(p - 1) * itemsPerPageC + i + 1}}</td>
+                <td class="text-center">{{data?.package ? data?.package : 'N.A' }}</td>
+                <td class="text-center">{{data?.mobile ? data?.mobile : 'N.A'}}</td>
+                <td class="text-center">{{data?.year ? data.year : 'N.A'}}</td>
+                <td class="text-center">{{data?.nop ? data?.nop : 'N.A'}}</td>
+                <td class="text-center">{{data?.pdf ? (data?.pdf): 'N.A'}}</td>
+                <td class="text-center">{{data.created_at ? (data?.created_at | date : 'dd-MM-yyyy h:mm a'): 'N.A'}}</td>
+                <td>
+                  <button routerLink="/dashboard/user-package-details/delete/{{data.id}}"><i class="fa fa-trash"></i></button></td>
+  
+              </tr>
+              <tr *ngIf="userPackage && userPackage?.length <= 0">
+                <td colspan="9" class="text-center" style="color:rgb(143, 71, 71);">Records Not Found</td>
+              </tr>
+            </tbody>
+          </table>
+  
+        </div>
+        <div *ngIf="userPackage &&  userPackage.length>0" id="pagination" class="mt-2">
+          <pagination-controls (pageChange)="p=$event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  
+  

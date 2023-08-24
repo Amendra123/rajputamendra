@@ -76,10 +76,10 @@ export class SidebarComponent implements OnInit {
     //   { name: 'Research & Insights', icon: "briefcase", showSubList:'false',extraClass:'', sublist: [{name:'Quick view'}] }
     // ]
 
-    this.listDATA=listDATA;
-    console.log(this.menuItems);
-    console.log(this.listDATA)
-    this._cd.detectChanges()
+     this.listDATA=listDATA;
+    // console.log(this.menuItems);
+    // console.log(this.listDATA)
+    // this._cd.detectChanges()
   }
 
   /**
