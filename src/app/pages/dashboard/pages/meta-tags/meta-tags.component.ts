@@ -30,7 +30,7 @@ export class MetaTagsComponent {
         this.route.navigate(['/dashboard/metaTags']);
       }
      });
-     this.getMetaTagAllData();///
+     this.getMetaTagAllData();
   }
   getMetaTagAllData(){
     this.rootService.getMetaTagAllData(this.name,this.limit).subscribe((res:any)=>{
