@@ -1,0 +1,51 @@
+.col-md-4 {    
+    margin-bottom: 7px;
+}
+.col-md-6 {    
+    margin-bottom: 10px;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+}
+.modal.show .modal-dialog {
+  transform: translate(0, 0);
+}
+.modal-lg {
+  max-width: 92%;
+}
+.btn-right{
+  float: right;
+}
+.btn-primary  {
+  float: right;
+  margin: 15px;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.5); 
+}
+.modal-backdrop {
+  display: none;
+}
+.active {
+  display: block;
+}
+.inactive {
+  display: none;
+}
+.img-respons{
+  width: 125px;
+}
+.model {
+  top: 55px;
+  max-height: 100%;
+  overflow-y: auto;
+}

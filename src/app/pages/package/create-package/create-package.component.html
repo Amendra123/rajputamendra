@@ -1,0 +1,512 @@
+<!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
+
+<div class="card-header topHeadList">
+    <h4 class="card-title">Add Package Details </h4>
+
+
+
+    <div class="display">
+        <button class="btn btn-success selectbox" (click)="showSightSeeing()">Show Sight Seeing</button>&nbsp;
+        <button class="btn btn-success selectbox" (click)="addSightSeeing()">Add</button>&nbsp;
+
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="form-control">
+        <div class="card-body">
+            <form [formGroup]="createPackage" (ngSubmit)="addPackage()">
+                <input type="hidden" name="setpacktitle" id="setpacktitle" class="form-control"
+                    placeholder="Enter Events">
+                <input type="hidden" formControlName="packdata" name="packdata" id="packdata" class="form-control"
+                    placeholder="Enter Events">
+                <input type="hidden" name="packdatatitle" id="packdatatitle" name="packdatatitle" class="form-control"
+                    placeholder="Enter Events">
+                <div class="basic-form">
+                    <div id="error"></div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4" id="homecity">
+                                <label>From City :</label>
+                                <ng-select [items]="cityOptions" formControlName="from_city" bindLabel="name"
+                                    bindValue="name" placeholder="Select City">
+                                    <ng-template ng-optgroup-tmp let-item="item">
+                                        <span class="ng-value-label">{{ item.name}}</span>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Package city:</label>
+                                    <ng-select formControlName="package_city" name="package_city"
+                                        [items]="packgeCityOptions" (change)="getPackCityEvent($event)"
+                                        bindLabel="city_name" bindValue="city_name" placeholder="Select Package city">
+                                        <ng-template ng-optgroup-tmp let-item="item">
+                                            <span class="ng-value-label">{{ item.city_name}}</span>
+                                        </ng-template>
+                                    </ng-select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Sight Seeing:</label>
+                                    <ng-select [items]="sightSeeingOptions" formControlName="package_title"
+                                        name="package_title" name="package_title" bindLabel="title" bindValue="id"
+                                        (change)="getSightSeeingEvent($event)" placeholder="Select Sight Seeing">
+                                        <ng-template ng-optgroup-tmp let-item="item">
+                                            <span class="ng-value-label">{{ item.title}}</span>
+                                        </ng-template>
+                                    </ng-select>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group col-md-4">
+                                <div class="form-group">
+                                    <label> No. of days:</label>
+                                    <select name="days" id="days" formControlName="days" name="days"
+                                        class="form-control" >
+                                        <option value="">--Select days--</option>
+
+                                        <option value="1">Day 1</option>
+                                        <option value="2">Day 2</option>
+                                        <option value="3">Day 3</option>
+                                        <option value="4">Day 4</option>
+                                        <option value="5">Day 5</option>
+                                        <option value="6">Day 6</option>
+                                        <option value="7">Day 7</option>
+                                        <option value="8">Day 8</option>
+                                        <option value="9">Day 9</option>
+                                        <option value="10">Day 10</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Duration:</label>
+
+                                <input type="text" name="duration" formControlName="duration" id="duration"
+                                    class="form-control" value="" placeholder="Total Duration" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <div class="form-group">
+                                    <label> Type:</label>
+                                    <select name="type" id="type" formControlName="type" class="form-control"
+                                        required="" >
+                                        <option value="">--Select--</option>
+
+                                        <option value="Pilgrims">Pilgrims</option>
+                                        <option value="Domestice">Domestice</option>
+                                        <option value="International">International</option>
+
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Package Title: </label>
+                                <ckeditor [editor]="Editor" formControlName="p_title" name="p_title"
+                                    placeholder="Full Title "></ckeditor>
+                                <!-- <textarea name="p_title" id="p_title" value="" onchange="checktitle(this.value);"
+                            class="form-control" placeholder="Full Title "
+                            style="visibility: hidden; display: none;"></textarea> -->
+
+                            </div>
+                            <script>
+
+                            </script>
+                            <div class="form-group col-md-6" id="Inclusion">
+                                <label>Inclusion:</label>
+                                <ckeditor [editor]="Editor" name="inclusion" formControlName="inclusion"
+                                    placeholder="Full Inclusion"></ckeditor>
+                                <!-- <textarea name="inclusion" id="inclusion" value="" class="form-control"
+                            placeholder="Full Inclusion " style="visibility: hidden; display: none;"></textarea> -->
+
+                            </div>
+                            <div class="form-group col-md-6" id="Exclusion">
+                                <label>Exclusion:</label>
+                                <ckeditor [editor]="Editor" name="exclusion" formControlName="exclusion"
+                                    placeholder="Full Exclusion"></ckeditor>
+                                <!-- <textarea name="exclusion" id="exclusion" value="" class="form-control"
+                            placeholder="Full Exclusion " style="visibility: hidden; display: none;"></textarea> -->
+
+
+                            </div>
+
+
+
+                            <div class="form-group col-md-4">
+                                <label>Day Tour:</label>
+
+                                <input type="text" name="day_tour" id="day_tour" formControlName="day_tour"
+                                    class="form-control" placeholder="Airport to hotel in Cochin"
+                                    >
+                            </div>
+
+
+
+                            <div class="form-group col-md-4">
+                                <label>Vehicle Category :</label>
+
+                                <ng-select [items]="categoryOptions" name="vechcategory" formControlName="vechcategory"
+                                    bindLabel="name" bindValue="name" placeholder="Select Vehicle Category">
+                                    <ng-template ng-optgroup-tmp let-item="item">
+                                        <span class="ng-value-label">{{ item.name}}</span>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Vehicle Model :</label>
+
+                                <ng-select [items]="vehicleOptions" name="vechmodel" formControlName="vechmodel"
+                                    bindLabel="model" bindValue="model" placeholder="Select Vehicle Model">
+                                    <ng-template ng-optgroup-tmp let-item="item">
+                                        <span class="ng-value-label">{{ item.model}}</span>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Facilities:</label>
+
+                                <input type="text" name="facility" id="facility" name="facility"
+                                    formControlName="facility" value="3 Seater | 2 Luggage Bags | AC | First Aid"
+                                    class="form-control" placeholder="3 Seater | 2 Luggage Bags | AC | First Aid"
+                                    >
+                            </div>
+
+                            <div class="form-group col-md-4" id="slider">
+                                <label>Slider Image1:</label>
+
+                                <input type="file" name="slider" formControlName="slider" (change)="selectFile($event)"
+                                    class="form-control" placeholder="Cover Photo">
+                            </div>
+                            <div class="form-group col-md-4" id="slider">
+                                <label>Slider Image2:</label>
+
+                                <input type="file" name="slider1" formControlName="slider1" (change)="selectFile1($event)"
+                                    class="form-control" placeholder="Cover Photo" >
+                            </div>
+                            <div class="form-group col-md-4" id="slider">
+                                <label>Slider Image3:</label>
+
+                                <input type="file" name="slider2" formControlName="slider2" (change)="selectFile2($event)"
+                                    class="form-control" placeholder="Cover Photo">
+                            </div>
+                            <div class="form-group col-md-4" id="slider">
+                                <label>Slider Image4:</label>
+
+                                <input type="file" name="slider3" formControlName="slider3" (change)="selectFile3($event)"
+                                    class="form-control" placeholder="Cover Photo">
+                            </div>
+                            <div class="form-group col-md-4" id="cover">
+                                <label>Cover Photo:</label>
+
+                                <input type="file" name="image" formControlName="image" (change)="selectFileImg($event)"
+                                    class="form-control" placeholder="Cover Photo" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Vedio Link:</label>
+
+                                <input type="text" name="vedio" formControlName="vedio" class="form-control"
+                                    placeholder="Vedio Link" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Stay :<b>(Like- 1N Munnar | 2N Allepey)</b></label>
+
+                                <input type="text" name="stay"  class="form-control"
+                                    placeholder="Enter (Like- 1N Munnar | 2N Allepey)" formControlName="stay"
+                                    required=""> 
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Days :<b>(Like- 2N/3D)</b></label>
+
+                                <input type="text" name="daynight" formControlName="daynight" 
+                                    class="form-control" placeholder="Enter Days(Like- 2N/3D)" required=""
+                                    >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Actual Price(Cut price) :</label>
+
+                                <input type="number" name="actual_price" formControlName="actual_price" 
+                                    class="form-control" placeholder="Actual Price" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Current Price :</label>
+
+                                <input type="number" name="current_price" formControlName="current_price" 
+                                    class="form-control" placeholder="Current Price" >
+                            </div>
+
+                            <!--	<div class="form-group col-md-4" >-->
+                            <!--	<label>Profile Photo:</label>-->
+
+                            <!--<input type="file"  name="profile_photo" value="" class="form-control" value="" placeholder="Adhaar">-->
+                            <!--</div>-->
+
+
+
+
+
+
+                            <div class="form-group col-md-4">
+                                <label>Title:</label>
+
+                                <input type="text" name="addtitle" id="addtitle" formControlName="addtitle"
+                                    class="form-control" placeholder="Title" >
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Per per charges:</label>
+
+                                <input type="number" required="" name="perchange" formControlName="perchange"
+                                    id="perchange" class="form-control"  placeholder="Total Per per charges:">
+                                    
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Name :</label>
+
+                                <input type="text" name="name"  formControlName="name" class="form-control"
+                                    placeholder="Enter name" required="">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Email :</label>
+
+                                <input type="email" name="email"  class="form-control" formControlName="email"
+                                    placeholder="Enter email" required="" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Mobile :</label>
+
+                                <input type="number" name="mobile"  class="form-control"
+                                    formControlName="mobile" placeholder="Enter number" required="">
+                                    
+                            </div>
+                            <!--<div class="form-group col-md-4" >-->
+                            <!--	<label>Shight Seeing:</label>-->
+
+                            <!--<input type="text"  name="day_activity" id="search-box" autocomplete="off" class="form-control"   placeholder="Day 1 - Arrival in Kochi">-->
+                            <!--<div id="suggesstion-box"></div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group col-md-4" >-->
+                            <!--	<label>Hotel Detail:</label>-->
+
+                            <!--<input type="text"  name="hotel" id="search-box1" autocomplete="off" class="form-control"   placeholder="Day 1 - Hotel in ">-->
+                            <!--<div id="suggesstion-box1"></div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+
+                    <div class="row" id="wraped">
+                        <!-- <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
+                            <label>Slider Image1: <a href="javascript:void(0);" class="remove_button"
+                                    (click)="cancel(1)"><img
+                                        src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"
+                                        style="width:15px;margin-left: 30px;">
+                                </a></label>
+
+                            <input type="file" name="slider1" formcontrolname="slider1" (change)="selectFile1($event,1)"
+                                class="form-control" placeholder="Enter Events">
+                        </div>
+                        <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
+                            <label>Slider Image2: <a href="javascript:void(0);" class="remove_button"
+                                    (click)="cancel(2)"><img
+                                        src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"
+                                        style="width:15px;margin-left: 30px;">
+                                </a></label>
+
+                            <input type="file" name="slider2" formcontrolname="slider2" (change)="selectFile1($event,2)"
+                                class="form-control" placeholder="Enter Events">
+                        </div>
+                        <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
+                            <label>Slider Image3: <a href="javascript:void(0);" class="remove_button"
+                                    (click)="cancel(3)"><img
+                                        src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"
+                                        style="width:15px;margin-left: 30px;">
+                                </a></label>
+
+                            <input type="file" name="slider3" formcontrolname="slider3" (change)="selectFile1($event,3)"
+                                class="form-control" placeholder="Enter Events">
+                        </div>
+                        <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
+                            <label>Slider Image4: <a href="javascript:void(0);" class="remove_button"
+                                    (click)="cancel(4)"><img
+                                        src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"
+                                        style="width:15px;margin-left: 30px;">
+                                </a></label>
+
+                            <input type="file" name="slider4" formcontrolname="slider4" (change)="selectFile1($event,4)"
+                                class="form-control" placeholder="Enter Events">
+                        </div>
+                        <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
+                            <label>Slider Image5: <a href="javascript:void(0);" class="remove_button"
+                                    (click)="cancel(5)"><img
+                                        src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"
+                                        style="width:15px;margin-left: 30px;">
+                                </a></label>
+
+                            <input type="file" name="slider5" formcontrolname="slider5" (change)="selectFile1($event,5)"
+                                class="form-control" placeholder="Enter Events">
+                        </div>
+                        <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
+                            <label>Slider Image6: <a href="javascript:void(0);" class="remove_button"
+                                    (click)="cancel(6)"><img
+                                        src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"
+                                        style="width:15px;margin-left: 30px;">
+                                </a></label>
+
+                            <input type="file" name="slider6" formcontrolname="slider6" (change)="selectFile1($event,6)"
+                                class="form-control" placeholder="Enter Events">
+                        </div>
+                        <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
+                            <label>Slider Image7: <a href="javascript:void(0);" class="remove_button"
+                                    (click)="cancel(7)"><img
+                                        src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"
+                                        style="width:15px;margin-left: 30px;">
+                                </a></label>
+
+                            <input type="file" name="slider7" formcontrolname="slider7" (change)="selectFile1($event,7)"
+                                class="form-control" placeholder="Enter Events">
+                        </div>
+                        <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
+                            <label>Slider Image8: <a href="javascript:void(0);" class="remove_button"
+                                    (click)="cancel(8)"><img
+                                        src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"
+                                        style="width:15px;margin-left: 30px;">
+                                </a></label>
+
+                            <input type="file" name="slider8" formcontrolname="slider8" (change)="selectFile1($event,8)"
+                                class="form-control" placeholder="Enter Events">
+                        </div>
+                        <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
+                            <label>Slider Image9: <a href="javascript:void(0);" class="remove_button"
+                                    (click)="cancel(9)"><img
+                                        src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"
+                                        style="width:15px;margin-left: 30px;">
+                                </a></label>
+
+                            <input type="file" name="slider9" formcontrolname="slider9" (change)="selectFile1($event,9)"
+                                class="form-control" placeholder="Enter Events">
+                        </div>
+                        <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
+                            <label>Slider Image10: <a href="javascript:void(0);" class="remove_button"
+                                    (click)="cancel(10)"><img
+                                        src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"
+                                        style="width:15px;margin-left: 30px;">
+                                </a></label>
+
+                            <input type="file" name="slider10" formcontrolname="slider10" (change)="selectFile1($event,10)"
+                                class="form-control" placeholder="Enter Events">
+                        </div> -->
+                    </div>
+                    <div class="row" id="wraped2">
+
+                    </div>
+                    <div class="row" id="wraped1">
+
+                    </div>
+                    <div class="row" id="wraped01">
+
+                    </div>
+                    <div class="form-row">
+
+
+
+                        <br>
+
+                    </div>
+                    <input type="submit" class="btn btn-dark"
+                        onclick="return confirm('Are you sure want to submit the Info?')" [disabled]="createPackage.invalid" value="Submit"
+                        id="submit">&nbsp;&nbsp;&nbsp;
+                    <!-- <a href="javascript:void(0);" class="add_button btn btn-success" title="Add field">Add Slider
+                        Images</a> -->
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal bd-example-modal-lg" id="contactus" [class.active]="sightSeeingPopUp"
+    [class.inactive]="!sightSeeingPopUp" tabindex="-1" role="dialog" aria-labelledby="franchiseLabel" aria-modal="true"
+    style="top: 55px;max-height: 100%;overflow-y: auto;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="franchiseLabel">Sight Seeing Details</h5>
+                <button type="button" class="btn close" data-dismiss="modal" aria-label="Close"
+                    (click)="hideSightSeeing()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="sight">
+                <span *ngFor="let items of sightSeeingData">
+                    <h5> {{items.package_title}} of Day {{items.days}} </h5>
+                    <table class="table mb-0" id="excel-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th *ngIf="items.data['event1']!=null">Event 1/Image 1</th>
+                                <th *ngIf="items.data['event2']!=null">Event 2/Image 2</th>
+                                <th *ngIf="items.data['event3']!=null">Event 3/Image 3</th>
+                                <th *ngIf="items.data['event4']!=null">Event 4/Image 4</th>
+                                <th *ngIf="items.data['event5']!=null">Event 5/Image 5</th>
+                                <th *ngIf="items.data['event6']!=null">Event 6/Image 6</th>
+                                <th *ngIf="items.data['event7']!=null">Event 7/Image 7</th>
+                                <th *ngIf="items.data['event8']!=null">Event 8/Image 8</th>
+                                <th *ngIf="items.data['event9']!=null">Event 9/Image 9</th>
+                                <th *ngIf="items.data['event10']!=null">Event 10/Image 10</th>
+                            </tr>
+                            <tr>
+                                <td *ngIf="items.data['event1']!=null">{{items.data['event1']}}/<br><img
+                                        crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity1']">
+                                </td>
+                                <td *ngIf="items.data['event2']!=null">{{items.data['event2']}}/<br><img
+                                        crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity2']">
+                                </td>
+                                <td *ngIf="items.data['event3']!=null">{{items.data['event3']}}/<br><img
+                                        crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity3']">
+                                </td>
+                                <td *ngIf="items.data['event4']!=null">{{items.data['event4']}}/<br><img
+                                        crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity4']">
+                                </td>
+                                <td *ngIf="items.data['event5']!=null">{{items.data['event5']}}/<br><img
+                                        crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity5']">
+                                </td>
+                                <td *ngIf="items.data['event6']!=null">{{items.data['event6']}}/<br><img
+                                        crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity6']">
+                                </td>
+                                <td *ngIf="items.data['event7']!=null">{{items.data['event7']}}/<br><img
+                                        crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity7']">
+                                </td>
+                                <td *ngIf="items.data['event8']!=null">{{items.data['event8']}}/<br><img
+                                        crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity8']">
+                                </td>
+                                <td *ngIf="items.data['event9']!=null">{{items.data['event9']}}/<br><img
+                                        crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity9']">
+                                </td>
+                                <td *ngIf="items.data['event10']!=null">{{items.data['event10']}}/<br><img
+                                        crossorigin="anonymous" class="img-respons"
+                                        [src]="url+items.data['activity10']"></td>
+
+                            </tr>
+                        </thead>
+
+                    </table><br>
+                </span>
+            </div>
+
+            <div class="col-md-12 btn-right">
+                <button type="button" value="submit" (click)="clearSightseeing();" data-dismiss="modal"
+                    aria-label="Close" class="btn btn-primary">
+                    Clear Sight Seeing
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</div>

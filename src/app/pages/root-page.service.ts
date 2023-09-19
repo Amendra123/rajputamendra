@@ -890,14 +890,38 @@ export class RootPageService {
    getPackageAllData(name:string,limit:number){
     return this.http.s_get(this.app_url+`package?name=${name}&limit=${limit}`);
    }
+   getPackageCityAllData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`packageCity?name=${name}&limit=${limit}`);
+   }
+   getPackageCityByIdAllData(id:any,limit:number){
+    return this.http.s_get(this.app_url+`packageCity?id=${id}&limit=${limit}`);
+   }
+   getCityAllData(name:string,limit:number){
+    return this.http.s_get("http://localhost:8080/api"+`?name=${name}`);
+   }
    getUserPackageAllData(name:string,limit:number){
     return this.http.s_get(this.app_url+`userPackage?name=${name}&limit=${limit}`);
    }
    getMetaTagAllData(name:string,limit:number){
     return this.http.s_get(this.app_url+`metatags?name=${name}&limit=${limit}`);
    }
+   getPackageListData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`getPackageDetailList?name=${name}&limit=${limit}`);
+   }
+   getPackageData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`getPackageList?name=${name}&limit=${limit}`);
+   }
    getCategoryAllData(name:string,limit:number){
     return this.http.s_get(this.app_url+`category?category=${name}&limit=${limit}`);
+   }
+   getSightSeeingAllData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`getSightseeing?id=${name}&limit=${limit}`);
+   }
+   getVehicleModelAllData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`getVehicleModel?name=${name}&limit=${limit}`);
+   }
+   getVehicleCategoryAllData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`getVehicleCategory?name=${name}&limit=${limit}`);
    }
    getSubCategoryAllData(name:string,limit:number){
     return this.http.s_get(this.app_url+`sub-category?subcategory=${name}&limit=${limit}`);
@@ -905,8 +929,14 @@ export class RootPageService {
    getPackageById(id:any){
     return this.http.s_get(this.app_url+`package/getPackageById/${id}`);
    }
+   getPackageDetailById(id:any){
+    return this.http.s_get(this.app_url+`getPackageById/${id}`);
+   }
    deletePackageById(id:any){
     return this.http.s_delete(this.app_url+`package/delete/${id}`);
+   }
+   deletePackageDetailById(id:any){
+    return this.http.s_delete(this.app_url+`deletePackDetail/${id}`);
    }
    deleteUserPackageById(id:any){
     return this.http.s_delete(this.app_url+`userPackage/delete/${id}`);

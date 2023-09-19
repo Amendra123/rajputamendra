@@ -72,8 +72,15 @@ export class PackageUtilityService {
      
      return this.http.post<Package[]>(`${this.app_url}package/add`,file);
     }
+    createPackage(data:any){
+        return this.http.post<Package[]>(`${this.app_url}createPackage`,data);
+    }
     updatePackage(file:any,id:any){
      
         return this.http.put<Package[]>(`${this.app_url}package/update/${id}`,file);
        }
+    updatePackageDetail(file:any,id:any){
+     
+        return this.http.put<Package[]>(`${this.app_url}updatePackDetail/${id}`,file);
+    }
 }

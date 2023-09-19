@@ -37,12 +37,18 @@ import { AddCategoryComponent } from './package/add-category/add-category.compon
 import { ShowCategoryComponent } from './package/show-category/show-category.component';
 import { AddSubcategoryComponent } from './package/add-subcategory/add-subcategory.component';
 import { ShowSubcategoryComponent } from './package/show-subcategory/show-subcategory.component';
-import { AddPackageComponent } from './package/add-package/add-package.component';
+import {  PackageAddComponent } from './package/package-add/package-add.component';
+
 import { EditPackageComponent } from './package/edit-package/edit-package.component';
 import { UserPackageComponent } from './dashboard/pages/user-package/user-package.component';
 import { MetaTagsComponent } from './dashboard/pages/meta-tags/meta-tags.component';
 import { AddMetatagComponent } from './metatags/add-metatag/add-metatag.component';
 import { EditMetatagComponent } from './metatags/edit-metatag/edit-metatag.component';
+import { PackageListComponent } from './package/package-list/package-list.component';
+import { CreatePackageComponent } from './package/create-package/create-package.component';
+import { EditPackageDetailsComponent } from './package/edit-package-details/edit-package-details.component';
+import { PackageComponent } from './package/package/package.component';
+import { AddPackageComponent } from './package/package/add-package/add-package.component';
 
 const routes: Routes = [
  
@@ -54,11 +60,25 @@ const routes: Routes = [
   { path: 'dashboard/user-package-details',component:UserPackageComponent },
   { path: 'dashboard/user-package-details/delete/:id',component:UserPackageComponent },
   { path: 'dashboard/package-details/delete/:id',component:PackageDetailsComponent },
+  { path: 'dashboard/package',component:PackageComponent },
   {
     path:"package/add-category",
     component:AddCategoryComponent
   },
+  {
+    path:"dashboard/package-list",
+    component:PackageListComponent
+  },
+  {
+    path:"dashboard/create-package",
+    component:CreatePackageComponent
+  },
+  {
+    path:"dashboard/package-add",
+    component:PackageAddComponent
+  },
   { path: 'package/edit-package/:id',component:EditPackageComponent },
+  { path: 'dashboard/edit-package-details/:id',component:EditPackageDetailsComponent },
   {
     path:"package/category/:id",
     component:AddCategoryComponent
@@ -106,6 +126,10 @@ const routes: Routes = [
   {
     path:"metatags/delete/:id",
     component:MetaTagsComponent
+  },
+  {
+    path:"package/deletePack/:id",
+    component:PackageListComponent
   },
   // {
   //  path:"campaign-revenue-list",

@@ -73,13 +73,21 @@ import { AddCategoryComponent } from './package/add-category/add-category.compon
 import { ShowCategoryComponent } from './package/show-category/show-category.component';
 import { ShowSubcategoryComponent } from './package/show-subcategory/show-subcategory.component';
 import { AddSubcategoryComponent } from './package/add-subcategory/add-subcategory.component';
-import { AddPackageComponent } from './package/add-package/add-package.component';
+
 import { ShowPackageComponent } from './package/show-package/show-package.component';
 import { EditPackageComponent } from './package/edit-package/edit-package.component';
 import { UserPackageComponent } from './dashboard/pages/user-package/user-package.component';
 import { MetaTagsComponent } from './dashboard/pages/meta-tags/meta-tags.component';
 import { AddMetatagComponent } from './metatags/add-metatag/add-metatag.component';
 import { EditMetatagComponent } from './metatags/edit-metatag/edit-metatag.component';
+import { PackageListComponent } from './package/package-list/package-list.component';
+import { CreatePackageComponent } from './package/create-package/create-package.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { EditPackageDetailsComponent } from './package/edit-package-details/edit-package-details.component';
+import { PackageComponent } from './package/package/package.component';
+import { AddPackageComponent } from './package/package/add-package/add-package.component';
+import { PackageAddComponent } from './package/package-add/package-add.component';
 
 @NgModule({
   declarations: [
@@ -123,14 +131,22 @@ import { EditMetatagComponent } from './metatags/edit-metatag/edit-metatag.compo
     ShowSubcategoryComponent,
     AddSubcategoryComponent,
     AddPackageComponent,
+    PackageAddComponent,
     ShowPackageComponent,
     EditPackageComponent,
     UserPackageComponent,
     MetaTagsComponent,
     AddMetatagComponent,
-    EditMetatagComponent
+    EditMetatagComponent,
+    PackageListComponent,
+    CreatePackageComponent,
+    EditPackageDetailsComponent,
+    PackageComponent,
+   
   ],
   imports: [
+    NgSelectModule,
+    CKEditorModule,
     CommonModule,
     WidgetModule,
     CountToModule,
