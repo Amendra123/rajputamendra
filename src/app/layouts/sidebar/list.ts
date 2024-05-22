@@ -41,6 +41,11 @@ export const listDATA: any = [
     sublist: [
       {
         // name: "Level 1 - Demographic (Limited Search queries)​",
+        name: "Package City",
+        routerLink: "dashboard/package-city",
+      },
+      {
+        // name: "Level 1 - Demographic (Limited Search queries)​",
         name: "Package List",
         routerLink: "dashboard/package",
       },
@@ -58,12 +63,22 @@ export const listDATA: any = [
         // name: "Level 3 - Keywords (Unlimited Search Queries)",
         name: "Meta Tags",
         routerLink: "dashboard/metaTags",
-      },      
-      // {
-      //   // name: "Level 3 - Keywords (Unlimited Search Queries)",
-      //   name: "Bulk SMS",
-      //   routerLink: "know-audience/keyword",
-      // },
+      },   
+      {
+        // name: "Level 1 - Demographic (Limited Search queries)​",
+        name: "Package Itinerary",
+        routerLink: "dashboard/package-itinerary",
+      },   
+      {
+        // name: "Level 1 - Demographic (Limited Search queries)​",
+        name: "Hotel Itinerary",
+        routerLink: "dashboard/hotel-itinerary",
+      }, 
+      {
+        // name: "Level 3 - Keywords (Unlimited Search Queries)",
+        name: "Manage Package Fare",
+        routerLink: "dashboard/package-fare",
+      },
     ],
   }
 ];

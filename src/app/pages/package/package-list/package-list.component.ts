@@ -61,9 +61,12 @@ export class PackageListComponent {
    
   }
   getPackageListData(){
-    this.rootService.getPackageListData(this.name,this.limit).subscribe((res:any)=>{
+    this.rootService.getPackageListData1(this.name,this.limit).subscribe((res:any)=>{
       this.tags=res['response'];
      }); 
+  }
+  openPdf(id:any){
+
   }
   }
   

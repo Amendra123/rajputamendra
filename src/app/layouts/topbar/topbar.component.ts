@@ -100,7 +100,7 @@ export class TopbarComponent implements OnInit {
     },(error:any)=>{
       console.log("error",error)
     })
-    this.loadAlarmNotificationData()
+    //this.loadAlarmNotificationData()
   }
 
   /**
@@ -229,7 +229,7 @@ export class TopbarComponent implements OnInit {
     return  this.rootPageService.updateAlarmNotificationList().subscribe((data:any)=>{
       if(data.status == 200){
         this.countingNotification = 0;
-        this.loadAlarmNotificationData()
+       // this.loadAlarmNotificationData()
       }
       this._cd.detectChanges();
      

@@ -1,0 +1,186 @@
+<!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
+
+<div class="card-header topHeadList">
+    <h4 class="card-title">Edit Package </h4>
+  
+  
+  
+  </div>
+  
+  <div class="col-lg-12">
+    <div class="form-control">
+        <div class="card-body">
+            <form [formGroup]="createPackage" (ngSubmit)="savePackage()">
+              
+                <div class="basic-form">
+                    <div id="error"></div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4" id="homecity">
+                                <label>From City :</label>
+                                <ng-select [items]="cityOptions" formControlName="from_city" bindLabel="name"
+                                    bindValue="name" placeholder="Select City">
+                                    <ng-template ng-optgroup-tmp let-item="item">
+                                        <span class="ng-value-label">{{ item.name}}</span>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Package city:</label>
+                                    <ng-select formControlName="package_city" name="package_city"
+                                        [items]="packgeCityOptions" (change)="getPackCityEvent($event)"
+                                        bindLabel="city_name" bindValue="city_name" placeholder="Select Package city">
+                                        <ng-template ng-optgroup-tmp let-item="item">
+                                            <span class="ng-value-label">{{ item.city_name}}</span>
+                                        </ng-template>
+                                    </ng-select>
+                                </div>
+                            </div>
+  
+                            
+  
+  
+  
+                            <div class="form-group col-md-4">
+                                <div class="form-group">
+                                    <label> Type:</label>
+                                    <select name="type" id="type" formControlName="type" class="form-control"
+                                        required="" >
+                                        <option value="">--Select--</option>
+  
+                                        <option value="Pilgrims">Pilgrims</option>
+                                        <option value="Domestic">Domestic</option>
+                                        <option value="International">International</option>
+  
+  
+                                    </select>
+                                </div>
+                            </div>
+  
+                            <div class="form-group col-md-6">
+                                <label>Package Title: </label>
+                                <ckeditor [editor]="Editor" formControlName="package_title" name="package_title"
+                                    placeholder="Full Title "></ckeditor>
+                                <!-- <textarea name="p_title" id="p_title" value="" onchange="checktitle(this.value);"
+                            class="form-control" placeholder="Full Title "
+                            style="visibility: hidden; display: none;"></textarea> -->
+  
+                            </div>
+                          
+                         
+                           
+                            <div class="form-group col-md-4" id="cover">
+                                <label style="color: red;">Cover Photo: Only Jpeg image</label>
+  
+                                <input type="file" name="image" formControlName="image" (change)="selectFileImg($event)"
+                                    class="form-control" placeholder="Cover Photo" >
+                            </div>
+                            <br>
+                            <div class="form-group col-md-4">
+                                <label>Stay :<b>(Like- 1N Munnar | 2N Allepey)</b></label>
+  
+                                <input type="text" name="stay"  class="form-control"
+                                    placeholder="Enter (Like- 1N Munnar | 2N Allepey)" formControlName="stay"
+                                    required=""> 
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Days :<b>(Like- 2N/3D)</b></label>
+  
+                                <input type="text" name="daynight" formControlName="daynight" 
+                                    class="form-control" placeholder="Enter Days(Like- 2N/3D)" required=""
+                                    >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Actual Price(Cut price) :</label>
+  
+                                <input type="number" name="actual_price" formControlName="actual_price" 
+                                    class="form-control" placeholder="Actual Price" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Current Price :</label>
+  
+                                <input type="number" name="current_price" formControlName="current_price" 
+                                    class="form-control" placeholder="Current Price" >
+                            </div>
+  
+                            <!--	<div class="form-group col-md-4" >-->
+                            <!--	<label>Profile Photo:</label>-->
+  
+                            <!--<input type="file"  name="profile_photo" value="" class="form-control" value="" placeholder="Adhaar">-->
+                            <!--</div>-->
+  
+  
+  
+  
+  
+  
+                            <div class="form-group col-md-4">
+                                <label>Sub-Title:</label>
+  
+                                <input type="text" name="subtitle" id="addtitle" formControlName="subtitle"
+                                    class="form-control" placeholder="SubTitle" >
+                            </div>
+  
+                            <div class="form-group col-md-4">
+                                <label>Per person:</label>
+  
+                                <input type="number" required="" name="person" formControlName="person"
+                                    id="perchange" class="form-control"  placeholder="Total Per per charges:">
+                                    
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Transfer Number:</label>
+  
+                                <input type="text" name="transfer"  formControlName="transfer" class="form-control"
+                                    placeholder="Enter transfer" required="">
+                            </div>
+                            
+                            <!--<div class="form-group col-md-4" >-->
+                            <!--	<label>Shight Seeing:</label>-->
+  
+                            <!--<input type="text"  name="day_activity" id="search-box" autocomplete="off" class="form-control"   placeholder="Day 1 - Arrival in Kochi">-->
+                            <!--<div id="suggesstion-box"></div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group col-md-4" >-->
+                            <!--	<label>Hotel Detail:</label>-->
+  
+                            <!--<input type="text"  name="hotel" id="search-box1" autocomplete="off" class="form-control"   placeholder="Day 1 - Hotel in ">-->
+                            <!--<div id="suggesstion-box1"></div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+  <br>
+                    <div class="row" id="wraped">
+                          
+                                <app-package-event [roleValue]="changeRoleData" (outputFormChild)="receiveChildData($event)"></app-package-event>
+                       
+                    </div>
+                    <div class="row" id="wraped2">
+  
+                    </div>
+                    <div class="row" id="wraped1">
+  
+                    </div>
+                    <div class="row" id="wraped01">
+  
+                    </div>
+                    <div class="form-row">
+  
+  
+  
+                        <br>
+  
+                    </div>
+                    <input type="submit" class="btn btn-dark"
+                        onclick="return confirm('Are you sure want to submit the Info?')" [disabled]="createPackage.invalid" value="Save"
+                        >&nbsp;&nbsp;&nbsp;
+                        
+  
+  
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  

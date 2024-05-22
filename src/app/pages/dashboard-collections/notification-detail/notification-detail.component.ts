@@ -15,7 +15,7 @@ export class NotificationDetailComponent implements OnInit{
 
 showHtml : boolean = false;
 ngOnInit(): void {
-  this.viewAllNotification()
+  //this.viewAllNotification()
 }
 
 viewAllNotification(){

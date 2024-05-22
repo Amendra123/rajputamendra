@@ -30,7 +30,7 @@
               "chartist",
               "ngx-lightbox"
             ],
-            "outputPath": "dist/minia",
+            "outputPath": "dist/yatra-admin",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",

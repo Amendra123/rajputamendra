@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthorizationService } from './athorization.service';
 import { MfuelService } from './mfuel.service';
 import { Router } from '@angular/router';
-// import { MfuelExtensionService } from './pages/mfuel-extension.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +15,7 @@ export class AppComponent implements OnInit {
   ngOnInit(){
     let _inofAvailable = this._sess.getS('userInfo');
     if(_inofAvailable){
-      this._authService.userInfo$.next(JSON.parse(_inofAvailable));
+    //  this._authService.userInfo$.next(JSON.parse(_inofAvailable));
     }  
     else{
       this.router.navigate(['login']);

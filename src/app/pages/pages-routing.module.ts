@@ -49,6 +49,21 @@ import { CreatePackageComponent } from './package/create-package/create-package.
 import { EditPackageDetailsComponent } from './package/edit-package-details/edit-package-details.component';
 import { PackageComponent } from './package/package/package.component';
 import { AddPackageComponent } from './package/package/add-package/add-package.component';
+import { PackageEditComponent } from './package/package-edit/package-edit.component';
+import { PackageCityComponent } from './package/package/package-city/package-city.component';
+import { AddPackageCityComponent } from './package/package/package-city/add-package-city/add-package-city.component';
+import { EditPackageCityComponent } from './package/package/package-city/edit-package-city/edit-package-city.component';
+import { PackagePdfComponent } from './package/package-pdf/package-pdf.component';
+import { PackageItineraryComponent } from './package/package-itinerary/package-itinerary.component';
+import { AddPackageItineraryComponent } from './package/package-itinerary/add-package-itinerary/add-package-itinerary.component';
+import { EditPackageItineraryComponent } from './package/package-itinerary/edit-package-itinerary/edit-package-itinerary.component';
+import { HotelItineraryComponent } from './hotel-itinerary/hotel-itinerary.component';
+import { AddHotelItineraryComponent } from './hotel-itinerary/add-hotel-itinerary/add-hotel-itinerary.component';
+import { EditHotelItineraryComponent } from './hotel-itinerary/edit-hotel-itinerary/edit-hotel-itinerary.component';
+import { PackageUploadComponent } from './package/package-upload/package-upload.component';
+import { PackageDetailListComponent } from './package/package-detail-list/package-detail-list.component';
+import { PackageFareComponent } from './package/package-fare/package-fare.component';
+import { ViewItineraryComponent } from '../view-itinerary/view-itinerary.component';
 
 const routes: Routes = [
  
@@ -57,10 +72,12 @@ const routes: Routes = [
     component: DashboardComponent,
   },
   { path: 'dashboard/package-details',component:PackageDetailsComponent },
+  { path: 'dashboard/package-itinerary',component:PackageItineraryComponent },
   { path: 'dashboard/user-package-details',component:UserPackageComponent },
   { path: 'dashboard/user-package-details/delete/:id',component:UserPackageComponent },
   { path: 'dashboard/package-details/delete/:id',component:PackageDetailsComponent },
   { path: 'dashboard/package',component:PackageComponent },
+  { path: 'dashboard/hotel-itinerary',component:HotelItineraryComponent },  
   {
     path:"package/add-category",
     component:AddCategoryComponent
@@ -70,15 +87,56 @@ const routes: Routes = [
     component:PackageListComponent
   },
   {
+    path:"dashboard/package-city",
+    component:PackageCityComponent
+  },
+  {
     path:"dashboard/create-package",
     component:CreatePackageComponent
   },
   {
+    path:"dashboard/create-package-itinerary",
+    component:AddPackageItineraryComponent
+  },
+  
+  {
+    path:"dashboard/create-hotel-itinerary",
+    component:AddHotelItineraryComponent
+  },
+  {
+    path:"dashboard/add-package-itinerary",
+    component:AddPackageItineraryComponent
+  },
+  { path: 'package-city/edit-packcity/:id',component:EditPackageCityComponent },
+  { path: 'dashboard/edit-package-itinerary/:id',component:EditPackageItineraryComponent },
+  { path: 'dashboard/edit-hotel-itinerary/:id',component:EditHotelItineraryComponent },
+  
+  
+  {
+    path:"package/package-upload",
+    component:PackageUploadComponent
+  },
+  {
+    path:"package-city/add-package-city",
+    component:AddPackageCityComponent
+  },
+  
+  {
     path:"dashboard/package-add",
     component:PackageAddComponent
   },
+  {
+    path:"dashboard/package-fare",
+    component:PackageFareComponent
+  },
+  {
+    path:"dashboard/package-fare/:id",
+    component:PackageFareComponent
+  },
   { path: 'package/edit-package/:id',component:EditPackageComponent },
+  { path: 'dashboard/package-edit/:id',component:PackageEditComponent },
   { path: 'dashboard/edit-package-details/:id',component:EditPackageDetailsComponent },
+  { path: 'dashboard/package-details-list/:id',component:PackageDetailListComponent },
   {
     path:"package/category/:id",
     component:AddCategoryComponent
@@ -90,6 +148,14 @@ const routes: Routes = [
   {
     path:"package/delete/:id",
     component:ShowCategoryComponent
+  },
+  {
+    path:"dashboard/delete-itinerary/:id",
+    component:PackageItineraryComponent
+  },
+  {
+    path:"package-city/delete/:id",
+    component:PackageCityComponent
   },
   {
     path:"package/deleteSubcategory/:id",
@@ -131,6 +197,8 @@ const routes: Routes = [
     path:"package/deletePack/:id",
     component:PackageListComponent
   },
+  { path: 'dashboard/pdf-package/:id',component:PackagePdfComponent },
+  
   // {
   //  path:"campaign-revenue-list",
   //  component: CampaignRevenueListComponent

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Details and Itinerary</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            margin: 1cm;
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .details {
+            font-size: 14px;
+            color: #333;
+        }
+        .duration {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<button (click)="export()">Print Pdf</button>
+
+<body style="font-family: Lato, sans-serif;width: 70rem;" #pdfContent id="pdfTable">
+  
+    <table  style="width: 100%; border-spacing: 15px; border: 0.8px solid #cac2c2;">
+        <tr>
+          <td style="width: 50%;">
+            <h1 style="color: #1a4e9d; text-align: left; font-size: 30px;">
+              <p>{{listData && listData[0]?.package_title!= ""?removeHtmlTags(listData[0]?.package_title):""}}</p>
+            </h1>
+            <h3 style="color: #1a4e9d; margin-bottom: 0.5rem; font-family: Lato, sans-serif; font-size: 30px; margin-top: 0; text-align: left;">
+                {{listData && listData[0]?.daynight!= ""?listData[0]?.daynight:""}}
+            </h3>
+            <h4 style="color: #da2517; margin: 0 0 0.5rem; font-family: Lato, sans-serif; font-size: 30px; text-align: left;">
+                <img src="assets/images/inr.png" *ngIf="listData && listData[0]?.actual_price!= ''" style="width: 12px;"> {{listData && listData[0]?.actual_price!= ""?listData[0]?.actual_price:""}}
+            </h4>
+            <span style="text-align: left; display: block; color: #747474; font-family: Lato, sans-serif; font-size: 25px;">
+              Per Person on twin sharing
+            </span>
+          </td>
+          <td style="width: 50%; text-align: center;">
+            <img src="assets/images/logo.jpeg" >
+            <br>
+            <span style="font-size: 20px; text-align: center;">Booking Id: {{randomNumber}}</span><br>
+            <span style="font-size: 20px; text-align: center;">Reykjavik cabiocab Pvt Ltd.</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="width: 100%; border-radius: 10px;" *ngIf="slider && slider[0]">
+            <img src="{{slider && slider[0]!= ''?slider[0]:''}}" style="width: auto;">
+          </td>
+        </tr>
+        <!-- <tr>
+          <td colspan="2">
+            <h3 style="color: #fff; font-size: 30px; margin: 1rem 0 5px;">.</h3>
+          </td>
+        </tr> -->
+    </table>
+ 
+    <table>
+        <tr>
+            <td style="width: 50%">
+                <h1 style="color: #1a4e9d; font-size: 20px;margin:1rem 0 5px;">Package Overview</h1>
+            </td>
+        </tr>
+    </table>
+    <table style="width: 100%; border: 0.8px solid #cac2c2;">
+        <tr>
+            <th style="width: 50%;">
+                <h3 style="width: 100%; background: #f8f9fc; border-radius: 5px 5px 0px 0px; padding: 20px; text-transform: capitalize; font-size: 15px; font-weight: 600; color: #1e1d1d; margin-top: 0; margin-bottom: 0rem; display: block;">
+                    Inclusions
+                </h3>
+            </th>
+            <th style="width: 50%;">
+                <h3 style="width: 100%; background: #f8f9fc; border-radius: 5px 5px 0px 0px; padding: 20px; text-transform: capitalize; font-size: 15px; font-weight: 600; color: #1e1d1d; margin-top: 0; margin-bottom: 0rem; display: block;">
+                    Exclusions
+                </h3>
+            </th>
+        </tr>
+        <tr>
+            <td style="font-size: 15px; line-height: 20px;max-width: 50%;text-wrap: wrap;">
+                <div [innerHTML]="listData && listData[0]?.inclusion!= ''?listData[0]?.inclusion:''"></div>
+
+                
+            </td>
+            <td style="font-size: 15px; line-height: 20px;text-wrap: wrap;">
+                <div [innerHTML]="listData && listData[0]?.exclusion!= ''?listData[0]?.exclusion:''"></div>                
+            </td>
+        </tr>
+    </table>
+    
+      
+    <br />
+    <table style="width: 100%; border-collapse: collapse;"  *ngFor="let packs of listData let i=index;">
+        <!-- <tr>
+            <td colspan="2" style="text-align: center;">
+                <h1 style="color: #1a4e9d; font-size: 30px; margin: 1rem 0 5px;">Hotel Details</h1>
+            </td>
+        </tr> -->
+        <tr *ngIf="0 == i">
+            <td colspan="2" style="text-align: center;">
+                <h1 style="color: #1a4e9d; font-size: 30px; margin: 1rem 0 5px;">Day Wise Itinerary</h1>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center; background: #1a4e9d;">
+                <h3 style="font-size: 30px; font-weight: 800; color: #ffffff; padding: 10px;">{{packs && packs['days']}}</h3>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <img src="assets/images/car.jpeg" style="width: 20%; max-width: 25%;">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <h4 style="font-size: 30px; color: #1e1d1d; font-weight: 600;">{{packs && packs['day_activity']!= ""?packs['day_activity']:""}}</h4>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <span style="font-size: 30px; font-weight: 800; color: #1a4e9d;">Vehicle Model: {{packs && packs['vechmodel']!= ""?packs['vechmodel']:""}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <p style="margin: 5px 0; font-size: 30px; font-weight: 600; color: #1e1d1d;">Category: {{packs && packs['vechcategory']!= ""?packs['vechcategory']:""}}</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <span style="font-size: 30px; color: #1a4e9d; padding-right: 10px; font-weight: 600;">Facilities:</span>
+                <span style="font-size: 25px; color: #727070;">{{packs && packs['facility']!= ""?packs['facility']:""}}</span>
+            </td>
+        </tr>
+        <table>
+       <tr>
+        <td>
+            <tr>
+                <td colspan="2" style="text-align: left;">
+                    <img src="{{packs && packs['activity1']!= ''?packs['activity1']:''}}" style="max-width: 230px;">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: left;max-width: 500px;">
+                    <span style="font-size: 15px; width:50%;font-weight: 800; color: #1a4e9d; padding: 1rem 0;">{{getCommaSeprator(packs)}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">
+                    <p style="font-size: 15px; font-weight: 700; color: #727070; margin-bottom: 0;">DURATION</p>
+                    <p style="font-size: 15px;">{{packs && packs['duration']!= ''?packs['duration']:''}} hours</p>
+                </td>
+                <td style="text-align: left;">
+                    <p style="font-size: 15px; font-weight: 700; color: #727070; margin-bottom: 0;">PLACES COVERED</p>
+                    <p style="font-size: 15px;">{{getCommaSepratorNew(packs)}}</p>
+                </td>
+            </tr>
+        </td>
+        <td>
+            <tr>
+                <td colspan="2" style="text-align: left;">
+                    <img src="{{packs && packs['hotel_image']!= ''?packs['hotel_image']:''}}" style="max-width: 230px;">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: left;max-width: 500px;">
+                    <span  style="font-size: 15px; width:50%; font-weight: 800; color: #1a4e9d; padding: 1rem 0;">{{packs && packs['hotel_title']!= ''?packs['hotel_title']:''}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">
+                    <p style="font-size: 15px; font-weight: 700; color: #727070; margin-bottom: 0;">Includes
+                    </p>
+                    <p style="font-size: 15px;">{{packs && packs['hotel_include']!= ''?packs['hotel_include']:''}} hours</p>
+                </td>
+                <td style="text-align: left;">
+                    <p style="font-size: 15px; font-weight: 700; color: #727070; margin-bottom: 0;">Room Type</p>
+                    <p style="font-size: 15px;">{{packs && packs['hotel_type']!= ''?packs['hotel_type']:''}}</p>
+                </td>
+            </tr>
+        </td>
+       </tr>     
+        
+    </table>
+        
+        <!-- Day 2 and Day 3 details can be added similarly -->
+    </table>
+    
+    <table>
+        <tr>
+            <td>
+                <h3 style="color: #1a4e9d; font-size: 20px; margin: 1rem 0 5px;">Fare Summary</h3><br />
+                <h3 style="font-size: 25px; margin: 1rem 0 5px;">Here is the detailed quotation of your desired holiday.
+                </h3>
+
+            </td>
+        </tr>
+        <br />
+        <table style="border-collapse: collapse;width: 100%;border: 1px solid #dddddd;">
+            <tr>
+                <th style="font-size: 10px;text-align: left; ">Price Summary Per Person</th>
+                <th style="font-size: 10px;text-align: left; ">Adult(Double)</th>
+                <th style="font-size: 10px;text-align: left; ">Child With Bed</th>
+                <th style="font-size: 10px;text-align: left; ">Child WithOut Bed</th>
+                <th style="font-size: 10px;text-align: left; ">Infants</th>
+            </tr>
+            <tr style="border: 1px solid #dddddd;text-align: left;padding: 8px;">
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">No. Of travellers
+                </td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">{{listData && listData[0]?.perchange!= ''?listData[0]?.perchange:''}}</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">0</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">0</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">0</td>
+            </tr>
+            <tr style="border: 1px solid #dddddd;text-align: left;padding: 8px;background-color: #dddddd;">
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 10px; ">Tour Cost (<img
+                        src="assets/images/inr.png" style="width: 10px">) Per Person</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 10px; "><img
+                        src="https://4dhamyatra.in/assets/images/logo.jpeg" style="width: 10px"> <span
+                        style="font-size: 20px">{{listData && listData[0].perchange!= ''?(listData[0].perchange * listData[0]?.actual_price):''}}</span></td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 10px; ">NA</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 10px; ">NA</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 10px; ">NA</td>
+            </tr>
+
+        </table>
+        <br />
+        <tr>
+            <td>
+
+                <h3 style="font-size: 15px; margin: 1rem 0 5px;">Total Tour Cost Calculation.</h3>
+
+            </td>
+        </tr>
+        <br />
+        <table style="border-collapse: collapse;width: 100%;">
+            <tr>
+                <td style="font-size: 15px;text-align: left;border: 1px solid #dddddd; ">Total tour Cost</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 25px; ">INR {{listData && listData[0]?.perchange!= ''?(listData[0]?.perchange * listData[0]?.actual_price):''}}</td>
+            </tr>
+            <tr>
+                <td style="font-size: 15px;text-align: left;border: 1px solid #dddddd; ">Gross Amount</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">{{listData && listData[0]?.perchange!= ''?(listData[0]?.perchange * listData[0]?.actual_price):''}}</td>
+            </tr>
+            <tr>
+                <td style="font-size: 15px;text-align: left;border: 1px solid #dddddd; ">Goods & Service Tax</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; "></td>
+            </tr>
+            <tr>
+                <td style="font-size: 15px;text-align: left;border: 1px solid #dddddd; ">CGST Calculated @2.5%</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">{{listData && listData[0]?.perchange!= ''?((listData[0]?.perchange * listData[0]?.actual_price)*2.5)/100:''}}</td>
+            </tr>
+            <tr>
+                <td style="font-size: 15px;text-align: left; border: 1px solid #dddddd;">SGST Calculated @2.5%</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">{{listData && listData[0]?.perchange!= ''?((listData[0]?.perchange * listData[0]?.actual_price)*2.5)/100:''}}</td>
+            </tr>
+            <tr style="background-color: #1a4e9d;color:#fff;">
+                <td style="font-size: 15px;text-align: left; color:white;border: 1px solid #dddddd;">Final Cost For All
+                    Passengers</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px;color:white; ">{{((listData[0]?.perchange * listData[0]?.actual_price)+((listData[0]?.perchange * listData[0].actual_price)*2.5)/100)}}
+                </td>
+            </tr>
+            
+        </table>
+
+        {{listData && listData[0]?.special_descr!= ''?listData[0]?.special_descr:''}}     
+
+    </table>
+   
+    
+    <table style="border-collapse: collapse;width: 100%;">
+        <tr>
+            <td>
+                <h3 style="color: #1a4e9d; font-size: 20px; margin: 1rem 0 5px;text-align: center;">Call Us - 8953767676</h3>
+            </td>
+        </tr>
+        <tr>
+            <td><span style="font-size: 15px; color: #1e1d1d;margin-bottom: 5px; display: block;text-align: center;">Book Now-
+                https://4dhamyatra.in/</span></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
+
+

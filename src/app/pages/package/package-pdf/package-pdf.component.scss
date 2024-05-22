@@ -1,0 +1,23 @@
+table {
+    border-collapse: unset;
+}
+
+
+  .responsive-table {
+    width: 100%;
+    table-layout: fixed; /* Ensures table layout does not depend on content */
+    border-collapse: collapse;
+  }
+  
+  .responsive-table td span {
+    padding: 10px;
+    text-align: left;
+    overflow-wrap: break-word; /* Wrap long words onto the next line */
+    max-width: 400px; /* Example maximum width; adjust as needed */
+  }
+  .img {
+    max-width: 100%; /* Ensures images fit within their container */
+  }
+  div p {
+    word-wrap: break-word !important
+  }

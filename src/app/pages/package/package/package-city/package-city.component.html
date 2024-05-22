@@ -1,0 +1,56 @@
+<!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
+
+
+<div class="col-xl-12">
+    <div class="card">
+      <div class="card-header topHeadList">
+        <h4 class="card-title">Package City </h4>
+  
+        <span class="count" *ngIf="tags">Count : <strong>{{tags.length}}</strong></span>
+        <div class="display">
+            <button class="btn btn-light selectbox" routerLink="/package-city/add-package-city">Add Package City</button>&nbsp;            
+          </div>
+      
+      </div>
+  
+      <div class="card-body">
+        <div class="table-responsive">
+          
+  
+          <table class="table mb-0" id="excel-table">
+            <thead class="table-light">
+              <tr>
+                <th class="text-center">S.No</th>
+                <th class="text-center">From City </th>
+                <th class="text-center">Package name </th>                
+                <th class="text-center">Created At </th>
+                <th class="text-center">Action </th>
+  
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of tags | paginate:{itemsPerPage: itemsPerPageC, currentPage:p};let i=index;">
+                <td class="text-center" scope="row">{{(p - 1) * itemsPerPageC + i + 1}}</td>
+                <td class="text-center">{{data?.from_city ? data?.from_city : 'N.A' }}</td>
+                <td class="text-center">{{data?.city_name ? data?.city_name : 'N.A'}}</td>                
+                <td class="text-center">{{data.created_at ? (data?.created_at | date : 'dd-MM-yyyy h:mm a'): 'N.A'}}</td>
+                <td><button routerLink="/package-city/edit-packcity/{{data.id}}"><i class="fa fa-edit"></i></button>&nbsp;
+                  <button routerLink="/package-city/delete/{{data.id}}"><i class="fa fa-trash"></i></button></td>
+  
+              </tr>
+              <tr *ngIf="tags && tags?.length <= 0">
+                <td colspan="9" class="text-center" style="color:rgb(143, 71, 71);">Records Not Found</td>
+              </tr>
+            </tbody>
+          </table>
+  
+        </div>
+        <div *ngIf="tags &&  tags.length>0" id="pagination" class="mt-2">
+          <pagination-controls (pageChange)="p=$event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  
+  

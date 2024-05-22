@@ -46,8 +46,13 @@
                 <td class="text-center">{{data?.perchange ? data?.perchange : 'N.A'}}</td>
                 <td class="text-center">{{data?.day_activity ? data?.day_activity : 'N.A'}}/{{data?.event1 ? data?.event1 : 'N.A'}}</td>
                 <td class="text-center">{{data.created_at ? (data?.created_at | date : 'dd-MM-yyyy h:mm a'): 'N.A'}}</td>
-                <td><button routerLink="/dashboard/edit-package-details/{{data.id}}"><i class="fa fa-edit"></i></button>&nbsp;
-                  <button  (click)="confirm(data.booking_id)"><i class="fa fa-trash"></i></button></td>
+                <td>
+                  <a routerLink="/dashboard/package-details-list/{{data.booking_id}}">View All</a>&nbsp;
+                  <button routerLink="/dashboard/edit-package-details/{{data.id}}"><i class="fa fa-edit"></i></button>&nbsp;
+                  <button type="button" class="btn btn-danger" target="_blank" routerLink="/dashboard/pdf-package/{{data.booking_id}}"><i class="fa fa-download" aria-hidden="true"></i>
+                  </button>&nbsp;
+                  <button  (click)="confirm(data.booking_id)"><i class="fa fa-trash"></i></button>
+                </td>
   
               </tr>
               <tr *ngIf="tags && tags?.length <= 0">

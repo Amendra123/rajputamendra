@@ -1,0 +1,126 @@
+<!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
+
+<div class="card-header topHeadList">
+    <h4 class="card-title">Edit Package </h4> 
+  
+  </div>
+  
+  <div class="col-lg-12">
+    <div class="form-control">
+        <div class="card-body">
+            <form [formGroup]="createPackage" (ngSubmit)="savePackage()">              
+                <div class="basic-form">
+                    <div id="error"></div>
+                    <div class="col-md-12">
+                        <div class="row">
+                           
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Package Title:</label>
+                                    <ng-select formControlName="package_id" name="package_title"
+                                        [items]="packgeCityOptions" 
+                                        bindLabel="package_title" bindValue="package_title" placeholder="Select Package title">
+                                        <ng-template ng-optgroup-tmp let-item="item">
+                                            <span class="ng-value-label">{{ item.package_title}}</span>
+                                        </ng-template>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                  <label> Select Month:</label>
+                                  <ng-select formControlName="package_month" name="package_month"
+                                      [items]="monthOptions" 
+                                      bindLabel="month" bindValue="month" placeholder="Select Package month">
+                                      <ng-template ng-optgroup-tmp let-item="item">
+                                          <span class="ng-value-label">{{ item.month}}</span>
+                                      </ng-template>
+                                  </ng-select>
+                              </div>
+                          </div>
+                            <div class="form-group col-md-4">
+                                <label>No Of Persion :</label>
+  
+                                <input type="number" name="no_person" formControlName="no_person" 
+                                    class="form-control" placeholder="No Of Persion" >
+                            </div>
+                            <!-- <div class="form-group col-md-4">
+                                <label>Actual Price(Cut price)1 :</label>
+  
+                                <input type="number" name="actual_price" formControlName="actual_price" 
+                                    class="form-control" placeholder="Actual Price" >
+                            </div> -->
+                            <div class="form-group col-md-4">
+                                <label>Current Price :</label>
+  
+                                <input type="number" name="current_price" formControlName="current_price" 
+                                    class="form-control" placeholder="Current Price" >
+                            </div>
+  
+  
+  
+                        </div>
+                    </div>
+  <br>
+                   
+                    <input type="submit" class="btn btn-dark" [disabled]="createPackage.invalid" value="Save">&nbsp;&nbsp;&nbsp;
+                        
+  
+  
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+          
+  
+          <table class="table mb-0" id="excel-table">
+            <thead class="table-light">
+              <tr>
+                <th class="text-center">S.No</th>
+                
+                <th class="text-center">Package Title </th>
+                <th class="text-center">Month</th>
+                <th class="text-center">Person</th>
+                <th class="text-center">Current Price</th>
+                <th class="text-center">Actual Price </th>
+                <!-- <th class="text-center">Created At </th> -->
+                <th class="text-center">Action </th>
+  
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of getPackageFareData | paginate:{itemsPerPage: itemsPerPageC, currentPage:p};let i=index;">
+                <td class="text-center" scope="row">{{(p - 1) * itemsPerPageC + i + 1}}</td>
+                
+                <td class="text-center">{{data?.package_id ? data?.package_id : 'N.A' }}</td>
+                <td class="text-center">{{data?.package_month ? data?.package_month : 'N.A' }}</td>
+                <td class="text-center">{{data?.no_person ? data?.no_person : 'N.A' }}</td>
+                <td class="text-center">{{data?.current_price ? data?.current_price : 'N.A'}}</td>
+                <td class="text-center">{{data?.actual_price ? data.actual_price : 'N.A'}}</td>
+                
+                <!-- <td class="text-center">{{data.created_at ? (data?.created_at | date : 'dd-MM-yyyy h:mm a'): 'N.A'}}</td> -->
+                <td>
+                  
+                  <button routerLink="/dashboard/package-fare/{{data.id}}" (click)="confirm1(data.id)"><i class="fa fa-edit"></i></button>&nbsp;
+                 
+                  <button  (click)="confirm(data.id)"><i class="fa fa-trash"></i></button>
+                </td>
+  
+              </tr>
+              <tr *ngIf="getPackageFareData && getPackageFareData?.length <= 0">
+                <td colspan="9" class="text-center" style="color:rgb(143, 71, 71);">Records Not Found</td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="getPackageFareData &&  getPackageFareData.length>0" id="pagination" class="mt-2">
+            <pagination-controls (pageChange)="p=$event"></pagination-controls>
+          </div>
+        </div>
+        <!-- <div *ngIf="tags &&  tags.length>0" id="pagination" class="mt-2">
+          <pagination-controls (pageChange)="p=$event"></pagination-controls>
+        </div> -->
+      </div>
+  </div>
+  

@@ -1,0 +1,41 @@
+<form [formGroup]="quantityForm">
+    <table class="table table-bordered" formArrayName="quantities">
+        
+        <!-- <tr>
+            <th colspan="1"></th>
+            <th width="150px"><button type="button" (click)="addQuantity()" mat-icon-button
+                    class="action-cell"><mat-icon>add</mat-icon></button></th>
+        </tr> -->
+        <tr *ngFor="let quantity of quantities().controls; let i=index let isLast = last;" [formGroupName]="i">
+            <td>
+                <div class="row-number-cell text-boxed mr-8">#{{ i + 1 }}</div>
+            </td>           
+            <td>  
+                <div class="form-group col-md-4">
+                    <label>Event{{i+1}}:</label>  
+                    <input type="text" name="events"  formControlName="events" class="form-control"
+                        placeholder="Enter Event{{i+1}}" required="">
+                </div> 
+              </td>  
+            
+           
+            <td>
+                &nbsp;&nbsp;  <button *ngIf="quantities().controls.length>1"  (click)="removeQuantity(i)" style="background-color: #52585d;" class="btn btn-dark">Delete</button>
+                &nbsp;&nbsp; <button type="button" *ngIf="isLast" (click)="addQuantity()"  style="background-color: #249a6a;"  class="btn btn-success">Add Event</button>
+            </td>
+           
+        </tr>
+        
+        <tr>
+            <th colspan="6"></th>
+            <th width="150px"><button type="button" (click)="addQuantity()"  style="background-color: #249a6a;"  class="btn btn-success">Add Event</button>
+            </th>
+        </tr>
+       
+    </table>
+
+    <!-- <button type="submit" class="btn btn-success">Submit</button>   -->
+
+</form>
+
+<br />

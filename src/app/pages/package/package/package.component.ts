@@ -43,16 +43,18 @@ export class PackageComponent {
       confirmButtonColor: '#34c38f',
       cancelButtonColor: '#f46a6a',
       confirmButtonText: 'Yes, delete it!',
-    }).then((result) => {
+    }).then((result) => {//console.log(result,id);
       if (result.value) {
         id &&  this.rootService.deletePackageDetailById(id).subscribe((res:any)=>{    
           if(res.status == 200){    
             Swal.fire('Deleted!', 'Event has been deleted.', 'success');  
             this.toastr.success("Delete Package Data All Days!");   
-            this.route.navigate(['/dashboard/package-list']);      
+            this.getPackageData();
+            //this.route.navigate(['/dashboard/package']);      
           }else{
-            this.toastr.error("some error occured!");     
-            this.route.navigate(['/dashboard/package-list']);
+            this.toastr.error("some error occured!");   
+            this.getPackageData();  
+           // this.route.navigate(['/dashboard/package']);
           }
          });        
       }

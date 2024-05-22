@@ -1,7 +1,7 @@
 <!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
 
 <div class="card-header topHeadList">
-    <h4 class="card-title">Edit Package Details </h4>
+    <h4 class="card-title">Edit Package Details (File uploading only jpeg)</h4>
 
 
 
@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label> Package city:</label>
+                                    <label> Package city:<span style="color: red;">(*)</span></label>
                                     <ng-select formControlName="package_city" name="package_city"
                                         [items]="packgeCityOptions" (change)="getPackCityEvent($event)"
                                         bindLabel="city_name" bindValue="city_name" placeholder="Select Package city">
@@ -47,19 +47,23 @@
                                             <span class="ng-value-label">{{ item.city_name}}</span>
                                         </ng-template>
                                     </ng-select>
+                                  
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label> Sight Seeing:</label>
-                                    <ng-select [items]="sightSeeingOptions" formControlName="package_title"
-                                        name="package_title" name="package_title" bindLabel="title" bindValue="id"
+                                    <!-- <input type="text" name="sightseeing" formControlName="sightseeing"  style="pointer-events: none;cursor: default;" id="package_title"
+                                    class="form-control" value="" placeholder="Sight Seeing"> -->
+                                    <ng-select [items]="sightSeeingOptions" formControlName="sightseeing"
+                                        name="sightseeing" bindLabel="title" bindValue="title"
                                         (change)="getSightSeeingEvent($event)" placeholder="Select Sight Seeing">
                                         <ng-template ng-optgroup-tmp let-item="item">
                                             <span class="ng-value-label">{{ item.title}}</span>
                                         </ng-template>
                                     </ng-select>
+                                   
 
                                 </div>
                             </div>
@@ -111,16 +115,14 @@
 
                             <div class="form-group col-md-6">
                                 <label>Package Title: </label>
-                                <ckeditor [editor]="Editor" formControlName="p_title" name="p_title"
+                                <ckeditor [editor]="Editor" formControlName="package_title" name="p_title"
                                     placeholder="Full Title "></ckeditor>
                                 <!-- <textarea name="p_title" id="p_title" value="" onchange="checktitle(this.value);"
                             class="form-control" placeholder="Full Title "
                             style="visibility: hidden; display: none;"></textarea> -->
 
                             </div>
-                            <script>
-
-                            </script>
+                            
                             <div class="form-group col-md-6" id="Inclusion">
                                 <label>Inclusion:</label>
                                 <ckeditor [editor]="Editor" name="inclusion" formControlName="inclusion"
@@ -346,84 +348,89 @@
                                 <input type="file" name="activity2"  formControlName="activity2" (change)="selectActImg2($event)" class="form-control" placeholder="Transfer Number">
                             </div>
                             <div class="form-group col-md-4 event_1" [class.disabled]="event2">                               
-                                <label>Event Name2:</label>
+                                <label>Event Name 2:</label>
                                 <input type="text" name="event2" id="event2" formControlName="event2"  class="form-control" placeholder="Transfer Number" >
                             </div>
                             <div class="form-group col-md-4 activity1" [class.disabled]="activity3">                               
-                                <label>Activity3 :</label>
+                                <label>Activity 3 :</label>
                                 <input type="file" name="activity3"  formControlName="activity3" (change)="selectActImg3($event)" class="form-control" placeholder="Transfer Number">
                             </div>
                             <div class="form-group col-md-4 event_1" [class.disabled]="event3">                               
-                                <label>Event Name3:</label>
+                                <label>Event Name 3:</label>
                                 <input type="text" name="event3" id="event2" formControlName="event3"  class="form-control" placeholder="Transfer Number" >
                             </div>
                             <div class="form-group col-md-4 activity1" [class.disabled]="activity4">                               
-                                <label>Activity4 :</label>
+                                <label>Activity 4 :</label>
                                 <input type="file" name="activity4"  formControlName="activity4" (change)="selectActImg4($event)" class="form-control" placeholder="Transfer Number">
                             </div>
                             <div class="form-group col-md-4 event_1" [class.disabled]="event4">                               
-                                <label>Event Name4:</label>
+                                <label>Event Name 4:</label>
                                 <input type="text" name="event4" id="event2" formControlName="event4"  class="form-control" placeholder="Transfer Number" >
                             </div>
                             <div class="form-group col-md-4 activity1" [class.disabled]="activity5">                               
-                                <label>Activity5 :</label>
+                                <label>Activity 5 :</label>
                                 <input type="file" name="activity5"  formControlName="activity5" (change)="selectActImg5($event)" class="form-control" placeholder="Transfer Number">
                             </div>
                             <div class="form-group col-md-4 event_1" [class.disabled]="event5">                               
-                                <label>Event Name5:</label>
+                                <label>Event Name 5:</label>
                                 <input type="text" name="event5" id="event2" formControlName="event5"  class="form-control" placeholder="Transfer Number" >
                             </div>
                             <div class="form-group col-md-4 activity1" [class.disabled]="activity6">                               
-                                <label>Activity6 :</label>
+                                <label>Activity 6 :</label>
                                 <input type="file" name="activity6"  formControlName="activity6" (change)="selectActImg6($event)" class="form-control" placeholder="Transfer Number">
                             </div>
                             <div class="form-group col-md-4 event_1" [class.disabled]="event6">                               
-                                <label>Event Name6:</label>
+                                <label>Event Name 6:</label>
                                 <input type="text" name="event6" id="event2" formControlName="event6"  class="form-control" placeholder="Transfer Number" >
                             </div>
                             <div class="form-group col-md-4 activity1" [class.disabled]="activity7">                               
-                                <label>Activity7 :</label>
+                                <label>Activity 7 :</label>
                                 <input type="file" name="activity7"  formControlName="activity7" (change)="selectActImg7($event)" class="form-control" placeholder="Transfer Number">
                             </div>
                             <div class="form-group col-md-4 event_1" [class.disabled]="event7">                               
-                                <label>Event Name7:</label>
+                                <label>Event Name 7:</label>
                                 <input type="text" name="event7" id="event2" formControlName="event7"  class="form-control" placeholder="Transfer Number" >
                             </div>
                             <div class="form-group col-md-4 activity1" [class.disabled]="activity8">                               
-                                <label>Activity8 :</label>
+                                <label>Activity 8 :</label>
                                 <input type="file" name="activity8"  formControlName="activity8" (change)="selectActImg8($event)" class="form-control" placeholder="Transfer Number">
                             </div>
                             <div class="form-group col-md-4 event_1" [class.disabled]="event8">                               
-                                <label>Event Name8:</label>
+                                <label>Event Name 8:</label>
                                 <input type="text" name="event8" id="event2" formControlName="event8"  class="form-control" placeholder="Transfer Number" >
                             </div>
                             <div class="form-group col-md-4 activity1" [class.disabled]="activity9">                               
-                                <label>Activity9 :</label>
+                                <label>Activity 9 :</label>
                                 <input type="file" name="activity9"  formControlName="activity9" (change)="selectActImg9($event)" class="form-control" placeholder="Transfer Number">
                             </div>
                             <div class="form-group col-md-4 event_1" [class.disabled]="event9">                               
-                                <label>Event Name9:</label>
+                                <label>Event Name 9:</label>
                                 <input type="text" name="event9" id="event2" formControlName="event9"  class="form-control" placeholder="Transfer Number" >
                             </div>
                             <div class="form-group col-md-4 activity1" [class.disabled]="activity10">                               
-                                <label>Activity10 :</label>
+                                <label>Activity 10 :</label>
                                 <input type="file" name="activity10"  formControlName="activity10" (change)="selectActImg10($event)" class="form-control" placeholder="Transfer Number">
                             </div>
                             <div class="form-group col-md-4 event_1" [class.disabled]="event10">                               
-                                <label>Event Name10:</label>
+                                <label>Event Name 10:</label>
                                 <input type="text" name="event10" id="event2" formControlName="event10"  class="form-control" placeholder="Transfer Number" >
-                            </div>
-                            
-
-                            
-
+                            </div> 
                             <div class="form-group col-md-4">
                                 <label>Duration:</label>                                                                    
                             <input type="text" name="duration"  formControlName="duration" class="form-control" placeholder="Total Duration">
                             </div>
                         </div>
                     </div>
+                    <div class="form-group col-md-12">
+                        <label>Special Description: </label>
+                        <ckeditor [editor]="Editor" formControlName="special_descr" name="special_descr"
+                            placeholder="Special Description">
+                        </ckeditor>
+                        <!-- <textarea name="p_title" id="p_title" value="" onchange="checktitle(this.value);"
+                    class="form-control" placeholder="Full Title "
+                    style="visibility: hidden; display: none;"></textarea> -->
 
+                    </div>
                     <div class="row" id="wraped">
                         <!-- <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
                             <label>Slider Image1: <a href="javascript:void(0);" class="remove_button"

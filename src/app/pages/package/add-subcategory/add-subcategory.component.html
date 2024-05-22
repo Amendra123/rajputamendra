@@ -25,7 +25,7 @@
           </div>
           <div class="modal-body">
              
-            <div class="form-group select_drop">
+            <div class="form-group select_drop" *ngIf="categoryOptions">
               <select     name="category_id"       formControlName="category_id"              
                 class="form-control"
                 id="sel1"

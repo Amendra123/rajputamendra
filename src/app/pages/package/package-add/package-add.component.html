@@ -43,49 +43,10 @@
                               </div>
                           </div>
 
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                  <label> Sight Seeing:</label>
-                                  <ng-select [items]="sightSeeingOptions" formControlName="package_title"
-                                      name="package_title" name="package_title" bindLabel="title" bindValue="id"
-                                      (change)="getSightSeeingEvent($event)" placeholder="Select Sight Seeing">
-                                      <ng-template ng-optgroup-tmp let-item="item">
-                                          <span class="ng-value-label">{{ item.title}}</span>
-                                      </ng-template>
-                                  </ng-select>
-
-                              </div>
-                          </div>
+                          
 
 
 
-                          <div class="form-group col-md-4">
-                              <div class="form-group">
-                                  <label> No. of days:</label>
-                                  <select name="days" id="days" formControlName="days" name="days"
-                                      class="form-control" >
-                                      <option value="">--Select days--</option>
-
-                                      <option value="1">Day 1</option>
-                                      <option value="2">Day 2</option>
-                                      <option value="3">Day 3</option>
-                                      <option value="4">Day 4</option>
-                                      <option value="5">Day 5</option>
-                                      <option value="6">Day 6</option>
-                                      <option value="7">Day 7</option>
-                                      <option value="8">Day 8</option>
-                                      <option value="9">Day 9</option>
-                                      <option value="10">Day 10</option>
-
-                                  </select>
-                              </div>
-                          </div>
-                          <div class="form-group col-md-4">
-                              <label>Duration:</label>
-
-                              <input type="text" name="duration" formControlName="duration" id="duration"
-                                  class="form-control" value="" placeholder="Total Duration" >
-                          </div>
                           <div class="form-group col-md-4">
                               <div class="form-group">
                                   <label> Type:</label>
@@ -94,7 +55,7 @@
                                       <option value="">--Select--</option>
 
                                       <option value="Pilgrims">Pilgrims</option>
-                                      <option value="Domestice">Domestice</option>
+                                      <option value="Domestic">Domestic</option>
                                       <option value="International">International</option>
 
 
@@ -104,111 +65,23 @@
 
                           <div class="form-group col-md-6">
                               <label>Package Title: </label>
-                              <ckeditor [editor]="Editor" formControlName="p_title" name="p_title"
+                              <ckeditor [editor]="Editor" formControlName="package_title" name="package_title"
                                   placeholder="Full Title "></ckeditor>
                               <!-- <textarea name="p_title" id="p_title" value="" onchange="checktitle(this.value);"
                           class="form-control" placeholder="Full Title "
                           style="visibility: hidden; display: none;"></textarea> -->
 
                           </div>
-                          <script>
-
-                          </script>
-                          <div class="form-group col-md-6" id="Inclusion">
-                              <label>Inclusion:</label>
-                              <ckeditor [editor]="Editor" name="inclusion" formControlName="inclusion"
-                                  placeholder="Full Inclusion"></ckeditor>
-                              <!-- <textarea name="inclusion" id="inclusion" value="" class="form-control"
-                          placeholder="Full Inclusion " style="visibility: hidden; display: none;"></textarea> -->
-
-                          </div>
-                          <div class="form-group col-md-6" id="Exclusion">
-                              <label>Exclusion:</label>
-                              <ckeditor [editor]="Editor" name="exclusion" formControlName="exclusion"
-                                  placeholder="Full Exclusion"></ckeditor>
-                              <!-- <textarea name="exclusion" id="exclusion" value="" class="form-control"
-                          placeholder="Full Exclusion " style="visibility: hidden; display: none;"></textarea> -->
-
-
-                          </div>
-
-
-
-                          <div class="form-group col-md-4">
-                              <label>Day Tour:</label>
-
-                              <input type="text" name="day_tour" id="day_tour" formControlName="day_tour"
-                                  class="form-control" placeholder="Airport to hotel in Cochin"
-                                  >
-                          </div>
-
-
-
-                          <div class="form-group col-md-4">
-                              <label>Vehicle Category :</label>
-
-                              <ng-select [items]="categoryOptions" name="vechcategory" formControlName="vechcategory"
-                                  bindLabel="name" bindValue="name" placeholder="Select Vehicle Category">
-                                  <ng-template ng-optgroup-tmp let-item="item">
-                                      <span class="ng-value-label">{{ item.name}}</span>
-                                  </ng-template>
-                              </ng-select>
-                          </div>
-                          <div class="form-group col-md-4">
-                              <label>Vehicle Model :</label>
-
-                              <ng-select [items]="vehicleOptions" name="vechmodel" formControlName="vechmodel"
-                                  bindLabel="model" bindValue="model" placeholder="Select Vehicle Model">
-                                  <ng-template ng-optgroup-tmp let-item="item">
-                                      <span class="ng-value-label">{{ item.model}}</span>
-                                  </ng-template>
-                              </ng-select>
-                          </div>
-                          <div class="form-group col-md-4">
-                              <label>Facilities:</label>
-
-                              <input type="text" name="facility" id="facility" name="facility"
-                                  formControlName="facility" value="3 Seater | 2 Luggage Bags | AC | First Aid"
-                                  class="form-control" placeholder="3 Seater | 2 Luggage Bags | AC | First Aid"
-                                  >
-                          </div>
-
-                          <div class="form-group col-md-4" id="slider">
-                              <label>Slider Image1:</label>
-
-                              <input type="file" name="slider" formControlName="slider" (change)="selectFile($event)"
-                                  class="form-control" placeholder="Cover Photo">
-                          </div>
-                          <div class="form-group col-md-4" id="slider">
-                              <label>Slider Image2:</label>
-
-                              <input type="file" name="slider1" formControlName="slider1" (change)="selectFile1($event)"
-                                  class="form-control" placeholder="Cover Photo" >
-                          </div>
-                          <div class="form-group col-md-4" id="slider">
-                              <label>Slider Image3:</label>
-
-                              <input type="file" name="slider2" formControlName="slider2" (change)="selectFile2($event)"
-                                  class="form-control" placeholder="Cover Photo">
-                          </div>
-                          <div class="form-group col-md-4" id="slider">
-                              <label>Slider Image4:</label>
-
-                              <input type="file" name="slider3" formControlName="slider3" (change)="selectFile3($event)"
-                                  class="form-control" placeholder="Cover Photo">
-                          </div>
+                        
+                       
+                         
                           <div class="form-group col-md-4" id="cover">
-                              <label>Cover Photo:</label>
+                              <label style="color: red;">Cover Photo: Only Jpeg image</label>
 
                               <input type="file" name="image" formControlName="image" (change)="selectFileImg($event)"
                                   class="form-control" placeholder="Cover Photo" >
                           </div>
-                          <div class="form-group col-md-4">
-                              <label>Vedio Link:</label>
-
-                              <input type="text" name="vedio" formControlName="vedio" class="form-control"
-                                  placeholder="Vedio Link" >
-                          </div>
+                          <br>
                           <div class="form-group col-md-4">
                               <label>Stay :<b>(Like- 1N Munnar | 2N Allepey)</b></label>
 
@@ -248,38 +121,26 @@
 
 
                           <div class="form-group col-md-4">
-                              <label>Title:</label>
+                              <label>Sub-Title:</label>
 
                               <input type="text" name="addtitle" id="addtitle" formControlName="addtitle"
                                   class="form-control" placeholder="Title" >
                           </div>
 
                           <div class="form-group col-md-4">
-                              <label>Per per charges:</label>
+                              <label>Per person:</label>
 
                               <input type="number" required="" name="perchange" formControlName="perchange"
                                   id="perchange" class="form-control"  placeholder="Total Per per charges:">
                                   
                           </div>
                           <div class="form-group col-md-4">
-                              <label>Name :</label>
+                              <label>Transfer Number:</label>
 
-                              <input type="text" name="name"  formControlName="name" class="form-control"
-                                  placeholder="Enter name" required="">
+                              <input type="text" name="transfer"  formControlName="transfer" class="form-control"
+                                  placeholder="Enter transfer" required="">
                           </div>
-                          <div class="form-group col-md-4">
-                              <label>Email :</label>
-
-                              <input type="email" name="email"  class="form-control" formControlName="email"
-                                  placeholder="Enter email" required="" >
-                          </div>
-                          <div class="form-group col-md-4">
-                              <label>Mobile :</label>
-
-                              <input type="number" name="mobile"  class="form-control"
-                                  formControlName="mobile" placeholder="Enter number" required="">
-                                  
-                          </div>
+                          
                           <!--<div class="form-group col-md-4" >-->
                           <!--	<label>Shight Seeing:</label>-->
 
@@ -296,6 +157,22 @@
                   </div>
 
                   <div class="row" id="wraped">
+                    <table class="table table-bordered" formArrayName="events">  
+                        
+                        <tr *ngFor="let quantity of events().controls; let i=index" [formGroupName]="i">  
+                          <td>  
+                            <div class="form-group col-md-4">
+                                <label>Event{{i+1}}:</label>  
+                                <input type="text" name="events"  formControlName="events" class="form-control"
+                                    placeholder="Enter Event{{i+1}}" required="">
+                            </div> 
+                          </td>  
+                         
+                          <td>  
+                              <button (click)="removeQuantity(i)" class="btn btn-dark" style="background-color: #343a40;">Remove</button>  
+                          </td>  
+                        </tr>  
+                      </table>  
                       <!-- <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
                           <label>Slider Image1: <a href="javascript:void(0);" class="remove_button"
                                   (click)="cancel(1)"><img
@@ -416,91 +293,11 @@
                   <input type="submit" class="btn btn-dark"
                       onclick="return confirm('Are you sure want to submit the Info?')" [disabled]="createPackage.invalid" value="Submit"
                       id="submit">&nbsp;&nbsp;&nbsp;
-                  <a href="javascript:void(0);" class="add_button btn btn-success" title="Add field">Add Event</a>
+                      <button type="button" (click)="addQuantity()" class="btn btn-primary" style="background-color: #4549a2;">Add Event</button>
 
 
               </div>
           </form>
       </div>
-  </div>
-</div>
-
-<div class="modal bd-example-modal-lg" id="contactus" [class.active]="sightSeeingPopUp"
-  [class.inactive]="!sightSeeingPopUp" tabindex="-1" role="dialog" aria-labelledby="franchiseLabel" aria-modal="true"
-  style="top: 55px;max-height: 100%;overflow-y: auto;">
-  <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="franchiseLabel">Sight Seeing Details</h5>
-              <button type="button" class="btn close" data-dismiss="modal" aria-label="Close"
-                  (click)="hideSightSeeing()">
-                  <span aria-hidden="true">×</span>
-              </button>
-          </div>
-          <div class="modal-body" id="sight">
-              <span *ngFor="let items of sightSeeingData">
-                  <h5> {{items.package_title}} of Day {{items.days}} </h5>
-                  <table class="table mb-0" id="excel-table">
-                      <thead class="table-light">
-                          <tr>
-                              <th *ngIf="items.data['event1']!=null">Event 1/Image 1</th>
-                              <th *ngIf="items.data['event2']!=null">Event 2/Image 2</th>
-                              <th *ngIf="items.data['event3']!=null">Event 3/Image 3</th>
-                              <th *ngIf="items.data['event4']!=null">Event 4/Image 4</th>
-                              <th *ngIf="items.data['event5']!=null">Event 5/Image 5</th>
-                              <th *ngIf="items.data['event6']!=null">Event 6/Image 6</th>
-                              <th *ngIf="items.data['event7']!=null">Event 7/Image 7</th>
-                              <th *ngIf="items.data['event8']!=null">Event 8/Image 8</th>
-                              <th *ngIf="items.data['event9']!=null">Event 9/Image 9</th>
-                              <th *ngIf="items.data['event10']!=null">Event 10/Image 10</th>
-                          </tr>
-                          <tr>
-                              <td *ngIf="items.data['event1']!=null">{{items.data['event1']}}/<br><img
-                                      crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity1']">
-                              </td>
-                              <td *ngIf="items.data['event2']!=null">{{items.data['event2']}}/<br><img
-                                      crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity2']">
-                              </td>
-                              <td *ngIf="items.data['event3']!=null">{{items.data['event3']}}/<br><img
-                                      crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity3']">
-                              </td>
-                              <td *ngIf="items.data['event4']!=null">{{items.data['event4']}}/<br><img
-                                      crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity4']">
-                              </td>
-                              <td *ngIf="items.data['event5']!=null">{{items.data['event5']}}/<br><img
-                                      crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity5']">
-                              </td>
-                              <td *ngIf="items.data['event6']!=null">{{items.data['event6']}}/<br><img
-                                      crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity6']">
-                              </td>
-                              <td *ngIf="items.data['event7']!=null">{{items.data['event7']}}/<br><img
-                                      crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity7']">
-                              </td>
-                              <td *ngIf="items.data['event8']!=null">{{items.data['event8']}}/<br><img
-                                      crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity8']">
-                              </td>
-                              <td *ngIf="items.data['event9']!=null">{{items.data['event9']}}/<br><img
-                                      crossorigin="anonymous" class="img-respons" [src]="url+items.data['activity9']">
-                              </td>
-                              <td *ngIf="items.data['event10']!=null">{{items.data['event10']}}/<br><img
-                                      crossorigin="anonymous" class="img-respons"
-                                      [src]="url+items.data['activity10']"></td>
-
-                          </tr>
-                      </thead>
-
-                  </table><br>
-              </span>
-          </div>
-
-          <div class="col-md-12 btn-right">
-              <button type="button" value="submit" (click)="clearSightseeing();" data-dismiss="modal"
-                  aria-label="Close" class="btn btn-primary">
-                  Clear Sight Seeing
-              </button>
-          </div>
-
-      </div>
-
   </div>
 </div>

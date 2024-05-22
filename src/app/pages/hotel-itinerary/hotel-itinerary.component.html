@@ -1,0 +1,66 @@
+<!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
+
+
+<div class="col-xl-12">
+    <div class="card">
+      <div class="card-header topHeadList">
+        <h4 class="card-title">Hotel Iinerary Details </h4>
+  
+        <span class="count" *ngIf="tags">Count : <strong>{{tags.length}}</strong></span>
+        <div class="display">
+            <button class="btn btn-light selectbox" routerLink="/dashboard/create-hotel-itinerary">Create Hotel Itinerary</button>&nbsp;            
+          </div>
+      
+      </div>
+  
+      <div class="card-body">
+        <div class="table-responsive">
+          
+  
+          <table class="table mb-0" id="excel-table">
+            <thead class="table-light">
+              <tr>
+                <th class="text-center">S.No</th>  
+                <th class="text-center">Package city</th>          
+                <th class="text-center">From city</th>
+                <th class="text-center">Hotel Type </th>
+                <th class="text-center">Hotel Name </th>      
+                <th class="text-center">Hotel Image </th>     
+                <th class="text-center">Hotel Include </th>           
+                <th class="text-center">Created At </th>
+                <th class="text-center">Action </th>
+  
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of tags | paginate:{itemsPerPage: itemsPerPageC, currentPage:p};let i=index;">
+                <td class="text-center" scope="row">{{(p - 1) * itemsPerPageC + i + 1}}</td>
+                <td class="text-center">{{data?.p_city ? data?.p_city : 'N.A' }}</td>
+                <td class="text-center">{{data?.from_city ? data?.from_city : 'N.A' }}</td>
+                <td class="text-center">{{data?.hotel_type ? data?.hotel_type : 'N.A'}}</td>
+                <td class="text-center">{{data?.hotel_title ? data.hotel_title : 'N.A'}}</td>
+                <td class="text-center"><img src="{{data?.hotel_image ? data.hotel_image : 'N.A'}}" style="width:50px"></td>
+                <td class="text-center">{{data?.hotel_include ? data.hotel_include : 'N.A'}}</td>
+                <td class="text-center">{{data.created_at ? (data?.created_at | date : 'dd-MM-yyyy h:mm a'): 'N.A'}}</td>
+                <td><button routerLink="/dashboard/edit-hotel-itinerary/{{data.id}}"><i class="fa fa-edit"></i></button>&nbsp;
+                 
+                  <button  routerLink="/dashboard/delete-itinerary/{{data.id}}" onclick="return confirm('Are you sure want to delete the itinerary?')"><i class="fa fa-trash"></i></button>
+                </td>
+  
+              </tr>
+              <tr *ngIf="tags && tags?.length <= 0">
+                <td colspan="9" class="text-center" style="color:rgb(143, 71, 71);">Records Not Found</td>
+              </tr>
+            </tbody>
+          </table>
+  
+        </div>
+        <div *ngIf="tags &&  tags.length>0" id="pagination" class="mt-2">
+          <pagination-controls (pageChange)="p=$event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  
+  

@@ -88,6 +88,22 @@ import { EditPackageDetailsComponent } from './package/edit-package-details/edit
 import { PackageComponent } from './package/package/package.component';
 import { AddPackageComponent } from './package/package/add-package/add-package.component';
 import { PackageAddComponent } from './package/package-add/package-add.component';
+import { PackageEditComponent } from './package/package-edit/package-edit.component';
+import { PackageEventComponent } from './package/package-edit/package-event/package-event.component';
+import { PackageCityComponent } from './package/package/package-city/package-city.component';
+import { AddPackageCityComponent } from './package/package/package-city/add-package-city/add-package-city.component';
+import { EditPackageCityComponent } from './package/package/package-city/edit-package-city/edit-package-city.component';
+import { PackagePdfComponent } from './package/package-pdf/package-pdf.component';
+import { PackageItineraryComponent } from './package/package-itinerary/package-itinerary.component';
+import { AddPackageItineraryComponent } from './package/package-itinerary/add-package-itinerary/add-package-itinerary.component';
+import { EditPackageItineraryComponent } from './package/package-itinerary/edit-package-itinerary/edit-package-itinerary.component';
+import { HotelItineraryComponent } from './hotel-itinerary/hotel-itinerary.component';
+import { AddHotelItineraryComponent } from './hotel-itinerary/add-hotel-itinerary/add-hotel-itinerary.component';
+import { EditHotelItineraryComponent } from './hotel-itinerary/edit-hotel-itinerary/edit-hotel-itinerary.component';
+import { PackageUploadComponent } from './package/package-upload/package-upload.component';
+import { PackageDetailListComponent } from './package/package-detail-list/package-detail-list.component';
+import { PackageFareComponent } from './package/package-fare/package-fare.component';
+import { ViewItineraryComponent } from '../view-itinerary/view-itinerary.component';
 
 @NgModule({
   declarations: [
@@ -142,6 +158,22 @@ import { PackageAddComponent } from './package/package-add/package-add.component
     CreatePackageComponent,
     EditPackageDetailsComponent,
     PackageComponent,
+    PackageEditComponent,
+    PackageEventComponent,
+    PackageCityComponent,
+    AddPackageCityComponent,
+    EditPackageCityComponent,
+    PackagePdfComponent,
+    PackageItineraryComponent,
+    AddPackageItineraryComponent,
+    EditPackageItineraryComponent,
+    HotelItineraryComponent,
+    AddHotelItineraryComponent,
+    EditHotelItineraryComponent,
+    PackageUploadComponent,
+    PackageDetailListComponent,
+    PackageFareComponent,
+    ViewItineraryComponent,
    
   ],
   imports: [

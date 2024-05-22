@@ -102,7 +102,7 @@ export class CreatePackageComponent {
     $('#remove_button' + id).hide();
   }
   createPackageForm(data: any) {
-console.log(data);
+//console.log(data);
     return this._formBuilder.group({
       from_city: [data.from_city || '', [Validators.required]],
       package_city: [data.p_id || '', [Validators.required]],
@@ -127,6 +127,7 @@ console.log(data);
       name: [data.name || '', [Validators.required]],
       email: [data.email || '', [Validators.required]],
       mobile: [data.mobile || '', [Validators.required]],
+      special_descr: [data.special_descr || '', [Validators.required]],
       slider: ['', [Validators.required]],
       slider1: [''],
       slider2: [''],
@@ -364,6 +365,7 @@ console.log(data);
       name: [data.name || '', [Validators.required]],
       email: [data.email || '', [Validators.required]],
       mobile: [data.mobile || '', [Validators.required]],
+      special_descr: [data.special_descr || '', [Validators.required]],
       packdata: [''],
       packdatatitle: [''],
       slider: [data.slider || '', [Validators.required]],
@@ -690,8 +692,8 @@ console.log(data);
     formData.append('mobile', this.createPackage.controls['mobile']?.value);
     formData.append('packdata', this.createPackage.controls['packdata']?.value);
     formData.append('packdatatitle', this.createPackage.controls['packdatatitle']?.value);
-
-    console.log(formData);
+    formData.append('special_descr', this.createPackage.controls['special_descr']?.value);
+   // console.log(formData);
     data.pdf = formData
     
     this._packService.createPackage(formData).subscribe((res: any) => {

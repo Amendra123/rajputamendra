@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RootPageService } from '../../root-page.service';
@@ -107,30 +107,18 @@ console.log(data);
       from_city: [data.from_city || '', [Validators.required]],
       package_city: [data.p_id || '', [Validators.required]],
       package_title: [data.package_title || '', [Validators.required]],
-      days: [data.days || '', [Validators.required]],
-      duration: [data.duration || '', [Validators.required]],
+      
       type: [data.type || '', [Validators.required]],
-      p_title: [data.package_title || '', [Validators.required]],
-      inclusion: [data.inclusion || '', [Validators.required]],
-      exclusion: [data.exclusion || '', [Validators.required]],
-      day_tour: [data.day_tour || ''],
-      vechcategory: [data.vechcategory || '', [Validators.required]],
-      vechmodel: [data.vechmodel || '', [Validators.required]],
-      facility: [data.facility || '', [Validators.required]],
-      vedio: [data.vedio || ''],
+     
+     
       stay: [data.stay || '', [Validators.required]],
       daynight: [data.daynight || '', [Validators.required]],
       actual_price: [data.actual_price || '', [Validators.required]],
       current_price: [data.current_price || '', [Validators.required]],
       addtitle: [data.addtitle || '', [Validators.required]],
       perchange: [data.perchange || '', [Validators.required]],
-      name: [data.name || '', [Validators.required]],
-      email: [data.email || '', [Validators.required]],
-      mobile: [data.mobile || '', [Validators.required]],
-      slider: ['', [Validators.required]],
-      slider1: [''],
-      slider2: [''],
-      slider3: [''],
+      transfer: [data.transfer || ''],
+      
       // slider4: [''],
       // slider5: [''],
       // slider6: [''],
@@ -139,6 +127,7 @@ console.log(data);
       // slider9: [''],
       // slider10: [''],
       image: ['', [Validators.required]],
+      events: this._formBuilder.array([]),
     });
   }
   x=1;
@@ -156,6 +145,24 @@ console.log(data);
     this.x++;    
   }
   
+  events() : FormArray {  
+    return this.createPackage.get("events") as FormArray  
+  }  
+     
+  newQuantity(): FormGroup {  
+    return this._formBuilder.group({  
+      events: ''
+     
+    })  
+  }  
+     
+  addQuantity() {  
+    this.events().push(this.newQuantity());  
+  }  
+     
+  removeQuantity(i:number) {  
+    this.events().removeAt(i);  
+  }  
   ngOnInit() {
 
 
@@ -173,168 +180,7 @@ console.log(data);
 
    // this.createPackage.addControl('slider1',[]);
 
-    $(document).ready(function () {
-      var maxField = 10; //Input fields increment limitation
-      var maxField1 = 10; //Input fields increment limitation
-      var maxField2 = 10; //Input fields increment limitation
-
-
-      var addButton = $('.add_button'); //Add button selector
-      var addButton1 = $('.add_button1'); //Add button selector
-      var addButton2 = $('.add_button2'); //Add button selector
-
-      var wrapper = $('#wraped'); //Input field wrapper
-      var wrapper1 = $('#wraped1'); //Input field wrapper
-      var wrapper2 = $('#wraped2'); //Input field wrapper
-
-
-
-      var x = 1;
-      var x1 = 1;
-      var x2 = 1;
-
-
-      var counter = 0;
-      var counter1 = 0;
-      var counter2 = 0;
-
-
-
-      //Once add button is clicked
-      $(addButton).click(function () {
-
-        counter++;
-        //Check maximum number of input fields
-        if (x <= maxField) {
-          x++; //Increment field counter
-          var dd = ``;
-          dd += ``;
-          dd += `
-            <div class="col-md-4" style="margin-bottom:5px;" id="remove_button${counter}">
-										<label>Slider Image${counter}: <a href="javascript:void(0);" class="remove_button" (click)="cancel(${counter})"><img src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"/ style="width:15px;margin-left: 30px;"> 
-                    </a></label>
-                                                                            
-									<input type="file"  name="slider${counter}" formControlName="slider${counter}" (change)="selectFile${counter}($event,${counter})" class="form-control"  placeholder="Enter Events">
-									</div>`;
-          var fieldHTML = dd; //New input field html
-
-          
-          //Initial field counter is 1
-          var idd = $("#images" + counter).val();
-          if (idd == undefined) {
-            $(wrapper).append(fieldHTML); //Add field html
-          }
-
-
-        } else {
-
-          alert("you have upload only 10 events");
-        }
-      });
-
-      //Once remove button is clicked
-      $(wrapper).on('click', '.remove_button', function (e) {
-
-
-        e.preventDefault();
-        $('#remove_button' + counter).remove();
-        // $(this).parent('div').remove(); //Remove field html
-        counter--;
-        x--; //Decrement field counter
-        console.log(counter);
-      });
-      //Once add button is clicked
-      $(addButton2).click(function () {
-
-        counter2++;
-        //Check maximum number of input fields
-        if (x2 <= maxField2) {
-          x2++; //Increment field counter
-          var dd = ``;
-          dd += ``;
-          dd += `
-            <div class="col-md-4" >
-										<label>Activity Image: <a href="javascript:void(0);" class="remove_button"><img src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"/ style="width:15px;margin-left: 30px;"> 
-                    </a></label>
-                                                                            
-									<input type="file"  name="activity${counter2}"  class="form-control"  placeholder="Enter Events">
-									</div><br/>`;
-
-
-
-          var fieldHTML = dd; //New input field html
-
-
-          //Initial field counter is 1
-          var idd = $("#activity" + counter).val();
-          if (idd == undefined) {
-            $(wrapper2).append(fieldHTML); //Add field html
-          }
-
-
-        } else {
-
-          alert("you have upload only 10 events");
-        }
-      });
-
-      //Once remove button is clicked
-      $(wrapper2).on('click', '.remove_button', function (e) {
-
-
-        e.preventDefault();
-        $(this).parent('div').remove(); //Remove field html
-        counter2--;
-        x2--; //Decrement field counter
-        console.log(counter);
-      });
-      //Once add button is clicked
-      $(addButton1).click(function () {
-
-        counter1++;
-        //Check maximum number of input fields
-        if (x1 <= maxField1) {
-          x1++; //Increment field counter
-          var dd = ``;
-          dd += ``;
-          dd += `
-            <div class="col-md-4" >
-										<label>Event Name: <a href="javascript:void(0);" class="remove_button"><img src="http://demos.codexworld.com/add-remove-input-fields-dynamically-using-jquery/images/remove-icon.png"/ style="width:15px;margin-left: 30px;"> 
-                    </a></label>
-                                                                            
-									<input type="text"  name="event${counter1}"  class="form-control" placeholder="Enter Events">
-									</div><br/>`;
-
-
-
-          var fieldHTML = dd; //New input field html
-
-
-          //Initial field counter is 1
-          var idd = $("#event" + counter).val();
-          if (idd == undefined) {
-            $(wrapper1).append(fieldHTML); //Add field html
-          }
-
-
-        } else {
-
-          alert("you have upload only 10 events");
-        }
-      });
-
-      //Once remove button is clicked
-      $(wrapper1).on('click', '.remove_button', function (e) {
-
-
-        e.preventDefault();
-        $(this).parent('div').remove(); //Remove field html
-        counter1--;
-        x1--; //Decrement field counter
-        console.log(counter1);
-      });
-
-    });
+    
     // this.createPackage = this.createPackageForm(this.dataForm);
 
 
@@ -342,45 +188,32 @@ console.log(data);
     console.log(data);
     this.createPackage = this._formBuilder.group({
       from_city: [data.from_city || '', [Validators.required]],
-      package_city: [data.package_city || '', [Validators.required]],
-      package_title: [data.p_title || ''],
-      days: [data.days || ''],
-      duration: [data.duration || ''],
+      package_city: [data.p_id || '', [Validators.required]],
+      package_title: [data.package_title || '', [Validators.required]],
+      
       type: [data.type || '', [Validators.required]],
-      p_title: [data.package_title || '', [Validators.required]],
-      inclusion: [data.inclusion || '', [Validators.required]],
-      exclusion: [data.exclusion || '', [Validators.required]],
-      day_tour: [data.day_tour || ''],
-      vechcategory: [data.vechcategory || '', [Validators.required]],
-      vechmodel: [data.vechmodel || '', [Validators.required]],
-      facility: [data.facility || '', [Validators.required]],
-      vedio: [data.vedio || ''],
+      
+     
       stay: [data.stay || '', [Validators.required]],
       daynight: [data.daynight || '', [Validators.required]],
       actual_price: [data.actual_price || '', [Validators.required]],
       current_price: [data.current_price || '', [Validators.required]],
       addtitle: [data.addtitle || '', [Validators.required]],
       perchange: [data.perchange || '', [Validators.required]],
-      name: [data.name || '', [Validators.required]],
-      email: [data.email || '', [Validators.required]],
-      mobile: [data.mobile || '', [Validators.required]],
-      packdata: [''],
-      packdatatitle: [''],
-      slider: [data.slider || '', [Validators.required]],
-      slider1: [''],
-      slider2: [''],
-      slider3: [''],
+      transfer: [data.transfer || ''],
+      
       // slider4: [''],
       // slider5: [''],
       // slider6: [''],
       // slider7: [''],
       // slider8: [''],
       // slider9: [''],
-      // slider10: [''],      
-      image: [data.image || '', [Validators.required]],
+      // slider10: [''],
+      image: ['', [Validators.required]],
+      events: this._formBuilder.array([]),
 
     });
-    console.log("okk11",id);
+   
     id && this.rootService.getPackageDetailById(id).subscribe((res: any) => {
       this.data = res['response'];
       if (res.status == 200) {console.log("okk");
@@ -635,24 +468,32 @@ console.log(data);
 
   }
   addPackage() {
-
-
+   
     const data = this.createPackage.getRawValue();
-    console.log(this.createPackage.controls['packdata']?.value);
+    console.log(data.events[0]);
+    console.log(data.events[0].events);
+    
+    // data.event= data.events[].events!=""?data.event= data.events[].events:'';
+    // data.event= data.events[].events!=""?data.event= data.events[].events:'';
+    // data.event= data.events[].events!=""?data.event= data.events[].events:'';
+    
+    console.log(data);
+    
+   // return;
     //this.createPackage.get('pdf').setValue(this.currentFile);
     // data.pdf=formData
     const formData = new FormData();
 
-    formData.append('slider', this.selectedFiles,   this.createPackage.controls['slider']?.value);
-    if(this.selectedFiles1!= undefined){
-      formData.append('slider1', this.selectedFiles1, this.createPackage.controls['slider1']?.value);
-    }
-    if(this.selectedFiles2!= undefined){
-      formData.append('slider2', this.selectedFiles2, this.createPackage.controls['slider2']?.value);
-    }
-    if(this.selectedFiles3!= undefined){
-      formData.append('slider3', this.selectedFiles3, this.createPackage.controls['slider3']?.value);
-    }
+    // formData.append('slider', this.selectedFiles,   this.createPackage.controls['slider']?.value);
+    // if(this.selectedFiles1!= undefined){
+    //   formData.append('slider1', this.selectedFiles1, this.createPackage.controls['slider1']?.value);
+    // }
+    // if(this.selectedFiles2!= undefined){
+    //   formData.append('slider2', this.selectedFiles2, this.createPackage.controls['slider2']?.value);
+    // }
+    // if(this.selectedFiles3!= undefined){
+    //   formData.append('slider3', this.selectedFiles3, this.createPackage.controls['slider3']?.value);
+    // }
     
     // formData.append('slider2', this.selectedFiles2, this.createPackage.controls['slider2']?.value);
     // formData.append('slider3', this.selectedFiles3, this.createPackage.controls['slider3']?.value);
@@ -664,37 +505,48 @@ console.log(data);
     // formData.append('slider9', this.selectedFiles9, this.createPackage.controls['slider9']?.value);
     // formData.append('slider10', this.selectedFiles10, this.createPackage.controls['slider10']?.value);
     formData.append('image', this.selectedFilesImg, this.createPackage.controls['image']?.value);
-    formData.append('vedio', this.createPackage.controls['vedio']?.value);
-    formData.append('from_city', this.createPackage.controls['from_city']?.value);
-    formData.append('daynight', this.createPackage.controls['daynight']?.value);
     
+    formData.append('from_city', this.createPackage.controls['from_city']?.value);
+    formData.append('days', this.createPackage.controls['daynight']?.value);    
     formData.append('package_city', this.createPackage.controls['package_city']?.value);
-    formData.append('package_title', this.createPackage.controls['package_title']?.value);
-    formData.append('days', this.createPackage.controls['days']?.value);
-    formData.append('duration', this.createPackage.controls['duration']?.value);
-    formData.append('type', this.createPackage.controls['type']?.value);
-    formData.append('p_title', this.createPackage.controls['p_title']?.value);
-    formData.append('inclusion', this.createPackage.controls['inclusion']?.value);
-    formData.append('exclusion', this.createPackage.controls['exclusion']?.value);
-    formData.append('day_tour', this.createPackage.controls['day_tour']?.value);
-    formData.append('vechcategory', this.createPackage.controls['vechcategory']?.value);
-    formData.append('vechmodel', this.createPackage.controls['vechmodel']?.value);
-    formData.append('facility', this.createPackage.controls['facility']?.value);
+    formData.append('title', this.createPackage.controls['package_title']?.value);
+    // formData.append('days', this.createPackage.controls['days']?.value);    
+    formData.append('type', this.createPackage.controls['type']?.value);   
     formData.append('stay', this.createPackage.controls['stay']?.value);
     formData.append('actual_price', this.createPackage.controls['actual_price']?.value);
     formData.append('current_price', this.createPackage.controls['current_price']?.value);
-    formData.append('addtitle', this.createPackage.controls['addtitle']?.value);
-    formData.append('perchange', this.createPackage.controls['perchange']?.value);
-    formData.append('name', this.createPackage.controls['name']?.value);
-    formData.append('email', this.createPackage.controls['email']?.value);
-    formData.append('mobile', this.createPackage.controls['mobile']?.value);
-    formData.append('packdata', this.createPackage.controls['packdata']?.value);
-    formData.append('packdatatitle', this.createPackage.controls['packdatatitle']?.value);
+    formData.append('subtitle', this.createPackage.controls['addtitle']?.value);
+    formData.append('person', this.createPackage.controls['perchange']?.value);
+    formData.append('transfer', this.createPackage.controls['transfer']?.value);
+    formData.append('events', this.createPackage.controls['events']?.value);
+
+    formData.append('event_1', data.events[0]!=undefined? data.events[0].events:'');
+    formData.append('event_2', data.events[1]!=undefined? data.events[1].events:'');
+    formData.append('event_3', data.events[2]!=undefined? data.events[2].events:'');
+    formData.append('event_4', data.events[3]!=undefined? data.events[3].events:'');
+    formData.append('event_5', data.events[4]!=undefined? data.events[4].events:'');
+    formData.append('event_6', data.events[5]!=undefined? data.events[5].events:'');
+    formData.append('event_7', data.events[6]!=undefined? data.events[6].events:'');
+    formData.append('event_8', data.events[7]!=undefined? data.events[7].events:'');
+    // formData.append('event9', data.events[8]!=undefined? data.events[8].events:'');
+    // formData.append('event10', data.events[9]!=undefined? data.events[9].events:'');
+    // formData.append('event11', data.events[11]!=undefined? data.events[11].events:'');
+    // data.event1= ;
+    // data.event2= data.events[1]!=undefined? data.events[1].events:'';
+    // data.event3= data.events[2]!=undefined? data.events[2].events:'';
+    // data.event4= data.events[3]!=undefined? data.events[3].events:'';
+    // data.event5= data.events[4]!=undefined?data.events[4].events:'';
+    // data.event6= data.events[5]!=undefined?data.events[5].events:'';
+    // data.event7= data.events[6]!=undefined? data.events[6].events:'';
+    // data.event8= data.events[7]!=undefined? data.events[7].events:'';
+    // data.event9= data.events[8]!=undefined?data.events[8].events:'';
+    // data.event10= data.events[9]!=undefined?data.events[9].events:'';
+    // data.event11= data.events[10]!=undefined?data.events[10].events:'';
 
     console.log(formData);
-    data.pdf = formData
     
-    this._packService.createPackage(formData).subscribe((res: any) => {
+    
+    this._packService.packageAdd(formData).subscribe((res: any) => {
      /// console.log(res.status);return;
       if (res.status == 200) {
         this.toastr.success("Added successfully");

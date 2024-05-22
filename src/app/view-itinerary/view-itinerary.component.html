@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Details and Itinerary</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            margin: 1cm;
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .details {
+            font-size: 14px;
+            color: #333;
+        }
+        .duration {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<button (click)="generatePDF()">Print Pdf</button>
+
+<body style="font-family: Lato, sans-serif;" id="pdfTable">
+  
+    <table  style="width: 100%; border-spacing: 15px; border: 0.8px solid #cac2c2;">
+        <tr>
+          <td style="width: 50%;">
+            <h1 style="color: #1a4e9d; text-align: left; font-size: 30px;">
+              <p>{{listData && listData[0]?.package_title!= ""?removeHtmlTags(listData[0]?.package_title):""}}</p>
+            </h1>
+            <h3 style="color: #1a4e9d; margin-bottom: 0.5rem; font-family: Lato, sans-serif; font-size: 30px; margin-top: 0; text-align: left;">
+                {{listData && listData[0]?.daynight!= ""?listData[0]?.daynight:""}}
+            </h3>
+            <h4 style="color: #da2517; margin: 0 0 0.5rem; font-family: Lato, sans-serif; font-size: 30px; text-align: left;">
+                <img src="assets/images/inr.png" *ngIf="listData && listData[0]?.actual_price!= ''" style="width: 12px;"> {{listData && listData[0]?.actual_price!= ""?listData[0]?.actual_price:""}}
+            </h4>
+            <span style="text-align: left; display: block; color: #747474; font-family: Lato, sans-serif; font-size: 25px;">
+              Per Person on twin sharing
+            </span>
+          </td>
+          <td style="width: 50%; text-align: center;">
+            <img src="assets/images/logo.jpeg" >
+            <br>
+            <span style="font-size: 20px; text-align: center;">Booking Id: {{randomNumber}}</span><br>
+            <span style="font-size: 20px; text-align: center;">Reykjavik cabiocab Pvt Ltd.</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="width: 100%; border-radius: 10px;" *ngIf="slider && slider[0]">
+            <img src="{{slider && slider[0]!= ''?slider[0]:''}}" style="width: auto;">
+          </td>
+        </tr>
+        <!-- <tr>
+          <td colspan="2">
+            <h3 style="color: #fff; font-size: 30px; margin: 1rem 0 5px;">.</h3>
+          </td>
+        </tr> -->
+    </table>
+ 
+    <table>
+        <tr>
+            <td style="width: 50%">
+                <h1 style="color: #1a4e9d; font-size: 20px;margin:1rem 0 5px;">Package Overview</h1>
+            </td>
+        </tr>
+    </table>
+    <table style="width: 100%; border: 0.8px solid #cac2c2;">
+        <tr>
+            <th style="width: 50%;">
+                <h3 style="width: 100%; background: #f8f9fc; border-radius: 5px 5px 0px 0px; padding: 20px; text-transform: capitalize; font-size: 15px; font-weight: 600; color: #1e1d1d; margin-top: 0; margin-bottom: 0rem; display: block;">
+                    Inclusions
+                </h3>
+            </th>
+            <th style="width: 50%;">
+                <h3 style="width: 100%; background: #f8f9fc; border-radius: 5px 5px 0px 0px; padding: 20px; text-transform: capitalize; font-size: 15px; font-weight: 600; color: #1e1d1d; margin-top: 0; margin-bottom: 0rem; display: block;">
+                    Exclusions
+                </h3>
+            </th>
+        </tr>
+        <tr>
+            <td style="font-size: 15px; line-height: 20px;max-width: 50%;text-wrap: wrap;">
+                <div [innerHTML]="listData && listData[0]?.inclusion!= ''?listData[0]?.inclusion:''"></div>
+
+                
+            </td>
+            <td style="font-size: 15px; line-height: 20px;text-wrap: wrap;">
+                <div [innerHTML]="listData && listData[0]?.exclusion!= ''?listData[0]?.exclusion:''"></div>                
+            </td>
+        </tr>
+    </table>
+    
+      
+    <br />
+    <table style="width: 100%; border-collapse: collapse;"  *ngFor="let packs of listData let i=index;">
+        <!-- <tr>
+            <td colspan="2" style="text-align: center;">
+                <h1 style="color: #1a4e9d; font-size: 30px; margin: 1rem 0 5px;">Hotel Details</h1>
+            </td>
+        </tr> -->
+        <tr *ngIf="0 == i">
+            <td colspan="2" style="text-align: center;">
+                <h1 style="color: #1a4e9d; font-size: 30px; margin: 1rem 0 5px;">Day Wise Itinerary</h1>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center; background: #1a4e9d;">
+                <h3 style="font-size: 30px; font-weight: 800; color: #ffffff; padding: 10px;">{{packs && packs['days']}}</h3>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <img src="assets/images/car.jpeg" style="width: 20%; max-width: 25%;">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <h4 style="font-size: 30px; color: #1e1d1d; font-weight: 600;">{{packs && packs['day_activity']!= ""?packs['day_activity']:""}}</h4>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <span style="font-size: 30px; font-weight: 800; color: #1a4e9d;">Vehicle Model: {{packs && packs['vechmodel']!= ""?packs['vechmodel']:""}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <p style="margin: 5px 0; font-size: 30px; font-weight: 600; color: #1e1d1d;">Category: {{packs && packs['vechcategory']!= ""?packs['vechcategory']:""}}</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <span style="font-size: 30px; color: #1a4e9d; padding-right: 10px; font-weight: 600;">Facilities:</span>
+                <span style="font-size: 25px; color: #727070;">{{packs && packs['facility']!= ""?packs['facility']:""}}</span>
+            </td>
+        </tr>
+        <table>
+       <tr>
+        <td>
+            <tr>
+                <td colspan="2" style="text-align: left;">
+                    <img src="{{packs && packs['activity1']!= ''?packs['activity1']:''}}" style="max-width: 230px;">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: left;max-width: 500px;">
+                    <span style="font-size: 15px; width:50%;font-weight: 800; color: #1a4e9d; padding: 1rem 0;">{{getCommaSeprator(packs)}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">
+                    <p style="font-size: 15px; font-weight: 700; color: #727070; margin-bottom: 0;">DURATION</p>
+                    <p style="font-size: 15px;">{{packs && packs['duration']!= ''?packs['duration']:''}} hours</p>
+                </td>
+                <td style="text-align: left;">
+                    <p style="font-size: 15px; font-weight: 700; color: #727070; margin-bottom: 0;">PLACES COVERED</p>
+                    <p style="font-size: 15px;">{{getCommaSepratorNew(packs)}}</p>
+                </td>
+            </tr>
+        </td>
+        <td>
+            <tr>
+                <td colspan="2" style="text-align: left;">
+                    <img src="{{packs && packs['hotel_image']!= ''?packs['hotel_image']:''}}" style="max-width: 230px;">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: left;max-width: 500px;">
+                    <span  style="font-size: 15px; width:50%; font-weight: 800; color: #1a4e9d; padding: 1rem 0;">{{getCommaSeprator(packs)}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">
+                    <p style="font-size: 15px; font-weight: 700; color: #727070; margin-bottom: 0;">DURATION</p>
+                    <p style="font-size: 15px;">{{packs && packs['duration']!= ''?packs['duration']:''}} hours</p>
+                </td>
+                <td style="text-align: left;">
+                    <p style="font-size: 15px; font-weight: 700; color: #727070; margin-bottom: 0;">PLACES COVERED</p>
+                    <p style="font-size: 15px;">{{getCommaSepratorNew(packs)}}</p>
+                </td>
+            </tr>
+        </td>
+       </tr>     
+        
+    </table>
+        
+        <!-- Day 2 and Day 3 details can be added similarly -->
+    </table>
+    
+    <table>
+        <tr>
+            <td>
+                <h3 style="color: #1a4e9d; font-size: 20px; margin: 1rem 0 5px;">Fare Summary</h3><br />
+                <h3 style="font-size: 25px; margin: 1rem 0 5px;">Here is the detailed quotation of your desired holiday.
+                </h3>
+
+            </td>
+        </tr>
+        <br />
+        <table style="border-collapse: collapse;width: 100%;border: 1px solid #dddddd;">
+            <tr>
+                <th style="font-size: 10px;text-align: left; ">Price Summary Per Person</th>
+                <th style="font-size: 10px;text-align: left; ">Adult(Double)</th>
+                <th style="font-size: 10px;text-align: left; ">Child With Bed</th>
+                <th style="font-size: 10px;text-align: left; ">Child WithOut Bed</th>
+                <th style="font-size: 10px;text-align: left; ">Infants</th>
+            </tr>
+            <tr style="border: 1px solid #dddddd;text-align: left;padding: 8px;">
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">No. Of travellers
+                </td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">{{listData && listData[0]?.perchange!= ''?listData[0]?.perchange:''}}</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">0</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">0</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">0</td>
+            </tr>
+            <tr style="border: 1px solid #dddddd;text-align: left;padding: 8px;background-color: #dddddd;">
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 10px; ">Tour Cost (<img
+                        src="assets/images/inr.png" style="width: 10px">) Per Person</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 10px; "><img
+                        src="https://4dhamyatra.in/assets/images/logo.jpeg" style="width: 10px"> <span
+                        style="font-size: 20px">{{listData && listData[0].perchange!= ''?(listData[0].perchange * listData[0]?.actual_price):''}}</span></td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 10px; ">NA</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 10px; ">NA</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 10px; ">NA</td>
+            </tr>
+
+        </table>
+        <br />
+        <tr>
+            <td>
+
+                <h3 style="font-size: 15px; margin: 1rem 0 5px;">Total Tour Cost Calculation.</h3>
+
+            </td>
+        </tr>
+        <br />
+        <table style="border-collapse: collapse;width: 100%;">
+            <tr>
+                <td style="font-size: 15px;text-align: left;border: 1px solid #dddddd; ">Total tour Cost</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 25px; ">INR {{listData && listData[0]?.perchange!= ''?(listData[0]?.perchange * listData[0]?.actual_price):''}}</td>
+            </tr>
+            <tr>
+                <td style="font-size: 15px;text-align: left;border: 1px solid #dddddd; ">Gross Amount</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">{{listData && listData[0]?.perchange!= ''?(listData[0]?.perchange * listData[0]?.actual_price):''}}</td>
+            </tr>
+            <tr>
+                <td style="font-size: 15px;text-align: left;border: 1px solid #dddddd; ">Goods & Service Tax</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; "></td>
+            </tr>
+            <tr>
+                <td style="font-size: 15px;text-align: left;border: 1px solid #dddddd; ">CGST Calculated @2.5%</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">{{listData && listData[0]?.perchange!= ''?((listData[0]?.perchange * listData[0]?.actual_price)*2.5)/100:''}}</td>
+            </tr>
+            <tr>
+                <td style="font-size: 15px;text-align: left; border: 1px solid #dddddd;">SGST Calculated @2.5%</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; ">{{listData && listData[0]?.perchange!= ''?((listData[0]?.perchange * listData[0]?.actual_price)*2.5)/100:''}}</td>
+            </tr>
+            <tr style="background-color: #1a4e9d;color:#fff;">
+                <td style="font-size: 15px;text-align: left; color:white;border: 1px solid #dddddd;">Final Cost For All
+                    Passengers</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px;color:white; ">{{((listData[0]?.perchange * listData[0]?.actual_price)+((listData[0]?.perchange * listData[0].actual_price)*2.5)/100)}}
+                </td>
+            </tr>
+            
+        </table>
+
+        <tr>
+            <td>
+                <h3 style="color: #1a4e9d; font-size: 20px; margin: 1rem 0 5px;">Payment Terms</h3>
+            </td>
+        </tr>
+
+
+        <table style="border-collapse: collapse;width: 100%;">
+            <tr>
+                <td>
+                    <h2 style="color: #1a4e9d; font-size: 15px; margin: 1rem 0 5px;">• Step1- You can book only with 30%
+                        <br /><br />
+                        • Step2- 60% Amount pay when you pickup the Transport • Step2- 10% Amount pay Before Badrinath
+                        yatra or after Kedarnath Yatra<br /><br />
+                        <!--• 10% amount after the kedarnath yatra If any such case of failure the payment cab not depture your location<br/ ><br/ >-->
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 13px; color: #1e1d1d;">
+                        • Note: If Any Payment Faliure Cab not Deputre at your Location . No refunds in case of Road
+                        Blocks, Accidents, etc Read the Terms and Conditions/ Cancellation Policy/ Refund Policy , etc
+                        before booking. Do let us know if you have any query.<br /><br />
+                        • Tour prices are printed in our brochures. Please return duly signed and completed booking form
+                        to us or our appointed agents along with an initial deposit per person for all tour packages.
+                        This initial deposit amount is non refundable or non transferable in the event of cancellation /
+                        change of travel date of tour by the Clients.
+                        <br /><br />
+                    </span>
+                </td>
+            </tr>
+        </table>
+        
+        <table style="border-collapse: collapse;width: 100%;">
+            <tr>
+                <td>
+                    <span style="font-size: 13px; color: #1e1d1d;">
+
+                        •
+                        All cheques / demand drafts to be payable in the name of ‘Reykjavik cabiocab pvt ltd’. On
+                        payment of
+                        the deposit amount you will be given an official receipt from Reykjavik cabiocab pvt ltd. You
+                        can also book the tour
+                        through our Preferred Sales Agent OR Travel Agent.
+                        <br /><br />
+                    </span>
+                </td>
+            </tr>
+        </table>
+        <table style="border-collapse: collapse;width: 100%;">
+            <tr>
+                <td>
+                    <span style="font-size: 13px; color: #1e1d1d;">
+
+                        The EMI options, if applicable, will be only available for the payment done online during the
+                        package
+                        booking. EMI option is not available for any payment done after the online booking of the
+                        package
+                        <br /><br />
+                    </span>
+                </td>
+            </tr>
+        </table>
+        <table style="border-collapse: collapse;width: 100%;">
+            <tr>
+                <td>
+                    <span style="font-size: 13px; color: #1e1d1d;">
+
+                        •ELIGIBILITY Persons fulfilling the criteria set by relevant provisions of law relating to
+                        foreign exchange in India and
+                        RBI Rules, whose passport is valid for at least six months subsequent to the date of departure
+                        of the
+                        tour and have been granted relevant visas to reach the point of commencement of the tour and
+                        travel
+                        throughout with the group are eligible to book on the tour.
+                        BOOKING AMOUNT
+                        <br /><br /> </span>
+                </td>
+
+
+
+            </tr>
+        </table>
+        <br />
+        <tr>
+            <td>
+                <h3 style="color: #1a4e9d; font-size: 20px; margin: 1rem 0 5px;">Travel Validity</h3>
+                <h4 style="color: #1a4e9d; font-size: 20px; margin: 1rem 0 5px;">Quotation same Day Valid Only</h4>
+            </td>
+        </tr>
+        <table style="border-collapse: collapse;width: 100%;">
+            <tr>
+                <td><span style="font-size: 15px; color: #1e1d1d;margin-bottom: 5px; display: block;">...</span></td>
+            </tr>
+        </table>
+
+        <tr>
+            <td>
+                <h3 style="color: #1a4e9d; font-size: 20px; margin: 1rem 0 5px;">Easy Cancellation</h3><br />
+                <h3 style="font-size: 15px; margin: 1rem 0 5px;">AMENDMENTS / CALCELLATION </h3>
+            </td>
+        </tr>
+
+        <table style="border-collapse: collapse;width: 100%; ">
+            <tr>
+                <td><span style="font-size: 15px; color: #1e1d1d;margin-bottom: 5px; display: block;">to relevant
+                        section of booking conditions for rules of forfeiture of booking amount.
+                        All payments for the tour including booking amount should be made in favour of ‘Reykjavik
+                        Cabiocab Pvt Ltd.’
+                        when you book at CABIO Holiday Outlets, Franchisee outlets, ASO.</span></td>
+            </tr>
+        </table>
+        <br />
+        <table style="border-collapse: collapse;width: 100%;border: 1px solid #cac2c2;">
+            <tr>
+                <th style="font-size: 15px;text-align: left; border: 1px solid #cac2c2;padding:5px;">Cancellation /
+                    Amendment Notice Recieved</th>
+                <th style="font-size: 15px;text-align: left; border: 1px solid #cac2c2;padding:5px;">Cancellation
+                    Charges Per Person</th>
+
+            </tr>
+            <tr style="border: 1px solid #dddddd;text-align: left;padding: 8px solid #cac2c2;">
+                <td
+                    style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px;border: 1px solid #cac2c2; ">
+                    Up to 30 days prior to date of departure</td>
+                <td
+                    style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px;border: 1px solid #cac2c2; ">
+                    Initial deposit amount</td>
+
+            </tr>
+            <tr style="border: 1px solid #dddddd;text-align: left;padding: 8px solid #cac2c2;">
+                <td
+                    style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px;border: 1px solid #cac2c2; ">
+                    Between 15 days to 29 days prior to</td>
+                <td
+                    style="border: 1px solid #dddddd;text-align: left;padding: 8px;font-size: 15px; border: 1px solid #cac2c2;">
+                    50% of tour cost OR Initial Booking amount whichever is</td>
+
+            </tr>
+
+
+        </table>
+
+        <br />
+        <tr>
+            <td>
+                <h3 style="color: #1a4e9d; font-size: 20px; margin: 1rem 0 5px;">High Season</h3>
+            </td>
+        </tr>
+
+        <table style="border-collapse: collapse;width: 100%;">
+            <tr>
+                <td><span style="font-size: 15px; color: #1e1d1d;margin-bottom: 5px; display: block;">Prices can
+                        fluctuate during peak season dates.</span></td>
+            </tr>
+        </table>
+        <tr>
+            <td>
+                <h3 style="color: #1a4e9d; font-size: 20px; margin: 1rem 0 5px;">Chardham Yatra/ Kedarnath Yatra 2023
+                    Upcoming Dates</h3>
+            </td>
+        </tr>
+        <table style="border-collapse: collapse;width: 100%;">
+            <tr>
+                <td><span style="font-size: 15px; color: #1e1d1d;margin-bottom: 5px; display: block;"> 23 April 2023 to
+                        26 OCt 2023(You can Book of Suitable Dates Between these months)</span></td>
+            </tr>
+        </table>
+
+    </table>
+    <table style="border-collapse: collapse;width: 100%;">
+        <tr>
+            <td><br>
+                <h2 style="color: #1a4e9d; font-size: 15px; margin: 5rem 0 5px;text-align:center;">Lucknow Head Office.
+                </h2>
+                <h3 style=" font-size: 12px; margin: 1rem 0 5px;">H/O- Adress- Shop No- 3 Kesari Complex Oppsite Yadav
+                    Chaurha, Krishna Nagar Lucknow.Call Us.- 8953767676 <br /><br />
+                </h3>
+
+                <h2 style="color: #1a4e9d; font-size: 15px; margin: 5rem 0 5px;text-align:center;">Delhi Office- </h2>
+
+                <h3 style=" font-size: 12px; margin: 1rem 0 5px;"> Cabio Parnter MGT -1478 , Sector 29 Faridabad Main
+                    Badhkal Road, Call Us- 8953767676<br /><br />
+                </h3>
+
+                <h2 style="color: #1a4e9d; font-size: 15px; margin: 5rem 0 5px;text-align:center;">Chennai Office-
+                </h2>
+                <h3 style=" font-size: 12px; margin: 1rem 0 5px;"> Cabio Parnter Taxida -No.8/54 - B, AG Block, Ground
+                    Floor, 3rd Street, Shanthi Colony,Anna Nagar, Chennai - 600040 Call Us- 8953767676<br /><br />
+                </h3>
+                <h2 style="color: #1a4e9d; font-size: 15px; margin: 5rem 0 5px;text-align:center;">Pune Office- </h2>
+
+                <h3 style=" font-size: 12px; margin: 1rem 0 5px;"> Cabio Parnter Keshav Tour Travels -serve No- 5 Keshav
+                    Nagar, Mundhwa, Pune, Maharashtra 411036- 8953767676<br /><br />
+                </h3>
+            </td>
+        </tr>
+    </table>
+    
+    <table style="border-collapse: collapse;width: 100%;">
+        <tr>
+            <td><span style="font-size: 15px; color: #1e1d1d;margin-bottom: 5px; display: block;">Book Your Resrvation
+                    Today Due To Rush and Price Increase</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3 style="color: #1a4e9d; font-size: 20px; margin: 1rem 0 5px;">Chardham Yatra 9 nights 10 Days Itinarry
+                </h3>
+            </td>
+        </tr>
+    </table>
+    
+
+
+    <table style="border-collapse: collapse;width: 100%;">
+        <tr>
+            <td>
+                <h2 style="color: #1a4e9d; font-size: 15px; margin: 1rem 0 5px;">•Day -1 <br /><br />
+                    • Haridwar – Barkot Driver 210 Km <br /><br />
+                    <!--• 10% amount after the kedarnath yatra If any such case of failure the payment cab not depture your location<br/ ><br/ >-->
+                </h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 13px; color: #1e1d1d;">
+                    • Morning meet our representative at your Hotel / Airport / Railway Station. After some basic
+                    information start your journey to Barkot. Later drive to Barkot. Check into the hotel arrival in
+                    Barkot. Overnight stay at Barkot. (Meals: Dinner).<br /><br />
+
+                    <br /><br />
+                    <h2 style="color: #1a4e9d; font-size: 15px; margin: 1rem 0 5px;">•Day -2 <br /><br />
+                        • Barkot – Janakichatti – Yamunotri – Jankichatti – Barkot Drive35 km Trek12 km Alt3235 m
+                        <br /><br />
+                        <!--• 10% amount after the kedarnath yatra If any such case of failure the payment cab not depture your location<br/ ><br/ >-->
+                    </h2>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 13px; color: #1e1d1d;">
+                    • Early morning after breakfast, drive to Jankichatti / Phoolchatti. Start your trek from here to
+                    Yamunotri (6kms) (Either by walk or by horse or by Doli at own cost). After arrival at Yamunotri
+                    take bath in warm waters of Surya Kund (Hot Spring). Enjoy Darshan of”Yamunaji”. Return trek to
+                    Jankichatti. Later drive towards Barkot. Overnight stay at Barkot. (Meals:Breakfast and
+                    Dinner).<br /><br />
+                    <h2 style="color: #1a4e9d; font-size: 15px; margin: 1rem 0 5px;">•Day -3 <br /><br />
+                        • Barkot – Uttarkashi Drive100 km <br /><br />
+                        <!--• 10% amount after the kedarnath yatra If any such case of failure the payment cab not depture your location<br/ ><br/ >-->
+                    </h2>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 13px; color: #1e1d1d;">
+                    • Morning after breakfast, relax for a while. Later drive to Uttarkashi. Visit Shivgufa on the way
+                    to Uttarkashi. In Uttarkashi visit Kashi Vishwanath Temple. After that, check in hotel. Day free for
+                    rest. Overnight stay at Uttarkashi. (Meals: Breakfast and Dinner)<br /><br />
+                    <h2 style="color: #1a4e9d; font-size: 15px; margin: 1rem 0 5px;">•Day -4 <br /><br />
+                        • Uttarkashi – Gangotri – Uttarkashi (100 kms each side) Drive200 km <br /><br />
+                        <!--• 10% amount after the kedarnath yatra If any such case of failure the payment cab not depture your location<br/ ><br/ >-->
+                    </h2>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 13px; color: #1e1d1d;">
+                    • Early morning after breakfast, drive to Gangotri. On the way visit Gangnani Hot Spring. Take a
+                    holy dip in Kund. Later drive to Gangotri via beautiful Harsil valley. On arrival at Gangotri, take
+                    a holy dip in the sacred river Ganges which is also called Bhagirathi at its origin. Perform Pooja
+                    and Darshan, after that relax for some time in the lovely surroundings. Later return drive to
+                    Uttarkashi. Overnight stay at Uttarkashi. (Meals: Breakfast and Dinner)<br /><br />
+                    <h2 style="color: #1a4e9d; font-size: 15px; margin: 1rem 0 5px;">•Day -5 <br /><br />
+                        • Uttarkashi – Guptkashi Drive220 km <br /><br />
+                        <!--• 10% amount after the kedarnath yatra If any such case of failure the payment cab not depture your location<br/ ><br/ >-->
+                    </h2>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 13px; color: #1e1d1d;">
+                    • Morning after breakfast, drive to Guptkashi. Enroute you can see the beautiful river Mandakini at
+                    Tilwahra. The Mandakini River comes from Kedarnath, drive alongside the river to reach Guptakashi,
+                    visit Ardh Narishwar Temple in Guptakashi. Check into the hotel arrival in Guptkashi. Overnight stay
+                    at Guptkashi. (Meals: Breakfast and Dinner)<br /><br />
+                    <h2 style="color: #1a4e9d; font-size: 15px; margin: 1rem 0 5px;">•Day -6 <br /><br />
+                        • Guptkashi – Sonprayag – Kedarnath Trek (35 km drive / 18 km Trek one side) <br /><br />
+                        <!--• 10% amount after the kedarnath yatra If any such case of failure the payment cab not depture your location<br/ ><br/ >-->
+                    </h2>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 13px; color: #1e1d1d;">
+                    • Morning after breakfast, today we will go to Kedarnath. To reach Kedarnath you will have two
+                    options. One if by trekking (Either by walk or by horse or by Doli at own cost) ..<br /><br />
+                    • In the next aurora you will have to go for trek for kedarnath. The zigzag, ganger way will make
+                    you tiered but keep saying the name of lord shiva and trek. You will pass by gaurikund which is also
+                    a hot water resource and it is heard that Mata Parvati came here to bath. There is also a shakti
+                    temple.<br /><br />
+                    • Then you will go forward to meet “bhole baba”. You can take ponies/ dolies/ palanquins to trek and
+                    other is by Air via Helicopter (at your own cost) (charges payment will your own). After reach
+                    kedarnath do worship of the shivlinga, the pandavas and you can see one of the highest altitude spot
+                    of india. Have dinner & the night will spend by you in kedarnath in the
+                    Ashram/Hotel/Tent.<br /><br />
+                    • By Helicopter: Morning our driver will transfer you your pre-book Helipad. After Back from
+                    Kedarnath.Our driver will drop you at Hotel for rest..<br /><br />
+                    • By Trek :Morning our driver will drop you at Sonprayag then you have to take local jeep for
+                    Gourikund & then your trek start for kedarnath ji. After darshan you follow same & back to
+                    Sonprayag. There is big parking issue so driver will back other palace if his contact no. in not
+                    working then you have to arrange other taxi or wait for your driver & send the massage any other
+                    driver.<br /><br />
+                    <h2 style="color: #1a4e9d; font-size: 15px; margin: 1rem 0 5px;">•Day -7 <br /><br />
+                        • Kedarnath – Sonprayag – Guptkashi (18 km trek / 35 km drive) <br /><br />
+                        <!--• 10% amount after the kedarnath yatra If any such case of failure the payment cab not depture your location<br/ ><br/ >-->
+                    </h2>
+                </span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span style="font-size: 13px; color: #1e1d1d;">
+                    • Today morning visit the kedarnath temple again, start trek down to gaurikund and than drive back
+                    to guptkashi/sitapur. After arrival at guptkashi/sitapur Check in to the hotel rooms and have
+                    relaxation overnight.<br /><br />
+                    <h2 style="color: #1a4e9d; font-size: 15px; margin: 1rem 0 5px;">•Day -8 <br /><br />
+                        • Guptkashi – Joshimath – Badrinath Drive220 km <br /><br />
+                        <!--• 10% amount after the kedarnath yatra If any such case of failure the payment cab not depture your location<br/ ><br/ >-->
+                    </h2>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 13px; color: #1e1d1d;">
+                    • Morning after breakfast, drive to Badrinath. Check in to the hotel arrival in Badrinath. Pilgrims
+                    after having a bath in the Taptkund have the Darshan of Badrivishal & Aarti in evening. Overnight
+                    stay at Badrinath. (Meals: Breakfast and Dinner)<br /><br />
+                    <h2 style="color: #1a4e9d; font-size: 15px; margin: 1rem 0 5px;">•Day -9 <br /><br />
+                        • Badrinath – Joshimath – Rudraprayag Drive 160 km <br /><br />
+                        <!--• 10% amount after the kedarnath yatra If any such case of failure the payment cab not depture your location<br/ ><br/ >-->
+                    </h2>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 13px; color: #1e1d1d;">
+                    • Morning enjoy the after breakfast, drive for Rudraprayag via Joshimath. Visit on the way Darshan
+                    of VishhttpsuPrayag, Narsingh Temple in Joshimath, KarnPrayag and NandPrayag. Check into the hotel
+                    arrival in Rudraprayag. Overnight stay at Rudraprayag. (Meals: Breakfast and Dinner)<br /><br />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 13px; color: #1e1d1d;">
+                    • Morning after breakfast, drive to Badrinath. Check in to the hotel arrival in Badrinath. Pilgrims
+                    after having a bath in the Taptkund have the Darshan of Badrivishal & Aarti in evening. Overnight
+                    stay at Badrinath. (Meals: Breakfast and Dinner)<br /><br />
+                    <h2 style="color: #1a4e9d; font-size: 15px; margin: 1rem 0 5px;">•Day -10 <br /><br />
+                        • Rudraprayag – Rishikesh – Haridwar Drive 165 km<br /><br />
+                        <!--• 10% amount after the kedarnath yatra If any such case of failure the payment cab not depture your location<br/ ><br/ >-->
+                    </h2>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size: 13px; color: #1e1d1d;">
+                    •Morning after breakfast, drive for Haridwar / Dehradun / Rishikesh. Drop at Hotel / Airport /
+                    railway station. (Meals: Breakfast) <br /><br />
+                </span>
+            </td>
+        </tr>
+    </table>
+    
+    <table style="border-collapse: collapse;width: 100%;">
+        <tr>
+            <td>
+                <h3 style="color: #1a4e9d; font-size: 20px; margin: 1rem 0 5px;text-align: center;">Call Us - 8953767676</h3>
+            </td>
+        </tr>
+        <tr>
+            <td><span style="font-size: 15px; color: #1e1d1d;margin-bottom: 5px; display: block;text-align: center;">Book Now-
+                https://4dhamyatra.in/</span></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
+
+

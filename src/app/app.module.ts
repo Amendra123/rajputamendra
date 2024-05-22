@@ -28,6 +28,7 @@ import * as exporting from 'highcharts/modules/exporting.src';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { DatePipe } from '@angular/common';
 import {ToastrModule} from 'ngx-toastr'
+import { PackageUtilityService } from './pages/package/package-utility.service';
 
 
 
@@ -75,7 +76,8 @@ export function createTranslateLoader(http: HttpClient): any {
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
     { provide: HIGHCHARTS_MODULES, useFactory: () => [ more, exporting ] }, // add as factory to your providers
-    DatePipe
+    DatePipe,
+    PackageUtilityService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,112 @@
+<!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
+
+<div class="card-header topHeadList">
+    <h4 class="card-title">Add Package Details </h4>
+  
+  
+  
+  </div>
+  
+  <div class="col-lg-12">
+    <div class="form-control">
+        <div class="card-body">
+            <form [formGroup]="createPackage" (ngSubmit)="addPackage()">
+                <input type="hidden" name="setpacktitle" id="setpacktitle" class="form-control"
+                    placeholder="Enter Events">
+                
+                <input type="hidden" name="packdatatitle" id="packdatatitle" name="packdatatitle" class="form-control"
+                    placeholder="Enter Events">
+                <div class="basic-form">
+                    <div id="error"></div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4" id="homecity">
+                                <label>From City :</label>
+                                <ng-select [items]="cityOptions" formControlName="from_city" bindLabel="name"
+                                    bindValue="name" placeholder="Select City">
+                                    <ng-template ng-optgroup-tmp let-item="item">
+                                        <span class="ng-value-label">{{ item.name}}</span>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Package city:</label>
+                                    <ng-select formControlName="package_city" name="package_city"
+                                        [items]="packgeCityOptions" (change)="getPackCityEvent($event)"
+                                        bindLabel="city_name" bindValue="id" placeholder="Select Package city">
+                                        <ng-template ng-optgroup-tmp let-item="item">
+                                            <span class="ng-value-label">{{ item.city_name}}</span>
+                                        </ng-template>
+                                    </ng-select>
+                                </div>
+                            </div>
+  
+                            
+                            <div class="form-group col-md-4">
+                                <label>Title:</label>
+  
+                                <input type="text" name="title" id="title" formControlName="title"
+                                    class="form-control" placeholder="Title" >
+                            </div>
+  
+                            <br>
+                            
+                           
+                        </div>
+                    </div>
+  
+                    <div class="row" id="wraped">
+                      <table class="table table-bordered" formArrayName="events">  
+                          
+                          <tr *ngFor="let quantity of events().controls; let i=index" [formGroupName]="i">  
+                            <td>  
+                              <div class="form-group col-md-4">
+                                  <label>Event{{i+1}}:</label>  
+                                  <input type="text" name="events"  formControlName="events" class="form-control"
+                                      placeholder="Enter Event{{i+1}}" required="">
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group col-md-4">
+                                <label>Activity Image{{i+1}}:</label>  
+                                <input type="file" name="activity"  formControlName="activity" (change)="selectFile($event,i)" class="form-control"
+                                    placeholder="Enter Activity{{i+1}}" required="">
+                            </div> 
+                            </td>  
+                           
+                            <td>  
+                                <button (click)="removeQuantity(i)" class="btn btn-dark" style="background-color: #343a40;">Remove</button>  
+                            </td>  
+                          </tr>  
+                        </table>  
+                       
+                    </div>
+                    <div class="row" id="wraped2">
+  
+                    </div>
+                    <div class="row" id="wraped1">
+  
+                    </div>
+                    <div class="row" id="wraped01">
+  
+                    </div>
+                    <div class="form-row">
+  
+  
+  
+                        <br>
+  
+                    </div>
+                    <input type="submit" class="btn btn-dark"
+                        onclick="return confirm('Are you sure want to submit the Info?')" [disabled]="createPackage.invalid" value="Submit"
+                        id="submit">&nbsp;&nbsp;&nbsp;
+                        <button type="button" (click)="addQuantity()" class="btn btn-primary" style="background-color: #4549a2;">Add Event</button>
+  
+  
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  

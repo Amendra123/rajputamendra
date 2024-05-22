@@ -12,9 +12,9 @@ export class PackageUtilityService {
 
     // for production, we should have `${environment.apiBaseName}/encash-offers`
     readonly appUrl = `${environment}`;
-    
+
     routeParams: any;
-    
+
 
     /**
      * Constructor
@@ -23,64 +23,101 @@ export class PackageUtilityService {
      */
     count = 0;
     constructor(private _httpClient: HttpClient,
-        private http :HttpClient
-       ) {
-        
+        private http: HttpClient
+    ) {
+
     }
-    app_url:any="http://localhost:8080/api/";
-    public addCategory(data:Category){
+    //app_url: any = "https://4dhamyatra.in:8080/backend/api/";
+    app_url: any = "http://localhost:8080/api/";
+    public addCategory(data: Category) {
         // var reqHeader = new HttpHeaders({
         //     'Content-Type': 'application/json',
         //     'Authorization': 'Bearer ' + localStorage.getItem('ssn_token')
         // });
-        return this._httpClient.post<Category[]>(`${this.app_url}category/add`,data);
+        return this._httpClient.post<Category[]>(`${this.app_url}category/add`, data);
     }
-    getCategoryById(id:number){
+    getCategoryById(id: number) {
         return this._httpClient.get<Category[]>(`${this.app_url}category/getCategoryById/${id}`);
 
     }
-    updateCategory(id:number,data:Category){
-        return this._httpClient.put<Category[]>(`${this.app_url}category/update/${id}`,data);
+    updateCategory(id: number, data: Category) {
+        return this._httpClient.put<Category[]>(`${this.app_url}category/update/${id}`, data);
     }
-    deleteCategoryById(id:number){
+    deleteCategoryById(id: number) {
         return this._httpClient.delete<Category[]>(`${this.app_url}category/delete/${id}`);
 
     }
-    public addSubCategory(data:SubCategory){
+    public addSubCategory(data: SubCategory) {
         // var reqHeader = new HttpHeaders({
         //     'Content-Type': 'application/json',
         //     'Authorization': 'Bearer ' + localStorage.getItem('ssn_token')
         // });
-        return this._httpClient.post<SubCategory[]>(`${this.app_url}sub-category/add`,data);
+        return this._httpClient.post<SubCategory[]>(`${this.app_url}sub-category/add`, data);
     }
-    getSubCategoryById(id:number){
+    getSubCategoryById(id: number) {
         return this._httpClient.get<SubCategory[]>(`${this.app_url}sub-category/getSubCategoryById/${id}`);
 
     }
-    getSubCategoryByName(name:string){
+    getSubCategoryByName(name: string) {
         return this._httpClient.get<SubCategory[]>(`${this.app_url}sub-category?name=${name}`);
 
     }
-    updateSubCategory(id:number,data:SubCategory){console.log(data);
-        return this._httpClient.put<SubCategory[]>(`${this.app_url}sub-category/update/${id}`,data);
+    updateSubCategory(id: number, data: SubCategory) {      
+        return this._httpClient.put<SubCategory[]>(`${this.app_url}sub-category/update/${id}`, data);
     }
-    deleteSubCategoryById(id:number){
+    updatePackCity(id: any, data: SubCategory) {       
+        return this._httpClient.put<any>(`${this.app_url}updatePackCity/${id}`, data);
+    }
+    deleteSubCategoryById(id: number) {
         return this._httpClient.delete<SubCategory[]>(`${this.app_url}sub-category/delete/${id}`);
 
     }
-    addPackage(file:any,data:Package){
-     
-     return this.http.post<Package[]>(`${this.app_url}package/add`,file);
+    addPackage(file: any, data: Package) {
+
+        return this.http.post<Package[]>(`${this.app_url}package/add`, file);
     }
-    createPackage(data:any){
-        return this.http.post<Package[]>(`${this.app_url}createPackage`,data);
+    createPackage(data: any) {
+        return this.http.post<Package[]>(`${this.app_url}createPackage`, data);
     }
-    updatePackage(file:any,id:any){
-     
-        return this.http.put<Package[]>(`${this.app_url}package/update/${id}`,file);
-       }
-    updatePackageDetail(file:any,id:any){
-     
-        return this.http.put<Package[]>(`${this.app_url}updatePackDetail/${id}`,file);
+    createHotel(data: any) {
+        return this.http.post(`${this.app_url}addHotelIteneray`, data);
+    }
+    packageAdd(data: any) {
+        return this.http.post<Package[]>(`${this.app_url}addPackage`, data);
+    }
+    addPackageIteneray(data: any) {
+        return this.http.post<Package[]>(`${this.app_url}addPackageIteneray`, data);
+    }
+    updatePackage(file: any, id: any) {
+
+        return this.http.put<Package[]>(`${this.app_url}package/update/${id}`, file);
+    }
+    updateHotel(file: any, id: any) {
+
+        return this.http.put<any[]>(`${this.app_url}/updateCityHotel/${id}`, file);
+    }
+    updatePack(file: any, id: any) {
+
+        return this.http.put<Package[]>(`${this.app_url}updatePack/${id}`, file);
+    }
+    manageFare(file: any) {
+
+        return this.http.post<Package[]>(`${this.app_url}package/manageFare`, file);
+    }
+    updatePackagefare(file: any, id: any) {
+
+        return this.http.put<Package[]>(`${this.app_url}package/updatePackagefare/${id}`, file);
+    }
+    updatePackageDetail(file: any, id: any) {
+
+        return this.http.put<Package[]>(`${this.app_url}updatePackDetail/${id}`, file);
+    }
+    updatePackageIteneray(file: any, id: any) {
+
+        return this.http.put<Package[]>(`${this.app_url}updatePackageIteneray/${id}`, file);
+    }
+    
+    addPackCity(data: any) {
+        return this.http.post<Package[]>(`${this.app_url}addPackCity`, data);
     }
 }

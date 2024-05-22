@@ -1,0 +1,201 @@
+<!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
+
+<div class="card-header topHeadList">
+    <h4 class="card-title">Add Hotel Details (file uploading only jpeg)</h4>
+
+</div>
+
+<div class="col-lg-12">
+    <div class="form-control">
+        <div class="card-body">
+            <form [formGroup]="createPackage" (ngSubmit)="addPackage()">
+                <input type="hidden" name="setpacktitle" id="setpacktitle" class="form-control"
+                    placeholder="Enter Events">
+                <input type="hidden" formControlName="packdata" name="packdata" id="packdata" class="form-control"
+                    placeholder="Enter Events">
+                <input type="hidden" name="packdatatitle" id="packdatatitle" name="packdatatitle" class="form-control"
+                    placeholder="Enter Events">
+                <div class="basic-form">
+                    <div id="error"></div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4" id="homecity">
+                                <label>From City :</label>
+                                <ng-select [items]="cityOptions" formControlName="from_city" bindLabel="name"
+                                    bindValue="name" placeholder="Select City">
+                                    <ng-template ng-optgroup-tmp let-item="item">
+                                        <span class="ng-value-label">{{ item.name}}</span>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Package city:</label>
+                                    <ng-select formControlName="p_city" name="p_city"
+                                        [items]="packgeCityOptions" (change)="getPackCityEvent($event)"
+                                        bindLabel="city_name" bindValue="id" placeholder="Select Package city">
+                                        <ng-template ng-optgroup-tmp let-item="item">
+                                            <span class="ng-value-label">{{ item.city_name}}</span>
+                                        </ng-template>
+                                    </ng-select>
+                                </div>
+                            </div>
+
+                            
+                            
+
+                           
+                            <div class="form-group col-md-6" id="Inclusion">
+                                <label>Hotel desc.:</label>
+                                <ckeditor [editor]="Editor" name="hoteld" formControlName="hoteld"
+                                    placeholder="Full Inclusion"></ckeditor>
+                                <!-- <textarea name="inclusion" id="inclusion" value="" class="form-control"
+                            placeholder="Full Inclusion " style="visibility: hidden; display: none;"></textarea> -->
+
+                            </div>
+                            
+
+
+                            <div class="form-group col-md-4">
+                                <label>Hotel Detail Per Person:</label>
+
+                                <input type="text" name="hotel_detail" id="day_tour" formControlName="hotel_detail"
+                                    class="form-control" placeholder="Like Price for 1 Night,2 adult"
+                                    >
+                            </div>
+
+
+
+                            
+                            <div class="form-group col-md-4">
+                                <label>Hotel Title:</label>
+
+                                <input type="text" name="hotel_title" id="facility" name="hotel_title"
+                                    formControlName="hotel_title" 
+                                    class="form-control" placeholder="Hotel Title"
+                                    >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Hotel Address:</label>
+
+                                <input type="text" name="hotel_address" id="facility" name="hotel_address"
+                                    formControlName="hotel_address" 
+                                    class="form-control" placeholder="Hotel Address"
+                                    >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Hotel Price:</label>
+
+                                <input type="text" name="hotel_price" id="facility" name="hotel_price"
+                                    formControlName="hotel_price" 
+                                    class="form-control" placeholder="Hotel Price"
+                                    >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Hotel Number:</label>
+
+                                <input type="text" name="hotel_no" id="facility" name="hotel_no"
+                                    formControlName="hotel_no" 
+                                    class="form-control" placeholder="Hotel Number"
+                                    >
+                            </div>
+
+                            <div class="form-group col-md-4" id="slider">
+                                <label>Hotel Front View:</label>
+
+                                <input type="file" name="hotel_image" formControlName="hotel_image" (change)="selectFile($event)"
+                                    class="form-control" placeholder="Hotel Front View">
+                            </div>
+                            <div class="form-group col-md-4" id="slider">
+                                <label>Hotel Gallery:</label>
+
+                                <input type="file" name="hotel1" formControlName="hotel1" (change)="selectFile1($event)"
+                                    class="form-control" placeholder="Cover Photo" >
+                            </div>
+                            <div class="form-group col-md-4" id="slider">
+                                <label>Hotel Image3:</label>
+
+                                <input type="file" name="hotel2" formControlName="hotel2" (change)="selectFile4($event)"
+                                    class="form-control" placeholder="Cover Photo">
+                            </div>
+                            <div class="form-group col-md-4" id="slider">
+                                <label>Hotel Bedroom:</label>
+
+                                <input type="file" name="hotel_image1" formControlName="hotel_image1" (change)="selectFile2($event)"
+                                    class="form-control" placeholder="Cover Photo">
+                            </div>
+                            <div class="form-group col-md-4" id="cover">
+                                <label>Hotel Bathroom:</label>
+
+                                <input type="file" name="hotel_image2" formControlName="hotel_image2" (change)="selectFile3($event)"
+                                    class="form-control" placeholder="Cover Photo" >
+                            </div>
+                            
+                          
+
+                            <!--	<div class="form-group col-md-4" >-->
+                            <!--	<label>Profile Photo:</label>-->
+
+                            <!--<input type="file"  name="profile_photo" value="" class="form-control" value="" placeholder="Adhaar">-->
+                            <!--</div>-->
+
+
+
+                        
+                   
+
+                    <div class="form-group col-md-4">
+                        <label>Hotel Type:</label>
+                          <select name="hotel_include" required="" formControlName="hotel_include" class="form-control" fdprocessedid="54es8j">
+                                       <option value="">--Select Hotel Type--</option>
+                                                                                      
+                                     
+                                      <option value="CP (Brekfast Only)">CP (Brekfast Only)</option>
+                                      <option value="MAP ( Breakfast and Dinner)">MAP ( Breakfast and Dinner)</option>
+                                      <option value="AP (No Meals No Brekfast)">AP (No Meals No Brekfast)</option>
+                                     
+                              </select> 
+                                                       
+                    <!--<input type="text"  name="hotel_include" value="" class="form-control"   placeholder="Hotel Inculdes">-->
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Star Category:</label>
+                          <select name="star" required="" formControlName="star" class="form-control" fdprocessedid="bf3n1">
+                                       <option value="">--Select star--</option>
+                                                                                      
+                                     
+                                      <option value="5 Star">5 Star Properties</option>
+                                      <option value="3 Star">3 Star Properties</option>
+                                      <option value="2 Star">2 Star Properties</option>
+                                     
+                              </select> 
+                                                       
+                    <!--<input type="text"  name="hotel_include" value="" class="form-control"   placeholder="Hotel Inculdes">-->
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Hotel Type:</label>
+                            <select name="hotel_type" required="" formControlName="hotel_type" class="form-control" fdprocessedid="l8y7fs">
+                                       <option value="">--Select Hotel Type--</option>
+                                                                                      
+                                     
+                                      <option value="Standard">Standard</option>
+                                      <option value="Delux">Delux</option>
+                                      <option value="Diametry">Diametry</option>
+                                     
+                              </select>                                
+                    <!--<input type="text"  name="hotel_type" value="" class="form-control"   placeholder="Hotel Type">-->
+                    </div>
+                </div>
+                </div><br>
+                    <input type="submit" class="btn btn-dark"
+                        onclick="return confirm('Are you sure want to submit the Info?')" [disabled]="createPackage.invalid" value="Submit"
+                        id="submit">&nbsp;&nbsp;&nbsp;
+                    <!-- <a href="javascript:void(0);" class="add_button btn btn-success" title="Add field">Add Slider
+                        Images</a> -->
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 <!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
 
 <div class="card-header topHeadList">
-    <h4 class="card-title">Add Package Details </h4>
+    <h4 class="card-title">Add Package Details (file uploading only jpeg) </h4>
 
 
 
@@ -299,7 +299,16 @@
                             <!--</div>-->
                         </div>
                     </div>
+                    <div class="form-group col-md-12">
+                        <label>Special Description: </label>
+                        <ckeditor [editor]="Editor" formControlName="special_descr" name="special_descr"
+                            placeholder="Special Description">
+                        </ckeditor>
+                        <!-- <textarea name="p_title" id="p_title" value="" onchange="checktitle(this.value);"
+                    class="form-control" placeholder="Full Title "
+                    style="visibility: hidden; display: none;"></textarea> -->
 
+                    </div>
                     <div class="row" id="wraped">
                         <!-- <div class="col-md-4" style="margin-bottom:5px;" id="remove_button1">
                             <label>Slider Image1: <a href="javascript:void(0);" class="remove_button"

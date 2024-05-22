@@ -90,6 +90,7 @@ export class EditPackageDetailsComponent {
   selectedActivityImg9: any;
   
   selectedActivityImg10: any;
+  sightSeeing: any;
   
 
 
@@ -123,6 +124,7 @@ export class EditPackageDetailsComponent {
   getSightSeeingData() {
     this.rootService.getSightSeeingAllData(this.name, this.limit).subscribe((res: any) => {
       this.sightSeeingOptions = res['response'];
+     // console.log(this.sightSeeingOptions);
     });
   }
   showSightSeeing() {
@@ -205,15 +207,15 @@ if(data.activity10!=""  && data.activity10!=null){
 }
     return this._formBuilder.group({
       from_city: [data.from_city || '', [Validators.required]],
-      package_city: [city || '', [Validators.required]],
+      package_city: [data.p_id || '', [Validators.required]],
       package_title: [data.package_title || '', [Validators.required]],
       days: [data.days || '', [Validators.required]],
       duration: [data.duration || '', [Validators.required]],
       type: [data.type || '', [Validators.required]],
-      p_title: [data.package_title || '', [Validators.required]],
+      sightseeing: [data.day_tour || '', [Validators.required]],
       inclusion: [data.inclusion || '', [Validators.required]],
       exclusion: [data.exclusion || '', [Validators.required]],
-      day_tour: [data.day_activity || ''],
+      day_tour: [data.day_tour || ''],
       vechcategory: [data.vechcategory || '', [Validators.required]],
       vechmodel: [data.vechmodel || '', [Validators.required]],
       facility: [data.facility || '', [Validators.required]],
@@ -227,11 +229,12 @@ if(data.activity10!=""  && data.activity10!=null){
       hotel_title: [data.hotel_title || '', [Validators.required]],
       hotel_include: [data.hotel_include || '', [Validators.required]],
       hotel_type: [data.hotel_type || '', [Validators.required]],
-      name: [data.name || '', [Validators.required]],
-      email: [data.email || '', [Validators.required]],
-      mobile: [data.mobile || '', [Validators.required]],
+      name: [data.name || ''],
+      email: [data.email || ''],
+      mobile: [data.mobile || ''],
       packid:[data.id || ''],
       hoteld:[data.hoteld || ''],
+      special_descr:[data.special_descr || ""],
       slider: [''],
       slider1: [''],
       slider2: [''],
@@ -470,14 +473,14 @@ if(data.activity10!=""  && data.activity10!=null){
     this.createPackage = this._formBuilder.group({
       from_city: [data.from_city || '', [Validators.required]],
       package_city: [data.p_id || '', [Validators.required]],
-      package_title: [data.p_title || ''],
+      package_title: [data.package_title || ''],
       days: [data.days || ''],
       duration: [data.duration || ''],
       type: [data.type || '', [Validators.required]],
-      p_title: [data.package_title || '', [Validators.required]],
+      sightseeing: [data.day_tour || '', [Validators.required]],
       inclusion: [data.inclusion || '', [Validators.required]],
       exclusion: [data.exclusion || '', [Validators.required]],
-      day_tour: [data.day_activity || ''],
+      day_tour: [data.day_tour || '',[Validators.required]],
       vechcategory: [data.vechcategory || '', [Validators.required]],
       vechmodel: [data.vechmodel || '', [Validators.required]],
       facility: [data.facility || '', [Validators.required]],
@@ -488,15 +491,16 @@ if(data.activity10!=""  && data.activity10!=null){
       current_price: [data.current_price || '', [Validators.required]],
       addtitle: [data.addtitle || '', [Validators.required]],
       perchange: [data.perchange || '', [Validators.required]],
-      name: [data.name || '', [Validators.required]],
+      name: [data.name || ''],
       hotel_title: [data.hotel_title || '', [Validators.required]],
       hotel_include: [data.hotel_include || '', [Validators.required]],
       hotel_type: [data.hotel_type || '', [Validators.required]],
       hotel_image: [''],
       hoteld:[data.hoteld || ''],
       packid:[data.id || ''],
-      email: [data.email || '', [Validators.required]],
-      mobile: [data.mobile || '', [Validators.required]],
+      email: [data.email || ''],
+      mobile: [data.mobile || ''],
+      special_descr:[data.special_descr || ""],
       packdata: [''],
       packdatatitle: [''],
       slider: [''],
@@ -805,9 +809,65 @@ if(data.activity10!=""  && data.activity10!=null){
   getSightSeeingEvent(val: any) {
     console.log(val);
     if (val != undefined) {
+      this.sightSeeing= val;
+      let data =val;
+      data.event1!="" && data.event1!=null?this.event1=false:this.event1=true;
+      data.event2!=""  && data.event2!=null?this.event2=false:this.event2=true;
+      data.event3!=""  && data.event3!=null?this.event3=false:this.event3=true;
+      data.event4!=""  && data.event4!=null?this.event4=false:this.event4=true;
+      data.event5!=""  && data.event5!=null?this.event5=false:this.event5=true;
+      data.event6!=""  && data.event6!=null?this.event6=false:this.event6=true;
+      data.event7!=""  && data.event7!=null?this.event7=false:this.event7=true;
+      data.event8!=""  && data.event8!=null?this.event8=false:this.event8=true;
+      data.event9!=""  && data.event9!=null?this.event9=false:this.event9=true;
+      data.event10!=""  && data.event10!=null?this.event10=false:this.event10=true;
+      
+      if(data.activity1!=""  && data.activity1!=null){
+        this.activity1=false;
+      }
+      
+      if(data.activity2!=""  && data.activity2!=null){
+        this.activity2=false;
+      }
+      if(data.activity3!=""  && data.activity3!=null){
+        this.activity3=false;
+      }
+      if(data.activity4!=""  && data.activity4!=null){
+        this.activity4=false;
+      }
+      if(data.activity5!=""  && data.activity5!=null){
+        this.activity5=false;
+      }
+      if(data.activity6!=""  && data.activity6!=null){
+        this.activity6=false;
+      }
+      if(data.activity7!=""  && data.activity7!=null){
+        this.activity7=false;
+      }
+      if(data.activity8!=""  && data.activity8!=null){
+        this.activity8=false;
+      }
+      if(data.activity9!=""  && data.activity9!=null){
+        this.activity9=false;
+      }
+      if(data.activity10!=""  && data.activity10!=null){
+        this.activity10=false;
+      }
+      this.createPackage.controls['day_tour']?.setValue(val.title);
+      
+      val.event1!="" && val.event1!= null && val.event1!=undefined?this.createPackage.controls['event1']?.setValue(val.event1):this.createPackage.controls['event1']?.setValue("");
+      val.event2!="" && val.event2!= null && val.event2!=undefined?this.createPackage.controls['event2']?.setValue(val.event2):this.createPackage.controls['event2']?.setValue("");
+      val.event3!="" && val.event3!= null && val.event3!=undefined?this.createPackage.controls['event3']?.setValue(val.event3):this.createPackage.controls['event3']?.setValue("");
+      val.event4!="" && val.event4!= null && val.event4!=undefined?this.createPackage.controls['event4']?.setValue(val.event4):this.createPackage.controls['event4']?.setValue("");
+      val.event5!="" && val.event5!= null && val.event5!=undefined?this.createPackage.controls['event5']?.setValue(val.event5):this.createPackage.controls['event5']?.setValue("");
+      val.event6!="" && val.event6!= null && val.event6!=undefined?this.createPackage.controls['event6']?.setValue(val.event6):this.createPackage.controls['event6']?.setValue("");
+      val.event7!="" && val.event7!= null && val.event7!=undefined?this.createPackage.controls['event7']?.setValue(val.event7):this.createPackage.controls['event7']?.setValue("");
+      val.event8!="" && val.event8!= null && val.event8!=undefined?this.createPackage.controls['event8']?.setValue(val.event8):this.createPackage.controls['event8']?.setValue("");
+      val.event9!="" && val.event9!= null && val.event9!=undefined?this.createPackage.controls['event9']?.setValue(val.event9):this.createPackage.controls['event9']?.setValue("");
+      val.event10!="" && val.event10!= null && val.event10!=undefined?this.createPackage.controls['event10']?.setValue(val.event10):this.createPackage.controls['event10']?.setValue("");
+      this.createPackage.controls['package_city']?.setValue("");
       localStorage.setItem("setpacktitle", JSON.stringify(val));
     }
-
   }
   selectHotelImg(event: any): void {
     const file: File = event.target.files[0];
@@ -863,14 +923,13 @@ if(data.activity10!=""  && data.activity10!=null){
 
 
     const data = this.createPackage.getRawValue();
-    console.log(this.createPackage.controls['packdata']?.value);
+   // console.log(this.createPackage.controls['packdata']?.value);
     //this.createPackage.get('pdf').setValue(this.currentFile);
     // data.pdf=formData
     const formData = new FormData();
     if(this.selectedFiles!= undefined){
       formData.append('slider', this.selectedFiles,   this.createPackage.controls['slider']?.value);
-    }
-    
+    }  
     if(this.selectedFiles1!= undefined){
       formData.append('slider1', this.selectedFiles1, this.createPackage.controls['slider1']?.value);
     }
@@ -888,36 +947,56 @@ if(data.activity10!=""  && data.activity10!=null){
     }
     if(this.selectedActivityImg1!= undefined){
       formData.append('activity1', this.selectedActivityImg1, this.createPackage.controls['activity1']?.value);
-    }
+    } else if(this.sightSeeing && this.sightSeeing?.activity1!="" && this.sightSeeing.activity1!=null && this.sightSeeing.activity1!= undefined){
+      formData.append('activity1', this.sightSeeing.activity1!="" && this.sightSeeing.activity1!=null && this.sightSeeing.activity1!= undefined?this.sightSeeing.activity1:"");
+    } 
     if(this.selectedActivityImg2!= undefined){
       formData.append('activity2', this.selectedActivityImg2, this.createPackage.controls['activity2']?.value);
-    }
+    }else if(this.sightSeeing && this.sightSeeing?.activity2!="" && this.sightSeeing.activity2!=null && this.sightSeeing.activity2!= undefined){
+      formData.append('activity2', this.sightSeeing.activity2!="" && this.sightSeeing.activity2!=null && this.sightSeeing.activity2!= undefined?this.sightSeeing.activity2:"");
+    } 
     if(this.selectedActivityImg3!= undefined){
       formData.append('activity3', this.selectedActivityImg3, this.createPackage.controls['activity3']?.value);
-    }
+    }else if(this.sightSeeing && this.sightSeeing?.activity3!="" && this.sightSeeing.activity3!=null && this.sightSeeing.activity3!= undefined){
+      formData.append('activity3', this.sightSeeing.activity3!="" && this.sightSeeing.activity3!=null && this.sightSeeing.activity3!= undefined?this.sightSeeing.activity3:"");
+    } 
     if(this.selectedActivityImg4!= undefined){
       formData.append('activity4', this.selectedActivityImg4, this.createPackage.controls['activity4']?.value);
-    }
+    }else if(this.sightSeeing && this.sightSeeing?.activity4!="" && this.sightSeeing.activity4!=null && this.sightSeeing.activity4!= undefined){
+      formData.append('activity4', this.sightSeeing.activity4!="" && this.sightSeeing.activity4!=null && this.sightSeeing.activity4!= undefined?this.sightSeeing.activity4:"");
+    } 
     if(this.selectedActivityImg5!= undefined){
       formData.append('activity5', this.selectedActivityImg5, this.createPackage.controls['activity5']?.value);
-    }
+    }else if(this.sightSeeing && this.sightSeeing?.activity5!="" && this.sightSeeing.activity5!=null && this.sightSeeing.activity5!= undefined){
+      formData.append('activity5', this.sightSeeing.activity5!="" && this.sightSeeing.activity5!=null && this.sightSeeing.activity5!= undefined?this.sightSeeing.activity5:"");
+    } 
     if(this.selectedActivityImg6!= undefined){
       formData.append('activity6', this.selectedActivityImg6, this.createPackage.controls['activity6']?.value);
-    }
+    }else if(this.sightSeeing && this.sightSeeing?.activity6!="" && this.sightSeeing.activity6!=null && this.sightSeeing.activity6!= undefined){
+      formData.append('activity6', this.sightSeeing.activity6!="" && this.sightSeeing.activity6!=null && this.sightSeeing.activity6!= undefined?this.sightSeeing.activity6:"");
+    } 
     if(this.selectedActivityImg7!= undefined){
       formData.append('activity7', this.selectedActivityImg7, this.createPackage.controls['activity7']?.value);
-    }
+    }else if(this.sightSeeing && this.sightSeeing?.activity7!="" && this.sightSeeing.activity7!=null && this.sightSeeing.activity7!= undefined){
+      formData.append('activity7', this.sightSeeing.activity7!="" && this.sightSeeing.activity7!=null && this.sightSeeing.activity7!= undefined?this.sightSeeing.activity7:"");
+    } 
     if(this.selectedActivityImg8!= undefined){
       formData.append('activity8', this.selectedActivityImg8, this.createPackage.controls['activity8']?.value);
-    }
+    }else if(this.sightSeeing && this.sightSeeing?.activity8!="" && this.sightSeeing.activity8!=null && this.sightSeeing.activity8!= undefined){
+      formData.append('activity8', this.sightSeeing.activity8!="" && this.sightSeeing.activity8!=null && this.sightSeeing.activity8!= undefined?this.sightSeeing.activity8:"");
+    } 
     if(this.selectedActivityImg9!= undefined){
       formData.append('activity9', this.selectedActivityImg9, this.createPackage.controls['activity9']?.value);
-    }
+    }else if(this.sightSeeing && this.sightSeeing?.activity9!="" && this.sightSeeing.activity9!=null && this.sightSeeing.activity9!= undefined){
+      formData.append('activity9', this.sightSeeing.activity9!="" && this.sightSeeing.activity9!=null && this.sightSeeing.activity9!= undefined?this.sightSeeing.activity9:"");
+    } 
     if(this.selectedActivityImg10!= undefined){
       formData.append('activity10', this.selectedActivityImg10, this.createPackage.controls['activity10']?.value);
-    }
+    }else if(this.sightSeeing && this.sightSeeing?.activity10!="" && this.sightSeeing.activity10!=null && this.sightSeeing.activity10!= undefined){
+      formData.append('activity10', this.sightSeeing.activity10!="" && this.sightSeeing.activity10!=null && this.sightSeeing.activity10!= undefined?this.sightSeeing.activity10:"");
+    } 
 
-    console.log(formData);
+    //console.log(formData);
     //return;
     // formData.append('slider2', this.selectedFiles2, this.createPackage.controls['slider2']?.value);
     // formData.append('slider3', this.selectedFiles3, this.createPackage.controls['slider3']?.value);
@@ -927,7 +1006,7 @@ if(data.activity10!=""  && data.activity10!=null){
     // formData.append('slider7', this.selectedFiles7, this.createPackage.controls['slider7']?.value);
     // formData.append('slider8', this.selectedFiles8, this.createPackage.controls['slider8']?.value);
     // formData.append('slider9', this.selectedFiles9, this.createPackage.controls['slider9']?.value);
-    // formData.append('slider10', this.selectedFiles10, this.createPackage.controls['slider10']?.value);
+     formData.append('day_activity', this.createPackage.controls['day_tour']?.value);
    // formData.append('image', this.selectedFilesImg, this.createPackage.controls['image']?.value);
     formData.append('vedio', this.createPackage.controls['vedio']?.value);
     formData.append('from_city', this.createPackage.controls['from_city']?.value);
@@ -971,11 +1050,11 @@ if(data.activity10!=""  && data.activity10!=null){
     formData.append('event8', this.createPackage.controls['event8']?.value);
     formData.append('event9', this.createPackage.controls['event9']?.value);
     formData.append('event10', this.createPackage.controls['event10']?.value);
-    
+    formData.append('special_descr', this.createPackage.controls['special_descr']?.value);
 
-    console.log(formData);
+    //console.log(this.createPackage.controls['special_descr']?.value); return;
     data.pdf = formData
-    
+    //return;
     this._packService.updatePackageDetail(formData,this.createPackage.controls['packid']?.value).subscribe((res: any) => {
      /// console.log(res.status);return;
       if (res.status == 200) {

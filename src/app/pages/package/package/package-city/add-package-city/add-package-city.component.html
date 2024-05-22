@@ -1,0 +1,44 @@
+<!-- <app-pagetitle title="Campaign Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle> -->
+<div class="card-header topHeadList">
+    <h4 class="card-title">Add Package City </h4>
+
+   
+</div>
+
+<div class="col-xl-6">
+    <div class="form-control">
+    <div class="modal-content">
+        <form [formGroup]="createPackage" enctype="multipart/form-data" (ngSubmit)="AddTags()">
+            <div class="modal-header">
+                
+                
+            </div>
+            <div class="modal-body">
+               
+                <div class="col-md-12" id="homecity">
+                    <label>From City :</label>
+                    <ng-select [items]="cityOptions" formControlName="from_city" bindLabel="name"
+                        bindValue="name" placeholder="Select City">
+                        <ng-template ng-optgroup-tmp let-item="item">
+                            <span class="ng-value-label">{{ item.name}}</span>
+                        </ng-template>
+                    </ng-select>
+                </div>            
+                
+                <br>
+                <div class="form-group mb-4">
+                    <label for="cc-exp" class="control-label mb-1">Package City</label>
+                    <input  type="text" class="form-control" formControlName="city_name" name="city_name"   placeholder="Package City">
+                </div>
+              
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" [disabled]="createPackage.invalid" >Add New</button>
+              
+            </div>
+        </form>
+    </div>
+</div>
+      </div>
+  
+  

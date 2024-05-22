@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { MfuelExtensionService } from "./mfuel-extension.service";
 import { environment } from '../../environments/environment';
+// import jsPDF from "jspdf";
 
 @Injectable({
   providedIn: "root",
@@ -24,6 +25,8 @@ export class RootPageService {
   // base_url1: string = environment.base_url_java;
 
   base_url: string = environment.base_url_node;
+  //base_url: string = environment.base_url_node_local;
+  
   base_url1: string = environment.base_url_node;
 
 
@@ -668,8 +671,7 @@ export class RootPageService {
     );
    }
   }
-  // http://localhost:8086/api/getConsumerPlanDistributionDetailReport?
-  // month=2023-04-20&day=2023-04-20&planName=3 Yearly
+
 
   ConsumerPlanDist_DrillDownReport(api_params: any) {
    if(api_params == null){
@@ -696,8 +698,7 @@ export class RootPageService {
       );
     }
   }
-  // http://localhost:9090/api/dashboard/top-five-campaign-detail-list?
-  // year=2020&month=10&campaignId=5f927231421aa975c03b33c4&day=23
+
   TopFiveCampaign_DrillDownReport(api_params: any) {
     if(api_params == null){
       return this.http.s_get(
@@ -763,9 +764,7 @@ export class RootPageService {
     return this.trafficDistAffiliate_Organic;
   }
 
-  // http://localhost:9090/api/dashboard/client/Affiliate-traffic-detail-list?
-  //  month=09&year=2020&day=04&clientId=5d11fd7768d3820aa7a3f5b3&campaignId=5f927201421aa975c03b33c3
-
+  
   getAffiliate_Traffic_DrillDownReport(api_params: any) {
    if(api_params == null){
     return this.http.s_get(
@@ -886,7 +885,8 @@ export class RootPageService {
     newWin.close(); 
    }
 
-   app_url:any="http://localhost:8080/api/";
+     //app_url:any="https://4dhamyatra.in:8080/backend/api/";
+     app_url:any="http://localhost:8080/api/";
    getPackageAllData(name:string,limit:number){
     return this.http.s_get(this.app_url+`package?name=${name}&limit=${limit}`);
    }
@@ -897,7 +897,10 @@ export class RootPageService {
     return this.http.s_get(this.app_url+`packageCity?id=${id}&limit=${limit}`);
    }
    getCityAllData(name:string,limit:number){
-    return this.http.s_get("http://localhost:8080/api"+`?name=${name}`);
+    return this.http.s_get(this.app_url+`?name=${name}`);
+   }
+   getAllPacakgeTitle(name:string,limit:number){
+    return this.http.s_get(this.app_url+`package/getPackageTitle`);
    }
    getUserPackageAllData(name:string,limit:number){
     return this.http.s_get(this.app_url+`userPackage?name=${name}&limit=${limit}`);
@@ -905,8 +908,26 @@ export class RootPageService {
    getMetaTagAllData(name:string,limit:number){
     return this.http.s_get(this.app_url+`metatags?name=${name}&limit=${limit}`);
    }
-   getPackageListData(name:string,limit:number){
-    return this.http.s_get(this.app_url+`getPackageDetailList?name=${name}&limit=${limit}`);
+   getPackageListData(id:any,name:string,limit:number){
+    return this.http.s_get(this.app_url+`getPackageDetailList?id=${id}&name=${name}&limit=${limit}`);
+   }
+   getPackageListData1(name:string,limit:number){
+    return this.http.s_get(this.app_url+`getPackageDetailList?id=&name=${name}&limit=${limit}`);
+   }
+   getPackageItenerayData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`getPackageIteneray?name=${name}&limit=${limit}`);
+   }
+   getHotelItenerayData(name:string,limit:number){
+    return this.http.s_get(this.app_url+`getCityHotel?name=${name}&limit=${limit}`);
+   }
+   getPackageListByIdData(id:any,limit:number){
+    return this.http.s_get(this.app_url+`getPackageList?id=${id}&limit=${limit}`);
+   }
+   getPackageFareById(id:any){
+    return this.http.s_get(this.app_url+`package/getPackageFareById/${id}`);
+   }
+   packageCity(id:any,limit:number){
+    return this.http.s_get(this.app_url+`packageCity?id=${id}&limit=${limit}`);
    }
    getPackageData(name:string,limit:number){
     return this.http.s_get(this.app_url+`getPackageList?name=${name}&limit=${limit}`);
@@ -920,11 +941,14 @@ export class RootPageService {
    getVehicleModelAllData(name:string,limit:number){
     return this.http.s_get(this.app_url+`getVehicleModel?name=${name}&limit=${limit}`);
    }
+   getPackageFare(name:string,limit:number){
+    return this.http.s_get(this.app_url+`package/getPackageFare?name=${name}&limit=${limit}`);
+   }
    getVehicleCategoryAllData(name:string,limit:number){
     return this.http.s_get(this.app_url+`getVehicleCategory?name=${name}&limit=${limit}`);
    }
    getSubCategoryAllData(name:string,limit:number){
-    return this.http.s_get(this.app_url+`sub-category?subcategory=${name}&limit=${limit}`);
+    return this.http.s_get(this.app_url+`sub-category?name=${name}&limit=${limit}`);
    }
    getPackageById(id:any){
     return this.http.s_get(this.app_url+`package/getPackageById/${id}`);
@@ -932,11 +956,20 @@ export class RootPageService {
    getPackageDetailById(id:any){
     return this.http.s_get(this.app_url+`getPackageById/${id}`);
    }
+   getPackageIteneray(id:any){
+    return this.http.s_get(this.app_url+`getPackageIteneray?id=${id}`);
+   }
+   getHotelIteneray(id:any){
+    return this.http.s_get(this.app_url+`getHotelById/${id}`);
+   }
    deletePackageById(id:any){
     return this.http.s_delete(this.app_url+`package/delete/${id}`);
    }
    deletePackageDetailById(id:any){
     return this.http.s_delete(this.app_url+`deletePackDetail/${id}`);
+   }
+   deletePackageFare(id:any){
+    return this.http.s_delete(this.app_url+`package/deletePackageFare/${id}`);
    }
    deleteUserPackageById(id:any){
     return this.http.s_delete(this.app_url+`userPackage/delete/${id}`);
@@ -944,4 +977,31 @@ export class RootPageService {
    deleteMetaTagsById(id:any){
     return this.http.s_delete(this.app_url+`metatags/delete/${id}`);
    }
+   deletePackageIteneray(id:any){
+    return this.http.s_delete(this.app_url+`deletePackageIteneray/${id}`);
+
+   }
+   
+   deletePackCityById(id:any){
+    return this.http.s_delete(this.app_url+`deletePackCity/${id}`);
+   }
+   async generatePdf(longContent: string, filename: string) {
+    // const doc = new jsPDF({
+    //   orientation: 'portrait', // or 'landscape'
+    //   unit: 'mm',
+    //   format: 'a4' // or custom size: [width, height]
+    // });
+
+    // doc.text(longContent, 10, 10); // Adjust position and styling as needed
+
+    // doc.save(`${filename}.pdf`);
+  }
+
+  private splitContent(content: string, chunkSize: number): string[] {
+    const chunks = [];
+    for (let i = 0; i < content.length; i += chunkSize) {
+      chunks.push(content.substring(i, i + chunkSize));
+    }
+    return chunks;
+  }
 }
